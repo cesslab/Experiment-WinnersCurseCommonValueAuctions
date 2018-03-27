@@ -3,22 +3,32 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
-    pass
+class SelectAuctionPage(Page):
+    form_model = 'player'
+    form_fields = ['preference']
+
+    def vars_for_template(self):
+        left_auction = Constants.auctions.left_auction(self.round_number)
+        right_auction = Constants.auctions.right_auction(self.round_number)
+        return {'left_auction': left_auction, 'right_auction': right_auction}
 
 
-class ResultsWaitPage(WaitPage):
-
-    def after_all_players_arrive(self):
-        pass
+# class ResultsWaitPage(WaitPage):
+#
+#     def after_all_players_arrive(self):
+#         pass
 
 
 class Results(Page):
-    pass
+    def is_displayed(self):
+        if self.round_number == Constants.num_rounds:
+            return True
+        else:
+            return False
 
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
+    SelectAuctionPage,
+    # ResultsWaitPage,
     Results
 ]
