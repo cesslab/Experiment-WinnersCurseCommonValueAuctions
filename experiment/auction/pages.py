@@ -13,10 +13,9 @@ class SelectAuctionPage(Page):
         return {'left_auction': left_auction, 'right_auction': right_auction}
 
 
-# class ResultsWaitPage(WaitPage):
-#
-#     def after_all_players_arrive(self):
-#         pass
+class InstructionsPage(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.INSTRUCTIONS_ROUND
 
 
 class Results(Page):
@@ -28,6 +27,7 @@ class Results(Page):
 
 
 page_sequence = [
+    InstructionsPage,
     SelectAuctionPage,
     # ResultsWaitPage,
     Results
