@@ -17,7 +17,19 @@ class Constants(BaseConstants):
     name_in_url = 'wc'
     players_per_group = 2
     num_rounds = 2
+    # --------------------------------------------
+    # constants
+    # --------------------------------------------
     auctions = Treatment.t1_auction_collection()
+    A = 1
+    NEITHER = 2
+    B = 3
+    INSTRUCTIONS_ROUND = 1
+    # --------------------------------------------
+    # parameters
+    # --------------------------------------------
+
+
 
 
 class Subsession(BaseSubsession):
