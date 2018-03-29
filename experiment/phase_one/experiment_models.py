@@ -57,6 +57,7 @@ class Treatment:
                     signals=[1, 5, 7, 8]
                 ),
             ],
+
             # Pair 2
             [
                 Auction(
