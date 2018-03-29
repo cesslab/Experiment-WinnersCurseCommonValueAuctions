@@ -1,7 +1,10 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree %}
 
-{% block title %}{% endblock %}
+{% block body_main %}
+  {% include 'phase_one/snippets/navbar.html' %}
+  {{ block.super }}
+{% endblock %}
 
 {% block content %}
   <div class="container">
