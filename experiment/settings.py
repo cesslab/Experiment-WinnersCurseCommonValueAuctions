@@ -17,10 +17,10 @@ SESSION_CONFIG_DEFAULTS = {
 
 SESSION_CONFIGS = [
     {
-        'name': 'auction',
-        'display_name': "Auction Experiment",
+        'name': 'phase_one',
+        'display_name': "Winner's Curse",
         'num_demo_participants': 2,
-        'app_sequence': ['auction'],
+        'app_sequence': ['phase_one'],
     },
 ]
 
