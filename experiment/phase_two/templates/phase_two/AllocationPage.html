@@ -24,35 +24,18 @@
       </div>
     </div>
   </div>
-  <div class="container mt-4 mb-4">
-    <div class="row justify-content-md-center">
-      <div class="col-md-auto">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-success">
-            <input type="radio" name="preference" id="id_preference_0" value="1" autocomplete="off" checked> Auction A
-          </label>
-          <label class="btn btn-success">
-            <input type="radio" name="preference" id="id_preference_1" value="2" autocomplete="off"> Indifferent
-          </label>
-          <label class="btn btn-success">
-            <input type="radio" name="preference" id="id_preference_2" value="3" autocomplete="off"> Auction B
-          </label>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
   {% next_button %}
 
 {% endblock %}
 
 
 {% block scripts %}
-  // With JQuery
-$("#ex2").slider({});
+    <script>
+        // With JQuery
+        $("#ex2").slider({});
 
-// Without JQuery
-var slider = new Slider('#ex2', {});
+        // Without JQuery
+        var slider = new Slider('#ex2', {});
+    </script>
 
 {% endblock %}
