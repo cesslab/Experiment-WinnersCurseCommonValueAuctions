@@ -3,7 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-from .experiment_models import Treatment
+from auction.auctions import AuctionCollectionFactory
 
 
 author = 'Anwar A Ruff'
@@ -14,22 +14,18 @@ https://github.com/cesslab/Experiment-WinnersCurseCommonValueAuctions
 
 
 class Constants(BaseConstants):
+    # oTree Constants
+    # --------------------------------------------
     name_in_url = 'wc'
     players_per_group = 2
     num_rounds = 2
+    # Experiment Constants
     # --------------------------------------------
-    # constants
-    # --------------------------------------------
-    auctions = Treatment.t1_auction_collection()
+    auctions = AuctionCollectionFactory.phase_one_auctions()
     A = 1
     NEITHER = 2
     B = 3
     INSTRUCTIONS_ROUND = 1
-    # --------------------------------------------
-    # parameters
-    # --------------------------------------------
-
-
 
 
 class Subsession(BaseSubsession):

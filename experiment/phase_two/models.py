@@ -3,7 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-from phase_one.experiment_models import Treatment
+from auction.auctions import AuctionCollectionFactory
 
 author = 'Your name here'
 
@@ -13,13 +13,15 @@ Your app description
 
 
 class Constants(BaseConstants):
+    # oTree Constants
+    # --------------------------------------------
     name_in_url = 'phase_two'
     players_per_group = 2
     num_rounds = 1
+    # Experiment Constants
     # --------------------------------------------
-    # constants
-    # --------------------------------------------
-    auctions = Treatment.t1_auction_collection()
+    INSTRUCTIONS_ROUND = 1
+    auctions = AuctionCollectionFactory.phase_two_auctions()
 
 
 class Subsession(BaseSubsession):
