@@ -12,7 +12,7 @@ class AllocationPage(Page):
     form_fields = ['preference']
 
     def vars_for_template(self):
-        auction = Constants.auctions.left_auction(self.round_number)
+        auction = Constants.auctions.auction(self.round_number)
         return {'auction': auction}
 
 
