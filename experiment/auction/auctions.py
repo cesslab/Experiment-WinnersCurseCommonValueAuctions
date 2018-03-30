@@ -4,7 +4,7 @@ class Auction:
     VALUE = 0
     PROBABILITY = 1
 
-    def __init__(self, type, kind, matrix=[], signals=[]):
+    def __init__(self, type, matrix=[], signals=[]):
         self.type = type
         self.matrix = matrix
         self.signals = signals
