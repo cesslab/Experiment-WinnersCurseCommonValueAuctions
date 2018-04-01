@@ -35,11 +35,11 @@ class PhaseOneAuctionCollection:
         self.auctions = auctions
 
     def left_auction(self, round):
-        auction_id = self.pairs[round][self.LEFT]
+        auction_id = self.pairs[round - 1][self.LEFT]
         return self.auctions[auction_id]
 
     def right_auction(self, round):
-        auction_id = self.pairs[round][self.RIGHT]
+        auction_id = self.pairs[round - 1][self.RIGHT]
         return self.auctions[auction_id]
 
 
