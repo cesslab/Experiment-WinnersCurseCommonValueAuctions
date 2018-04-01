@@ -1,0 +1,97 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css">
+  <link rel="stylesheet" href="{% static 'phase_two/bid.css' %}">
+{% endblock %}
+
+{% block body_main %}
+  {% include 'phase_one/snippets/navbar.html' %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="grid-container">
+      <div class="header-item">
+          <p>Description of decision task goes here</p>
+      </div>
+
+      <div class="grid-auction-container">
+        <div class="">
+          <h3>Auction A</h3>
+        </div>
+        <div class="">
+          {% if auction.type == 1 %}
+            {% include 'phase_one/snippets/type_1.html' %}
+          {% endif %}
+        </div>
+      </div>
+
+    <div class="grid-slider-container">
+
+      <div class="item text-center">
+        <h3>Your Bid</h3>
+      </div>
+
+      <div class="item text-center">
+        <h4 id="output">&ndash;</h4>
+     </div>
+      <div class="grid-slider-label-container">
+        <div class="text-left">
+          <span>Min: <b>10</b></span>
+        </div>
+        <div class="text-right">
+          <span>Max: <b>1000</b></span>
+        </div>
+        <div class="slider-item">
+          <input
+            id="bid"
+            type="range"
+            min="10"
+            max="1000"
+            value="0"
+            step="1"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  {% next_button %}
+{% endblock %}
+
+
+
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
+  <script>
+    var $element = $('input#bid');
+    var $output = $('#output');
+
+    function updateOutput(el, val) {
+      el.textContent = val;
+    }
+
+    $element.rangeslider({
+        polyfill: false,
+        onInit: function() {
+          $('.rangeslider__handle').hide();
+          $('.rangeslider__fill').hide();
+        },
+
+        // Callback function
+        onSlide: function(position, value) {
+          $('.rangeslider__handle').show();
+          $('.rangeslider__fill').show();
+          $element.val(value)
+          updateOutput($output[0], value)
+        },
+
+        // Callback function
+        onSlideEnd: function(position, value) {
+        }
+    });
+  </script>
+{% endblock %}
