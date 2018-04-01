@@ -8,7 +8,8 @@ from auction.auctions import AuctionCollectionFactory
 author = 'Your name here'
 
 doc = """
-Your app description
+Phase 2:
+https://github.com/cesslab/Experiment-WinnersCurseCommonValueAuctions
 """
 
 
@@ -22,6 +23,9 @@ class Constants(BaseConstants):
     # --------------------------------------------
     INSTRUCTIONS_ROUND = 1
     auctions = AuctionCollectionFactory.phase_two_auctions()
+    MIN_BID = 0
+    MAX_BID = 100
+    BID_INCREMENTS = 1
 
 
 class Subsession(BaseSubsession):
@@ -33,4 +37,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    bid = models.IntegerField(
+        min=Constants.MIN_BID, max=Constants.MAX_BID,
+        widget=widgets.Slider({'step': '1'}), blank=False)
