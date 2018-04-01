@@ -1,0 +1,38 @@
+output {
+  padding   : .3em;
+  font-size : 1em;
+}
+
+.pull-left {
+  display : inline-block;
+}
+
+.grid-container {
+  display               : grid;
+  grid-gap              : 5em;
+  grid-template-columns : auto auto;
+}
+
+.grid-auction-container {
+  display  : grid;
+  grid-gap : 1em;
+}
+
+.grid-slider-label-container {
+  display               : grid;
+  grid-template-columns : auto auto;
+  grid-template-rows    : auto auto;
+}
+
+.grid-slider-container {
+  display  : grid;
+  grid-gap : 1em;
+}
+
+.header-item {
+  grid-column : 1 / span 2;
+}
+
+.slider-item {
+  grid-column : 1 / span 2;
+}
