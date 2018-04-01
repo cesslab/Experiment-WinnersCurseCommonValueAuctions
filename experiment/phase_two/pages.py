@@ -7,9 +7,9 @@ class InstructionsPage(Page):
     pass
 
 
-class AllocationPage(Page):
+class BidPage(Page):
     form_model = 'player'
-    form_fields = ['preference']
+    form_fields = ['bid']
 
     def vars_for_template(self):
         auction = Constants.auctions.auction(self.round_number)
@@ -27,5 +27,5 @@ class Results(Page):
 
 
 page_sequence = [
-    InstructionsPage,
+    InstructionsPage, BidPage
 ]
