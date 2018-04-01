@@ -9,6 +9,7 @@ from auction.auctions import AuctionCollectionFactory
 author = 'Anwar A Ruff'
 
 doc = """
+Phase 1:
 https://github.com/cesslab/Experiment-WinnersCurseCommonValueAuctions
 """
 
@@ -37,4 +38,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    preference = models.IntegerField(choices=[1, 2, 3])
+    preference = models.IntegerField(choices=[1, 2, 3], blank=False)
