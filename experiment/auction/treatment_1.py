@@ -38,13 +38,29 @@ AUCTIONS = [
 
 
 class AuctionCollectionFactory:
+    PAIRS = [(1, 2), (3, 4)]
+    IDS = [1, 2, 3, 4]
+    MIN_MAX = [{'auction_ids': [1, 2, 3, 4], 'min_max': (7, 28)}]
+
+    @staticmethod
+    def phase_one_rounds():
+        return len(AuctionCollectionFactory.PAIRS)
+
+    @staticmethod
+    def phase_two_rounds():
+        return len(AuctionCollectionFactory.IDS)
+
+    @staticmethod
+    def phase_three_rounds():
+        rounds = 0
+        for r in AuctionCollectionFactory.MIN_MAX:
+            rounds += len(r['auction_ids'])
+        return rounds
+
     @staticmethod
     def phase_one_auctions():
-        pairs = [(1, 2), (3, 4)]
-        return PhaseOneAuctionCollection(pairs, AUCTIONS)
+        return PhaseOneAuctionCollection(AuctionCollectionFactory.PAIRS, AUCTIONS)
 
     @staticmethod
     def phase_two_auctions():
-        ids = [1, 2, 3, 4]
-        min_max = [{'auction_ids': [1, 2, 3, 4], 'min_max': (7, 28)}]
-        return PhaseTwoAuctionCollection(ids, min_max, AUCTIONS)
+        return PhaseTwoAuctionCollection(AuctionCollectionFactory.IDS, AuctionCollectionFactory.MIN_MAX, AUCTIONS)
