@@ -3,8 +3,9 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
-    pass
+class InstructionsPage(Page):
+    def is_displayed(self):
+        return self.round_number == Constants.INSTRUCTIONS_ROUND
 
 
 class ResultsWaitPage(WaitPage):
@@ -13,12 +14,19 @@ class ResultsWaitPage(WaitPage):
         pass
 
 
+class BidPage(Page):
+    form_model = 'player'
+    form_fields = ['bid']
+
+    def vars_for_template(self):
+        auction = Constants.auctions.auction(self.round_number)
+        return {'auction': auction}
+
+
 class Results(Page):
     pass
 
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
-    Results
+    InstructionsPage, BidPage,
 ]
