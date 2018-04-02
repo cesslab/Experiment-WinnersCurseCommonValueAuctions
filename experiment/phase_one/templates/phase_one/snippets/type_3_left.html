@@ -1,0 +1,18 @@
+{% extends 'experiment\base_auction_table.html' %}
+
+{% block top_left %}
+  {{ left_auction.val_low.0 }}
+{% endblock %}
+
+{% block top_right  %}
+  {{left_auction.val_high.0}}, {{ left_auction.val_high.1 }}
+{% endblock %}
+
+{% block bottom_left %}
+  {{left_auction.prob_low.0}}
+{% endblock %}
+
+{% block bottom_right %}
+  {{left_auction.prob_high.0}}
+{% endblock %}
+

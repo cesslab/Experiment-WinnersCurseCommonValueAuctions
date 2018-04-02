@@ -16,17 +16,34 @@
       <div class="col">
         <h4>Auction A</h4>
         {% if left_auction.type == 1 %}
-          {% include 'phase_one/snippets/type_1.html' %}
+          {% include 'phase_one/snippets/type_1_left.html' %}
+        {% elif left_auction.type == 2 %}
+          {% include 'phase_one/snippets/type_2_left.html' %}
+        {% elif left_auction.type == 3 %}
+          {% include 'phase_one/snippets/type_3_left.html' %}
+        {% elif left_auction.type == 4 %}
+          {% include 'phase_one/snippets/type_4_left.html' %}
+        {% else %}
+          {% include 'phase_one/snippets/type_5_left.html' %}
         {% endif %}
       </div>
       <div class="col">
         <h4>Auction B</h4>
-        {% if left_auction.type == 1 %}
-          {% include 'phase_one/snippets/type_1.html' %}
+        {% if right_auction.type == 1 %}
+          {% include 'phase_one/snippets/type_1_right.html' %}
+        {% elif right_auction.type == 2 %}
+          {% include 'phase_one/snippets/type_2_right.html' %}
+        {% elif right_auction.type == 3 %}
+          {% include 'phase_one/snippets/type_3_right.html' %}
+        {% elif right_auction.type == 4 %}
+          {% include 'phase_one/snippets/type_4_right.html' %}
+        {% else %}
+          {% include 'phase_one/snippets/type_5_right.html' %}
         {% endif %}
       </div>
     </div>
   </div>
+
   <div class="container mt-4 mb-4">
     <div class="row justify-content-md-center">
       <div class="col-md-auto">

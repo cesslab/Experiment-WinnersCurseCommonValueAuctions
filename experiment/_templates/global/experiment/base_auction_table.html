@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+  <tr class="text-center">
+    <th scope="col"></th>
+    <th class="table-primary" scope="col">Low</th>
+    <th class="table-primary" scope="col">High</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-center">
+    <th class="table-primary"   scope="row">Value</th>
+    <td>{% block top_left %}{% endblock %}</td>
+    <td>{% block top_right %}{% endblock %}</td>
+  </tr>
+  <tr class="text-center">
+    <th class="table-primary" scope="row">Probability</th>
+    <td>{% block bottom_left %}{% endblock %}</td>
+    <td>{% block bottom_right %}{% endblock %}</td>
+  </tr>
+  </tbody>
+</table>
