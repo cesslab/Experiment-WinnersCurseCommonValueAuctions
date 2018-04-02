@@ -9,7 +9,7 @@ class InstructionsPage(Page):
 
 class CutoffSelectionPage(Page):
     form_model = 'player'
-    form_fields = ['bid']
+    form_fields = ['cutoff']
 
     def vars_for_template(self):
         auction = Constants.auctions.auction(self.round_number)

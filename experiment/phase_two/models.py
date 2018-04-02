@@ -3,7 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-from auction.auctions import AuctionCollectionFactory
+from auction.treatment_1 import AuctionCollectionFactory
 
 author = 'Your name here'
 
@@ -23,8 +23,8 @@ class Constants(BaseConstants):
     # --------------------------------------------
     INSTRUCTIONS_ROUND = 1
     auctions = AuctionCollectionFactory.phase_two_auctions()
-    MIN_BID = 0
-    MAX_BID = 100
+    MIN_CUTOFF = 0
+    MAX_CUTOFF = 100
     BID_INCREMENTS = 1
 
 
@@ -37,6 +37,6 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    bid = models.IntegerField(
-        min=Constants.MIN_BID, max=Constants.MAX_BID,
+    cutoff = models.IntegerField(
+        min=Constants.MIN_CUTOFF, max=Constants.MAX_CUTOFF,
         widget=widgets.Slider({'step': '1'}), blank=False)
