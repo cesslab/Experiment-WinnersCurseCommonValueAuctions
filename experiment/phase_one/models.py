@@ -19,7 +19,7 @@ class Constants(BaseConstants):
     # --------------------------------------------
     name_in_url = 'wc'
     players_per_group = 2
-    num_rounds = 2
+    num_rounds = AuctionCollectionFactory.phase_one_rounds()
     # Experiment Constants
     # --------------------------------------------
     auctions = AuctionCollectionFactory.phase_one_auctions()
