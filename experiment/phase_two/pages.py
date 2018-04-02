@@ -7,7 +7,7 @@ class InstructionsPage(Page):
     pass
 
 
-class BidPage(Page):
+class CutoffSelectionPage(Page):
     form_model = 'player'
     form_fields = ['bid']
 
@@ -27,5 +27,5 @@ class Results(Page):
 
 
 page_sequence = [
-    InstructionsPage, BidPage
+    InstructionsPage, CutoffSelectionPage
 ]
