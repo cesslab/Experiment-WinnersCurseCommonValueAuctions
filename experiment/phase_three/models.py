@@ -3,18 +3,26 @@ from otree.api import (
     Currency as c, currency_range
 )
 
+from auction.treatment_1 import AuctionCollectionFactory
 
 author = 'Your name here'
 
 doc = """
-Your app description
+Phase 3:
+https://github.com/cesslab/Experiment-WinnersCurseCommonValueAuctions
 """
 
 
 class Constants(BaseConstants):
+    # oTree Constants
+    # --------------------------------------------
     name_in_url = 'phase_three'
-    players_per_group = None
-    num_rounds = 1
+    players_per_group = 2
+    num_rounds = AuctionCollectionFactory.phase_two_rounds()
+    # Experiment Constants
+    # --------------------------------------------
+    INSTRUCTIONS_ROUND = 1
+    auctions = AuctionCollectionFactory.phase_three_auctions()
 
 
 class Subsession(BaseSubsession):
@@ -26,4 +34,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    bid = models.CurrencyField()
