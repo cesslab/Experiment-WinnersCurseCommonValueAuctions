@@ -34,55 +34,28 @@ class PhaseOneAuctionCollection:
         self.pairs = pairs
         self.auctions = auctions
 
-    def left_auction(self, round):
-        auction_id = self.pairs[round - 1][self.LEFT]
+    def left_auction(self, session_round):
+        auction_id = self.pairs[session_round - 1][self.LEFT]
         return self.auctions[auction_id]
 
-    def right_auction(self, round):
-        auction_id = self.pairs[round - 1][self.RIGHT]
+    def right_auction(self, session_round):
+        auction_id = self.pairs[session_round - 1][self.RIGHT]
         return self.auctions[auction_id]
 
 
 class PhaseTwoAuctionCollection:
-    def __init__(self, ids, auctions):
+    def __init__(self, ids, rages, auctions):
         self.ids = ids
+        self.ranges = rages
         self.auctions = auctions
 
-    def auction(self, round):
-        auction_id = self.ids[round]
+    def auction(self, session_round):
+        auction_id = self.ids[session_round - 1]
         return self.auctions[auction_id]
 
-
-AUCTIONS = [
-    Auction(
-        type=1,
-        matrix=[[[1], [2]], [[0.2], [0.3]]],
-        signals=[1, 5, 7, 8]
-    ),
-    Auction(
-        type=1,
-        matrix=[[[1], [2]], [[0.2], [0.3]]],
-        signals=[1, 5, 7, 8]
-    ),
-    Auction(
-        type=1,
-        matrix=[[[1], [2]], [[0.2], [0.3]]],
-        signals=[1, 5, 7, 8]
-    ),
-    Auction(
-        type=1,
-        matrix=[[[1], [2]], [[0.2], [0.3]]],
-        signals=[1, 5, 7, 8]
-    ),
-]
+    def auction_min_max(self, session_round):
+        for r in self.ranges:
+            if self.ids[session_round - 1] in r['auction_ids']:
+                return r['min_max']
 
 
-class AuctionCollectionFactory:
-    @staticmethod
-    def phase_one_auctions():
-        pairs = [(0, 1), (2, 3)]
-        return PhaseOneAuctionCollection(pairs, AUCTIONS)
-
-    def phase_two_auctions():
-        ids = [1, 2, 3, 4]
-        return PhaseTwoAuctionCollection(ids, AUCTIONS)

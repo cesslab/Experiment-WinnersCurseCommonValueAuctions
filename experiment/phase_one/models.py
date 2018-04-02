@@ -3,7 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-from auction.auctions import AuctionCollectionFactory
+from auction.treatment_1 import AuctionCollectionFactory
 
 
 author = 'Anwar A Ruff'
