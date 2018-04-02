@@ -20,7 +20,7 @@ SESSION_CONFIGS = [
         'name': 'phase_one',
         'display_name': "Winner's Curse",
         'num_demo_participants': 2,
-        'app_sequence': ['phase_one', 'phase_two'],
+        'app_sequence': ['phase_one', 'phase_two', 'phase_three'],
     },
 ]
 
