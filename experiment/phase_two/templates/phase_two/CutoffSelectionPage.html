@@ -4,7 +4,7 @@
 
 {% block styles %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css">
-  <link rel="stylesheet" href="{% static 'phase_two/bid.css' %}">
+  <link rel="stylesheet" href="{% static 'phase_two/cutoff.css' %}">
 {% endblock %}
 
 {% block body_main %}
@@ -25,6 +25,14 @@
         <div class="">
           {% if auction.type == 1 %}
             {% include 'phase_two/snippets/type_1.html' %}
+          {% elif auction.type == 2 %}
+            {% include 'phase_two/snippets/type_2.html' %}
+          {% elif auction.type == 3 %}
+            {% include 'phase_two/snippets/type_3.html' %}
+          {% elif auction.type == 4 %}
+            {% include 'phase_two/snippets/type_4.html' %}
+          {% else %}
+            {% include 'phase_two/snippets/type_5.html' %}
           {% endif %}
         </div>
       </div>
@@ -47,7 +55,8 @@
         </div>
         <div class="slider-item">
           <input
-            id="bid"
+            id="cutoff"
+            name="cutoff"
             type="range"
             min="10"
             max="1000"
@@ -67,7 +76,7 @@
 {% block scripts %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
   <script>
-    var $element = $('input#bid');
+    var $element = $('input#cutoff');
     var $output = $('#output');
 
     function updateOutput(el, val) {
