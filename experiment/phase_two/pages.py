@@ -4,7 +4,8 @@ from .models import Constants
 
 
 class InstructionsPage(Page):
-    pass
+    def is_displayed(self):
+        return self.round_number == Constants.INSTRUCTIONS_ROUND
 
 
 class CutoffSelectionPage(Page):
