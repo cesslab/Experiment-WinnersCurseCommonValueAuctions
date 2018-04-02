@@ -64,3 +64,7 @@ class AuctionCollectionFactory:
     @staticmethod
     def phase_two_auctions():
         return PhaseTwoAuctionCollection(AuctionCollectionFactory.IDS, AuctionCollectionFactory.MIN_MAX, AUCTIONS)
+
+    @staticmethod
+    def phase_three_auctions():
+        return PhaseTwoAuctionCollection(AuctionCollectionFactory.IDS, AuctionCollectionFactory.MIN_MAX, AUCTIONS)
