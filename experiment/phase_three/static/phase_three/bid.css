@@ -1,0 +1,25 @@
+output {
+  padding   : .3em;
+  font-size : 1em;
+}
+
+.pull-left {
+  display : inline-block;
+}
+
+.grid-container {
+  display               : grid;
+  grid-gap              : 5em;
+  grid-template-columns : auto auto;
+}
+
+.grid-auction-container {
+  display  : grid;
+  grid-gap : 1em;
+}
+
+.grid-bid-container {
+    display  : grid;
+    grid-gap : 1em;
+}
+
