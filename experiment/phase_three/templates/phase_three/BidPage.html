@@ -3,7 +3,7 @@
 {% load staticfiles %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{% static 'phase_two/cutoff.css' %}">
+  <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
 {% endblock %}
 
 {% block body_main %}
@@ -36,12 +36,21 @@
         </div>
       </div>
 
-    <div class="grid-slider-container">
+    <div class="grid-bid-container">
 
-      <div class="item text-center">
+      <div class="text-center">
+        <h4>Enter your Bid</h4>
       </div>
-      <div class="item">
-        {% formfield player.bid label="Enter your bid" %}
+
+      <div class="text-center">
+        <h4>Signal: {{ signal }}</h4>
+      </div>
+
+      <div class="e input-group">
+        <input type="number" name="bid" required id="id_bid" class="">
+        <div class="input-group-append">
+          <span class="input-group-text">points</span>
+        </div>
       </div>
     </div>
   </div>
