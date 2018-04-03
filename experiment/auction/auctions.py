@@ -4,7 +4,8 @@ class Auction:
     VALUE = 0
     PROBABILITY = 1
 
-    def __init__(self, type, matrix=[], signals=[]):
+    def __init__(self, id, type, matrix=[], signals=[]):
+        self.id = id
         self.type = type
         self.matrix = matrix
         self.signals = signals
@@ -27,35 +28,39 @@ class Auction:
 
 
 class PhaseOneAuctionCollection:
-    LEFT = 0
-    RIGHT = 1
-
-    def __init__(self, pairs, auctions):
-        self.pairs = pairs
-        self.auctions = auctions
+    def __init__(self, left_auctions, right_auctions):
+        self.left_auctions = left_auctions
+        self.right_auctions = right_auctions
 
     def left_auction(self, session_round):
-        auction_id = self.pairs[session_round - 1][self.LEFT]
-        return self.auctions[auction_id]
+        assert(0 < session_round <= len(self.left_auctions))
+        return self.left_auctions[session_round - 1]
 
     def right_auction(self, session_round):
-        auction_id = self.pairs[session_round - 1][self.RIGHT]
-        return self.auctions[auction_id]
+        assert(0 < session_round <= len(self.right_auctions))
+        return self.right_auctions[session_round - 1]
 
 
 class PhaseTwoAuctionCollection:
-    def __init__(self, ids, rages, auctions):
-        self.ids = ids
-        self.ranges = rages
+    def __init__(self, auctions, min_max_values):
+        self.auctions = auctions
+        self.min_max_values = min_max_values
+
+    def auction(self, session_round):
+        return self.auctions[session_round - 1]
+
+    def auction_min_max(self, session_round):
+        return self.min_max_values[session_round - 1]
+
+
+class PhaseThreeAuctionCollection:
+    def __init__(self, auctions, signals):
+        self.signals = signals
         self.auctions = auctions
 
     def auction(self, session_round):
-        auction_id = self.ids[session_round - 1]
-        return self.auctions[auction_id]
+        return self.auctions[session_round - 1]
 
-    def auction_min_max(self, session_round):
-        for r in self.ranges:
-            if self.ids[session_round - 1] in r['auction_ids']:
-                return r['min_max']
-
+    def signal(self, session_round):
+        return self.signals[session_round - 1]
 
