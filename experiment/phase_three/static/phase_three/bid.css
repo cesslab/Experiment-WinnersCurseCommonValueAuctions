@@ -4,13 +4,17 @@ output {
 }
 
 .pull-left {
-  display : inline-block;
+    display : inline-block;
 }
 
 .grid-container {
   display               : grid;
   grid-gap              : 5em;
   grid-template-columns : auto auto;
+}
+
+.header-item {
+    grid-column : 1 / span 2;
 }
 
 .grid-auction-container {
@@ -20,6 +24,5 @@ output {
 
 .grid-bid-container {
     display  : grid;
-    grid-gap : 1em;
+  grid-template-rows    : auto auto auto;
 }
-
