@@ -4,6 +4,7 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
+  <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
 {% endblock %}
 
 {% block body_main %}
@@ -13,47 +14,30 @@
 
 {% block content %}
   <div class="grid-container">
-      <div class="header-item">
-          <p>Description of decision task goes here</p>
+    <div class="header-item">
+        <p>Description of decision task goes here</p>
+    </div>
+
+    <div class="grid-auction-container">
+      <div class="title-item">
+        <h3>Auction</h3>
       </div>
-
-      <div class="grid-auction-container">
-        <div class="">
-          <h3>Auction</h3>
-        </div>
-        <div class="">
-          {% if auction.type == 1 %}
-            {% include 'phase_two/snippets/type_1.html' %}
-          {% elif auction.type == 2 %}
-            {% include 'phase_two/snippets/type_2.html' %}
-          {% elif auction.type == 3 %}
-            {% include 'phase_two/snippets/type_3.html' %}
-          {% elif auction.type == 4 %}
-            {% include 'phase_two/snippets/type_4.html' %}
-          {% else %}
-            {% include 'phase_two/snippets/type_5.html' %}
-          {% endif %}
-        </div>
-      </div>
-
-    <div class="grid-bid-container">
-
-      <div class="text-center">
-        <h4>Enter your Bid</h4>
-      </div>
-
-      <div class="text-center">
-        <h4>Signal: {{ signal }}</h4>
-      </div>
-
-      <div class="e input-group">
-        <input type="number" name="bid" required id="id_bid" class="">
-        <div class="input-group-append">
-          <span class="input-group-text">points</span>
-        </div>
+      <div class="">
+        {% if auction.type == 1 %}
+          {% include 'phase_two/snippets/type_1.html' %}
+        {% elif auction.type == 2 %}
+          {% include 'phase_two/snippets/type_2.html' %}
+        {% elif auction.type == 3 %}
+          {% include 'phase_two/snippets/type_3.html' %}
+        {% elif auction.type == 4 %}
+          {% include 'phase_two/snippets/type_4.html' %}
+        {% else %}
+          {% include 'phase_two/snippets/type_5.html' %}
+        {% endif %}
       </div>
     </div>
+
+    {% include 'phase_three/snippets/bid.html' %}
   </div>
   {% next_button %}
 {% endblock %}
-
