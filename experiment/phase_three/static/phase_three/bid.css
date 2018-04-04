@@ -3,6 +3,11 @@ output {
   font-size : 1em;
 }
 
+.title-item {
+  border-bottom: 1px solid lightgrey;
+  text-align: center;
+}
+
 .pull-left {
     display : inline-block;
 }
@@ -22,7 +27,19 @@ output {
   grid-gap : 1em;
 }
 
+.signal-update-container {
+  display  : grid;
+  grid-template-columns : auto auto;
+}
+
 .grid-bid-container {
-    display  : grid;
+  display  : grid;
+  grid-row-gap : 2em;
+  grid-template-columns : auto;
   grid-template-rows    : auto auto auto;
+}
+
+input[type=number].form-control {
+  max-width: 100%;
+  text-align: center
 }
