@@ -26,6 +26,27 @@ class Auction:
     def prob_high(self):
         return self.matrix[Auction.PROBABILITY][Auction.HIGH]
 
+    def low_update(self, signal):
+        assert(1 <= self.type <= 5)
+        if self.type == 2:
+            return (self.val_low[Auction.LOW] + signal) / 2
+        elif self.type == 3:
+            return (self.val_high[Auction.LOW] + signal) / 2
+        elif self.type == 4:
+            return (self.prob_low[Auction.LOW] + signal) / 2
+        else:
+            return (self.prob_high[Auction.LOW] + signal) / 2
+
+    def high_update(self, signal):
+        if self.type == 2:
+            return (self.val_low[Auction.HIGH] + signal) / 2
+        if self.type == 3:
+            return (self.val_high[Auction.HIGH] + signal) / 2
+        if self.type == 4:
+            return (self.prob_low[Auction.HIGH] + signal) / 2
+        if self.type == 5:
+            return (self.prob_high[Auction.HIGH] + signal) / 2
+
 
 class PhaseOneAuctionCollection:
     def __init__(self, left_auctions, right_auctions):
@@ -63,4 +84,3 @@ class PhaseThreeAuctionCollection:
 
     def signal(self, session_round):
         return self.signals[session_round - 1]
-
