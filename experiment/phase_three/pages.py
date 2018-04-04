@@ -21,7 +21,12 @@ class BidPage(Page):
     def vars_for_template(self):
         auction = Constants.auctions.auction(self.round_number)
         signal = Constants.auctions.signal(self.round_number)
-        return {'auction': auction, 'signal': signal}
+
+        return {
+            'auction': auction,
+            'signal': signal,
+            'low_update': auction.low_update(signal),
+            'high_update': auction.high_update(signal)}
 
 
 class Results(Page):
