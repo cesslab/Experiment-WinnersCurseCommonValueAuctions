@@ -1,21 +1,21 @@
 <table class="table borderless">
-  <thead>
+  <thead class="table-top">
   <tr class="text-center">
-    <th></th>
-    <th class="table-primary" scope="col">Low</th>
-    <th class="table-primary" scope="col">High</th>
+    <th class="header-blank"></th>
+    <th class="table-primary table-header" scope="col">Low</th>
+    <th class="table-primary table-header" scope="col">High</th>
   </tr>
   </thead>
   <tbody>
   <tr class="text-center">
-    <th class="table-primary"   scope="row">Value</th>
-    <td>{% block top_left %}{% endblock %}</td>
-    <td>{% block top_right %}{% endblock %}</td>
+    <th class="table-primary table-header"   scope="row">Value</th>
+    <td class="auction-cell">{% block top_left %}{% endblock %}</td>
+    <td class="auction-cell">{% block top_right %}{% endblock %}</td>
   </tr>
   <tr class="text-center">
-    <th class="table-primary" scope="row">Probability</th>
-    <td>{% block bottom_left %}{% endblock %}</td>
-    <td>{% block bottom_right %}{% endblock %}</td>
+    <th class="table-primary table-header" scope="row">Probability</th>
+    <td class="auction-cell">{% block bottom_left %}{% endblock %}</td>
+    <td class="auction-cell">{% block bottom_right %}{% endblock %}</td>
   </tr>
   </tbody>
 </table>
