@@ -1,4 +1,6 @@
-from .auctions import Auction, PhaseOneAuctionCollection, PhaseTwoAuctionCollection, PhaseThreeAuctionCollection
+from .auctions import (
+    Auction, PhaseOneAuctionCollection, PhaseTwoAuctionCollection,
+    PhaseThreeAuctionCollection)
 
 AUCTIONS = [
     # 0
@@ -99,4 +101,3 @@ class AuctionCollectionFactory:
                 auctions.append(auction)
                 signals.append(signal)
         return PhaseThreeAuctionCollection(auctions, signals)
-
