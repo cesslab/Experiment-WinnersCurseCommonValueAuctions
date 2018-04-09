@@ -13,7 +13,6 @@ class SelectAuctionPage(Page):
         return {'left_auction': left_auction, 'right_auction': right_auction}
 
     def preference_error_message(self, value):
-        print('message called')
         if value not in Constants.PREFERENCE_OPTIONS:
             return 'You must choose Auction A, Auction B, or Indifferent'
 
@@ -35,5 +34,5 @@ page_sequence = [
     InstructionsPage,
     SelectAuctionPage,
     # ResultsWaitPage,
-    Results
+    # Results
 ]
