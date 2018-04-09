@@ -27,6 +27,7 @@ class Constants(BaseConstants):
     NEITHER = 2
     B = 3
     INSTRUCTIONS_ROUND = 1
+    PREFERENCE_OPTIONS = [1, 2, 3]
 
 
 class Subsession(BaseSubsession):
@@ -38,4 +39,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    preference = models.IntegerField(choices=[1, 2, 3], blank=False)
+    preference = models.IntegerField(choices=Constants.PREFERENCE_OPTIONS, blank=False)
