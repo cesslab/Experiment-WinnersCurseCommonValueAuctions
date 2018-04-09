@@ -49,24 +49,25 @@
      </div>
       <div class="grid-slider-label-container">
         <div class="text-left">
-          <span>Min: <b>10</b></span>
+          <span>Min: <b>{{auction_min}}</b></span>
         </div>
         <div class="text-right">
-          <span>Max: <b>1000</b></span>
+          <span>Max: <b>{{auction_max}}</b></span>
         </div>
         <div class="slider-item">
           <input
             id="cutoff"
             name="cutoff"
             type="range"
-            min="10"
-            max="1000"
-            value="0"
+            min="{{auction_min}}"
+            max="{{auction_max}}"
             step="1"
           >
+          <input type="hidden" name="clicked" id="clicked" value="0">
         </div>
       </div>
     </div>
+    {{form.errors.cliced}}
   </div>
   {% next_button %}
 {% endblock %}
@@ -78,6 +79,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
   <script>
     var $element = $('input#cutoff');
+    var $hidden = $('input#clicked');
     var $output = $('#output');
 
     function updateOutput(el, val) {
@@ -96,6 +98,7 @@
           $('.rangeslider__handle').show();
           $('.rangeslider__fill').show();
           $element.val(value)
+          $hidden.val(1)
           updateOutput($output[0], value)
         },
 
@@ -103,5 +106,10 @@
         onSlideEnd: function(position, value) {
         }
     });
+
+
+      $(function() {
+        $('input#cutoff').val(0);
+      })
   </script>
 {% endblock %}
