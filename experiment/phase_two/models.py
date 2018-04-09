@@ -34,4 +34,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    cutoff = models.IntegerField()
+    cutoff = models.IntegerField(blank=False)
+    clicked = models.IntegerField()
