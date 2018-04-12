@@ -69,7 +69,11 @@ class AuctionCollectionFactory:
 
     @classmethod
     def phase_three_rounds(cls):
-        return len(AUCTIONS) - len(cls.PHASE_TWO_AUCTION_EXCLUDE_LIST)
+        rounds = 0
+        for auction in AUCTIONS:
+            rounds += len(auction.signals)
+
+        return rounds
 
     @classmethod
     def phase_one_auctions(cls):
