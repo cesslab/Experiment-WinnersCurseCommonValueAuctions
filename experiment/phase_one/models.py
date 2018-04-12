@@ -3,7 +3,7 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-from auction.treatment_1 import AuctionCollectionFactory
+from auction.treatment_1 import AuctionCollectionFactory as Factory
 
 
 author = 'Anwar A Ruff'
@@ -19,10 +19,11 @@ class Constants(BaseConstants):
     # --------------------------------------------
     name_in_url = 'wc'
     players_per_group = 2
-    num_rounds = AuctionCollectionFactory.phase_one_rounds()
+    num_rounds = Factory.phase_one_rounds()
+    # --------------------------------------------
     # Experiment Constants
     # --------------------------------------------
-    auctions = AuctionCollectionFactory.phase_one_auctions()
+    auctions = Factory.phase_one_auctions()
     A = 1
     NEITHER = 2
     B = 3
