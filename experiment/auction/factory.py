@@ -1,9 +1,11 @@
 import random
 
 from .auctions import (
-    PhaseOneAuctionCollection, PhaseTwoAuctionCollection, PhaseThreeAuctionCollection)
+    PhaseOneAuctionCollection, PhaseTwoAuctionCollection,
+    PhaseThreeAuctionCollection)
 
-from .treatment_one import AUCTIONS, PHASE_ONE_AUCTION_PAIRS, PHASE_TWO_AUCTION_GROUP
+from .treatment_one import (
+    AUCTIONS, PHASE_ONE_AUCTION_PAIRS, PHASE_TWO_AUCTION_GROUP)
 
 
 class AuctionCollectionFactory:
@@ -27,15 +29,17 @@ class AuctionCollectionFactory:
 
         return rounds
 
-    @classmethod
-    def phase_one_auctions(cls):
-        shuffled_pair = random.shuffle(AUCTIONS)
+    @staticmethod
+    def phase_one_auctions():
+        shuffled_pair = PHASE_ONE_AUCTION_PAIRS[:]
+        random.shuffle(shuffled_pair)
 
         left_auctions = []
         right_auctions = []
-        for pair in cls.PAIRS:
-            left_auctions.append(AUCTIONS[pair[cls.LEFT_AUCTION]])
-            right_auctions.append(AUCTIONS[pair[cls.RIGHT_AUCTION]])
+        for pair in shuffled_pair:
+            random.shuffle(pair)
+            left_auctions.append(AUCTIONS[pair[0]])
+            right_auctions.append(AUCTIONS[pair[1]])
 
         return PhaseOneAuctionCollection(left_auctions, right_auctions)
 

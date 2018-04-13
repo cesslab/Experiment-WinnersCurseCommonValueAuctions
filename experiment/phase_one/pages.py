@@ -8,8 +8,9 @@ class SelectAuctionPage(Page):
     form_fields = ['preference']
 
     def vars_for_template(self):
-        left_auction = Constants.auctions.left_auction(self.round_number)
-        right_auction = Constants.auctions.right_auction(self.round_number)
+        auction_collection = self.player.participant.vars['phase_one_auctions']
+        left_auction = auction_collection.left_auction(self.round_number)
+        right_auction = auction_collection.right_auction(self.round_number)
         return {'left_auction': left_auction, 'right_auction': right_auction}
 
     def preference_error_message(self, value):

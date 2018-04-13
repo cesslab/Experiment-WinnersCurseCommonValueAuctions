@@ -23,7 +23,6 @@ class Constants(BaseConstants):
     # --------------------------------------------
     # Experiment Constants
     # --------------------------------------------
-    auctions = Factory.phase_one_auctions()
     A = 1
     NEITHER = 2
     B = 3
@@ -35,8 +34,8 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             for player in self.get_players():
-                player.participant.vars['phase_1_auctions'] = Factory.phase_one_auctions()
-
+                auctions = Factory.phase_one_auctions()
+                player.participant.vars['phase_one_auctions'] = auctions
 
 
 class Group(BaseGroup):
@@ -44,4 +43,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    preference = models.IntegerField(choices=Constants.PREFERENCE_OPTIONS, blank=False)
+    preference = models.IntegerField(
+        choices=Constants.PREFERENCE_OPTIONS, blank=False)
