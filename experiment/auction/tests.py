@@ -1,6 +1,6 @@
 import unittest
 
-from .treatment_1 import AuctionCollectionFactory
+from .factory import AuctionCollectionFactory
 from .auctions import PhaseOneAuctionCollection, Auction
 
 
