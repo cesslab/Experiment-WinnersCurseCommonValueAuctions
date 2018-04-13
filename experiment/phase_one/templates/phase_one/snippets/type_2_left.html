@@ -1,7 +1,9 @@
 {% extends 'global/experiment/base_auction_table.html' %}
 
 {% block top_left %}
-  {{ left_auction.val_low.0 }}, {{ left_auction.val_low.1 }}
+  {{ left_auction.val_low.0 }}
+  &#8804; v &#8804;
+ {{ left_auction.val_low.1 }}
 {% endblock %}
 
 {% block top_right  %}
@@ -9,10 +11,9 @@
 {% endblock %}
 
 {% block bottom_left %}
-  {{left_auction.prob_low.0}}
+  {% widthratio left_auction.prob_low.0 1 100 %}&#37;
 {% endblock %}
 
 {% block bottom_right %}
-  {{left_auction.prob_high.0}}
+  {% widthratio left_auction.prob_high.0 1 100 %}&#37;
 {% endblock %}
-

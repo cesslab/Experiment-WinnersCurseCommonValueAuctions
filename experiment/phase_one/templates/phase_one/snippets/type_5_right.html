@@ -9,10 +9,11 @@
 {% endblock %}
 
 {% block bottom_left %}
-  <span>1 - p</span>
+  {% widthratio right_auction.prob_low.0 1 100 %}&#37;
+  &#8804; p &#8804;
+  {% widthratio right_auction.prob_low.1 1 100 %}&#37;
 {% endblock %}
 
 {% block bottom_right %}
-  {{right_auction.prob_high.0}}, {{right_auction.prob_high.1}}
+ <span>100&#37; - p</span>
 {% endblock %}
-

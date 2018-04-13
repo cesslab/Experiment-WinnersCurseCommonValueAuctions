@@ -9,9 +9,9 @@
 {% endblock %}
 
 {% block bottom_left %}
-  {{left_auction.prob_low.0}}
+  {% widthratio left_auction.prob_low.0 1 100 %}&#37;
 {% endblock %}
 
 {% block bottom_right %}
-  {{left_auction.prob_high.0}}
+  {% widthratio left_auction.prob_high.0 1 100 %}&#37;
 {% endblock %}
