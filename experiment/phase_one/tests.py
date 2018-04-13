@@ -5,5 +5,5 @@ from phase_one import pages
 class PlayerBot(Bot):
 
     def play_round(self):
-        yield (pages.MyPage)
-        yield (pages.Results)
+        yield (pages.InstructionsPage)
+        yield (pages.SelectAuctionPage, {'preference': 0})
