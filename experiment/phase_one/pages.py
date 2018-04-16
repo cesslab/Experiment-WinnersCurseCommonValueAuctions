@@ -14,7 +14,10 @@ class SelectAuctionPage(Page):
         return {'left_auction': left_auction, 'right_auction': right_auction}
 
     def preference_error_message(self, value):
-        if value not in Constants.PREFERENCE_OPTIONS:
+        auction_collection = self.player.participant.vars['phase_one_auctions']
+        left_auction = auction_collection.left_auction(self.round_number)
+        right_auction = auction_collection.right_auction(self.round_number)
+        if value not in [left_auction.id, right_auction.id, 0]:
             return 'You must choose Auction A, Auction B, or Indifferent'
 
 
