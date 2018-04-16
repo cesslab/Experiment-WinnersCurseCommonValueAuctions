@@ -43,5 +43,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    preference = models.IntegerField(
-        choices=Constants.PREFERENCE_OPTIONS, blank=False)
+    preference = models.IntegerField(blank=False)
