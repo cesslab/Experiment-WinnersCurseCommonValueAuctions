@@ -1,10 +1,13 @@
+from typing import List
+
+
 class Auction:
     LOW = 0
     HIGH = 1
     VALUE = 0
     PROBABILITY = 1
 
-    def __init__(self, id, type, matrix=[], signals=[]):
+    def __init__(self, id: int, type: int, matrix: List = [], signals: List = []):
         self.id = id
         self.type = type
         self.matrix = matrix
@@ -27,7 +30,7 @@ class Auction:
         return self.matrix[Auction.PROBABILITY][Auction.HIGH]
 
     def low_update(self, signal):
-        assert(1 <= self.type <= 5)
+        assert (1 <= self.type <= 5)
         if self.type == 2:
             return (self.val_low[Auction.LOW] + signal) / 2
         elif self.type == 3:
@@ -47,6 +50,9 @@ class Auction:
         if self.type == 5:
             return (self.prob_high[Auction.HIGH] + signal) / 2
 
+    def __str__(self):
+        return 'Auction ' % self.id
+
 
 class PhaseOneAuctionCollection:
     def __init__(self, left_auctions, right_auctions):
@@ -54,11 +60,9 @@ class PhaseOneAuctionCollection:
         self.right_auctions = right_auctions
 
     def left_auction(self, session_round):
-        assert(0 < session_round <= len(self.left_auctions))
         return self.left_auctions[session_round - 1]
 
     def right_auction(self, session_round):
-        assert(0 < session_round <= len(self.right_auctions))
         return self.right_auctions[session_round - 1]
 
 
