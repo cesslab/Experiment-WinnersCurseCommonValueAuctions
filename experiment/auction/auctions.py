@@ -7,9 +7,9 @@ class Auction:
     VALUE = 0
     PROBABILITY = 1
 
-    def __init__(self, id: int, type: int, matrix: List = [], signals: List = []):
-        self.id = id
-        self.type = type
+    def __init__(self, aid: int, atype: int, matrix: List = [], signals: List = []):
+        self.aid = aid
+        self.atype = atype
         self.matrix = matrix
         self.signals = signals
 
@@ -30,29 +30,31 @@ class Auction:
         return self.matrix[Auction.PROBABILITY][Auction.HIGH]
 
     def low_update(self, signal):
-        assert (1 <= self.type <= 5)
-        if self.type == 2:
+        assert (1 <= self.atype <= 5)
+        if self.atype == 2:
             return (self.val_low[Auction.LOW] + signal) / 2
-        elif self.type == 3:
+        elif self.atype == 3:
             return (self.val_high[Auction.LOW] + signal) / 2
-        elif self.type == 4:
+        elif self.atype == 4:
             return (self.prob_low[Auction.LOW] + signal) / 2
         else:
             return (self.prob_high[Auction.LOW] + signal) / 2
 
     def high_update(self, signal):
-        if self.type == 2:
+        if self.atype == 2:
             return (self.val_low[Auction.HIGH] + signal) / 2
-        if self.type == 3:
+        if self.atype == 3:
             return (self.val_high[Auction.HIGH] + signal) / 2
-        if self.type == 4:
+        if self.atype == 4:
             return (self.prob_low[Auction.HIGH] + signal) / 2
-        if self.type == 5:
+        if self.atype == 5:
             return (self.prob_high[Auction.HIGH] + signal) / 2
 
     def __str__(self):
-        return 'Auction ' % self.id
+        return 'Auction ' % self.aid
 
+    def __rpr__(self):
+        return "Auction: {}, Type: {}".format(self.aid, self.atype)
 
 class PhaseOneAuctionCollection:
     def __init__(self, left_auctions, right_auctions):
