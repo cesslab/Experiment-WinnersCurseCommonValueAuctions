@@ -20,14 +20,14 @@ class PlayerBot(Bot):
             # SelectAuctionPage: test right preferred selection
             auction_collection = self.player.participant.vars['phase_one_auctions']
             right_auction = auction_collection.right_auction(self.round_number)
-            yield (pages.SelectAuctionPage, {'preference': right_auction.id})
-            assert self.player.preference == right_auction.id, "actual preference was {}".format(self.player.preference)
+            yield (pages.SelectAuctionPage, {'preference': right_auction.aid})
+            assert self.player.preference == right_auction.aid, "actual preference was {}".format(self.player.preference)
         else:
             # SelectAuctionPage: test left preferred selection
             auction_collection = self.player.participant.vars['phase_one_auctions']
             left_auction = auction_collection.left_auction(self.round_number)
-            yield (pages.SelectAuctionPage, {'preference': left_auction.id})
-            assert self.player.preference == left_auction.id, "actual preference was {}".format(self.player.preference)
+            yield (pages.SelectAuctionPage, {'preference': left_auction.aid})
+            assert self.player.preference == left_auction.aid, "actual preference was {}".format(self.player.preference)
 
 
 

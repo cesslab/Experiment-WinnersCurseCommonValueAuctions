@@ -11,13 +11,16 @@ class SelectAuctionPage(Page):
         auction_collection = self.player.participant.vars['phase_one_auctions']
         left_auction = auction_collection.left_auction(self.round_number)
         right_auction = auction_collection.right_auction(self.round_number)
-        return {'left_auction': left_auction, 'right_auction': right_auction}
+        left_type = left_auction.atype
+        right_type = right_auction.atype
+        return {'left_auction': left_auction, 'right_auction': right_auction,
+                'ltype': left_type, 'rtype': right_type}
 
     def preference_error_message(self, value):
         auction_collection = self.player.participant.vars['phase_one_auctions']
         left_auction = auction_collection.left_auction(self.round_number)
         right_auction = auction_collection.right_auction(self.round_number)
-        if value not in [left_auction.id, right_auction.id, 0]:
+        if value not in [left_auction.aid, right_auction.aid, 0]:
             return 'You must choose Auction A, Auction B, or Indifferent'
 
 

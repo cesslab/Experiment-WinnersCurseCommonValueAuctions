@@ -18,13 +18,13 @@
     <div class="row">
       <div class="col">
         <h4>Auction A</h4>
-        {% if left_auction.type == 1 %}
+        {% if left_auction.atype == 1 %}
           {% include 'phase_one/snippets/type_1_left.html' %}
-        {% elif left_auction.type == 2 %}
+        {% elif left_auction.atype == 2 %}
           {% include 'phase_one/snippets/type_2_left.html' %}
-        {% elif left_auction.type == 3 %}
+        {% elif left_auction.atype == 3 %}
           {% include 'phase_one/snippets/type_3_left.html' %}
-        {% elif left_auction.type == 4 %}
+        {% elif left_auction.atype == 4 %}
           {% include 'phase_one/snippets/type_4_left.html' %}
         {% else %}
           {% include 'phase_one/snippets/type_5_left.html' %}
@@ -33,13 +33,13 @@
       <!-- Auction B -->
       <div class="col">
         <h4>Auction B</h4>
-        {% if right_auction.type == 1 %}
+        {% if right_auction.atype == 1 %}
           {% include 'phase_one/snippets/type_1_right.html' %}
-        {% elif right_auction.type == 2 %}
+        {% elif right_auction.atype == 2 %}
           {% include 'phase_one/snippets/type_2_right.html' %}
-        {% elif right_auction.type == 3 %}
+        {% elif right_auction.atype == 3 %}
           {% include 'phase_one/snippets/type_3_right.html' %}
-        {% elif right_auction.type == 4 %}
+        {% elif right_auction.atype == 4 %}
           {% include 'phase_one/snippets/type_4_right.html' %}
         {% else %}
           {% include 'phase_one/snippets/type_5_right.html' %}
@@ -54,13 +54,13 @@
       <div class="col-md-auto">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-success" id="id-preference-1">
-            <input type="radio" name="preference" value="{{left_auction.id}}" autocomplete="off"> Auction A
+            <input type="radio" name="preference" value="{{left_auction.aid}}" autocomplete="off"> Auction A
           </label>
           <label class="btn btn-success">
             <input type="radio" name="preference" value="0" autocomplete="off"> Indifferent
           </label>
           <label class="btn btn-success" id="id-preference-3">
-            <input type="radio" name="preference" value="{{right_auction.id}}" autocomplete="off"> Auction B
+            <input type="radio" name="preference" value="{{right_auction.aid}}" autocomplete="off"> Auction B
           </label>
         </div>
       </div>

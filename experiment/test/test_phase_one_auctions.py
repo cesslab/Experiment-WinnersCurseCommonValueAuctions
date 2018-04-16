@@ -2,10 +2,6 @@ from auction.factory import AuctionCollectionFactory
 from auction.auctions import PhaseOneAuctionCollection, Auction
 
 
-def test_auction_collection_not_empty():
-    assert AuctionCollectionFactory.phase_one_auctions()
-
-
 def test_auction_collection_contain_auctions():
     phase_one_auctions = AuctionCollectionFactory.phase_one_auctions()
     assert type(phase_one_auctions) is PhaseOneAuctionCollection
@@ -36,31 +32,31 @@ def test_right_auctions_not_empty():
 
 
 def is_correct_auction_format(auction):
-    aid = auction .id
-    type = auction.type
+    aid = auction .aid
+    atype = auction.atype
     temp = "Auction {} type {} must have {{}} value(s) in the {{}} position"
-    message = temp.format(aid, type)
-    if type == 1:
+    message = temp.format(aid, atype)
+    if atype == 1:
         assert len(auction.val_low) == 1, message.format(1, 'val_low')
         assert len(auction.val_high) == 1, message.format(1, 'val_high')
         assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
         assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
-    elif type == 2:
+    elif atype == 2:
         assert len(auction.val_low) == 2, message.format(2, 'val_low')
         assert len(auction.val_high) == 1, message.format(1, 'val_high')
         assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
         assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
-    elif type == 3:
+    elif atype == 3:
         assert len(auction.val_low) == 1, message.format(1, 'val_low')
         assert len(auction.val_high) == 2, message.format(2, 'val_high')
         assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
         assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
-    elif type == 4:
+    elif atype == 4:
         assert len(auction.val_low) == 1, message.format(1, 'val_low')
         assert len(auction.val_high) == 1, message.format(1, 'val_high')
         assert len(auction.prob_low) == 0, message.format(0, 'prob_low')
         assert len(auction.prob_high) == 2, message.format(2, 'prob_high')
-    elif type == 5:
+    elif atype == 5:
         assert len(auction.val_low) == 1, message.format(1, 'val_low')
         assert len(auction.val_high) == 1, message.format(1, 'val_high')
         assert len(auction.prob_low) == 2, message.format(2, 'prob_low')
@@ -70,13 +66,13 @@ def is_correct_auction_format(auction):
 def test_left_auctions_have_valid_type_ids():
     phase_one_auction = AuctionCollectionFactory.phase_one_auctions()
     for auction in phase_one_auction.left_auctions:
-        assert auction.type in [1, 2, 3, 4, 5]
+        assert auction.atype in [1, 2, 3, 4, 5]
 
 
 def test_right_auctions_have_valid_type_ids():
     phase_one_auction = AuctionCollectionFactory.phase_one_auctions()
     for auction in phase_one_auction.right_auctions:
-        assert auction.type in [1, 2, 3, 4, 5]
+        assert auction.atype in [1, 2, 3, 4, 5]
 
 
 def test_left_auction_values():
