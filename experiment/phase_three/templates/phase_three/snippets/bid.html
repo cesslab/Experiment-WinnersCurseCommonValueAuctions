@@ -1,29 +1,33 @@
 <div class="grid-bid-container">
 
-  <div class="title-item">
-    <h4>Bid</h4>
-  </div>
-
-  <div class="signal-update-container">
-    <div class="text-center">
-      <h5>Signal</h5>
+    <div class="title-item">
+        <h4>Bid</h4>
     </div>
 
-    <div class="text-center">
-      <h5>Update</h5>
-    </div>
-    <div class="text-center">
-      <h5>{{ signal }}</h5>
+    <div class="signal-update-container">
+        <div class="text-center">
+            <h5>Signal</h5>
+        </div>
+
+        <div class="text-center">
+            <h5>Update</h5>
+        </div>
+        <div class="text-center">
+            {% if signal < 1 %}
+                <h5>{% widthratio signal 1 100 %}&#37;</h5>
+            {% else %}
+                <h5>{{ signal }}</h5>
+            {% endif %}
+        </div>
+
+        <div class="text-center">
+            <h5>{{ low_update }} &#8804; u &#8804; {{ high_update }}</h5>
+        </div>
     </div>
 
-    <div class="text-center">
-      <h5>{{low_update}},  {{high_update}}</h5>
+    <div>
+        <input type="number" name="bid" required id="id_bid" class="form-control" placeholder="Enter Your Bid">
+        <small id="bidhelp" class="form-text text-muted">Your bid must be between 0 and {{ auction.max_value }}</small>
     </div>
-  </div>
-
-  <div>
-    <input type="number" name="bid" required id="id_bid" class="form-control" placeholder="Enter Your Bid">
-    <small id="bidhelp" class="form-text text-muted">Your bid must be between 0 and x</small>
-  </div>
-  </div>
+</div>
 </div>
