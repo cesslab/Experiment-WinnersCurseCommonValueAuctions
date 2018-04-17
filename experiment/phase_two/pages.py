@@ -13,22 +13,19 @@ class CutoffSelectionPage(Page):
     form_fields = ['cutoff', 'clicked']
 
     def vars_for_template(self):
-        auction_collection = self.player.participant.vars['phase_one_auctions']
+        auction_collection = self.player.participant.vars['phase_two_auctions']
         auction = auction_collection.auction(self.round_number)
-        return {
-            'auction': auction,
-            'auction_min': auction.min,
-            'auction_max': auction.max}
+        return {'auction': auction}
 
     def cutoff_max(self):
-        auction_collection = self.player.participant.vars['phase_one_auctions']
+        auction_collection = self.player.participant.vars['phase_two_auctions']
         auction = auction_collection.auction(self.round_number)
-        return auction.max
+        return auction.max_value
 
     def cutoff_min(self):
-        auction_collection = self.player.participant.vars['phase_one_auctions']
+        auction_collection = self.player.participant.vars['phase_two_auctions']
         auction = auction_collection.auction(self.round_number)
-        return auction.min
+        return auction.min_value
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
