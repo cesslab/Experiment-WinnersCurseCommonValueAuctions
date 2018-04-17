@@ -89,12 +89,11 @@ class PhaseTwoAuctionCollection:
 
 
 class PhaseThreeAuctionCollection:
-    def __init__(self, auctions, signals):
-        self.signals = signals
-        self.auctions = auctions
+    def __init__(self, auction_signal_pairs):
+        self.auction_signal_pairs = auction_signal_pairs
 
     def auction(self, session_round):
-        return self.auctions[session_round - 1]
+        return self.auction_signal_pairs[session_round - 1]['auction']
 
     def signal(self, session_round):
-        return self.signals[session_round - 1]
+        return self.auction_signal_pairs[session_round - 1]['signal']
