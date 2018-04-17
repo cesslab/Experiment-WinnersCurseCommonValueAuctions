@@ -1,5 +1,5 @@
-from auction.factory import AuctionCollectionFactory
 from auction.auctions import PhaseOneAuctionCollection, Auction
+from auction.factory import AuctionCollectionFactory
 
 
 def test_auction_collection_contain_auctions():
@@ -19,8 +19,10 @@ def test_right_auction_types():
         assert type(right_auction) is Auction
 
 
-def test_rounds_not_zero():
-    assert AuctionCollectionFactory.phase_one_rounds() > 0
+def test_rounds_equal_num_auction_pairs():
+    phase_one_auctions = AuctionCollectionFactory.phase_one_auctions()
+    assert AuctionCollectionFactory.phase_one_rounds() == len(phase_one_auctions.left_auctions)
+    assert AuctionCollectionFactory.phase_one_rounds() == len(phase_one_auctions.right_auctions)
 
 
 def test_left_auctions_not_empty():
@@ -32,7 +34,7 @@ def test_right_auctions_not_empty():
 
 
 def is_correct_auction_format(auction):
-    aid = auction .aid
+    aid = auction.aid
     atype = auction.atype
     temp = "Auction {} type {} must have {{}} value(s) in the {{}} position"
     message = temp.format(aid, atype)
