@@ -23,11 +23,7 @@ class Constants(BaseConstants):
     # --------------------------------------------
     # Experiment Constants
     # --------------------------------------------
-    A = 1
-    NEITHER = 2
-    B = 3
     INSTRUCTIONS_ROUND = 1
-    PREFERENCE_OPTIONS = [1, 2, 3]
 
 
 class Subsession(BaseSubsession):
