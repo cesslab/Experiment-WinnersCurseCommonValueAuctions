@@ -3,41 +3,41 @@
 {% load staticfiles %}
 
 {% block styles %}
-  <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
-  <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
+    <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
+    <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
 {% endblock %}
 
 {% block body_main %}
-  {% include 'phase_one/snippets/navbar.html' %}
-  {{ block.super }}
+    {% include 'phase_one/snippets/navbar.html' %}
+    {{ block.super }}
 {% endblock %}
 
 {% block content %}
-  <div class="grid-container">
-    <div class="header-item">
-        <p>Description of decision task goes here</p>
-    </div>
+    <div class="grid-container">
+        <div class="header-item">
+            <p>Description of decision task goes here</p>
+        </div>
 
-    <div class="grid-auction-container">
-      <div class="title-item">
-        <h3>Auction</h3>
-      </div>
-      <div class="">
-        {% if auction.type == 1 %}
-          {% include 'phase_two/snippets/type_1.html' %}
-        {% elif auction.type == 2 %}
-          {% include 'phase_two/snippets/type_2.html' %}
-        {% elif auction.type == 3 %}
-          {% include 'phase_two/snippets/type_3.html' %}
-        {% elif auction.type == 4 %}
-          {% include 'phase_two/snippets/type_4.html' %}
-        {% else %}
-          {% include 'phase_two/snippets/type_5.html' %}
-        {% endif %}
-      </div>
-    </div>
+        <div class="grid-auction-container">
+            <div class="title-item">
+                <h3>Auction</h3>
+            </div>
+            <div class="">
+                {% if auction.atype == 1 %}
+                    {% include 'phase_two/snippets/type_1.html' %}
+                {% elif auction.atype == 2 %}
+                    {% include 'phase_two/snippets/type_2.html' %}
+                {% elif auction.atype == 3 %}
+                    {% include 'phase_two/snippets/type_3.html' %}
+                {% elif auction.atype == 4 %}
+                    {% include 'phase_two/snippets/type_4.html' %}
+                {% else %}
+                    {% include 'phase_two/snippets/type_5.html' %}
+                {% endif %}
+            </div>
+        </div>
 
-    {% include 'phase_three/snippets/bid.html' %}
-  </div>
-  {% next_button %}
+        {% include 'phase_three/snippets/bid.html' %}
+    </div>
+    {% next_button %}
 {% endblock %}
