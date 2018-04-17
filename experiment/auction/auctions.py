@@ -41,15 +41,15 @@ class Auction:
         return self.min_max[Auction.MAX]
 
     def low_update(self, signal):
-        assert (1 <= self.atype <= 5)
+        assert (2 <= self.atype <= 5)
         if self.atype == 2:
             return (self.val_low[Auction.LOW] + signal) / 2
         elif self.atype == 3:
             return (self.val_high[Auction.LOW] + signal) / 2
         elif self.atype == 4:
-            return (self.prob_low[Auction.LOW] + signal) / 2
-        else:
             return (self.prob_high[Auction.LOW] + signal) / 2
+        else:
+            return (self.prob_low[Auction.LOW] + signal) / 2
 
     def high_update(self, signal):
         if self.atype == 2:
@@ -57,9 +57,9 @@ class Auction:
         if self.atype == 3:
             return (self.val_high[Auction.HIGH] + signal) / 2
         if self.atype == 4:
-            return (self.prob_low[Auction.HIGH] + signal) / 2
-        if self.atype == 5:
             return (self.prob_high[Auction.HIGH] + signal) / 2
+        if self.atype == 5:
+            return (self.prob_low[Auction.HIGH] + signal) / 2
 
     def __str__(self):
         return 'Auction ' % self.aid
