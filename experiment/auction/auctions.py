@@ -4,14 +4,17 @@ from typing import List
 class Auction:
     LOW = 0
     HIGH = 1
+    MIN = 0
+    MAX = 1
     VALUE = 0
     PROBABILITY = 1
 
-    def __init__(self, aid: int, atype: int, matrix: List = [], signals: List = []):
+    def __init__(self, aid: int, atype: int, matrix: List = [], signals: List = [], min_max: List = []):
         self.aid = aid
         self.atype = atype
         self.matrix = matrix
         self.signals = signals
+        self.min_max = min_max
 
     @property
     def val_low(self):
@@ -28,6 +31,14 @@ class Auction:
     @property
     def prob_high(self):
         return self.matrix[Auction.PROBABILITY][Auction.HIGH]
+
+    @property
+    def min_value(self):
+        return self.min_max[Auction.MIN]
+
+    @property
+    def max_value(self):
+        return self.min_max[Auction.MAX]
 
     def low_update(self, signal):
         assert (1 <= self.atype <= 5)
@@ -56,6 +67,7 @@ class Auction:
     def __rpr__(self):
         return "Auction: {}, Type: {}".format(self.aid, self.atype)
 
+
 class PhaseOneAuctionCollection:
     def __init__(self, left_auctions, right_auctions):
         self.left_auctions = left_auctions
@@ -69,15 +81,11 @@ class PhaseOneAuctionCollection:
 
 
 class PhaseTwoAuctionCollection:
-    def __init__(self, auctions, min_max_values):
+    def __init__(self, auctions):
         self.auctions = auctions
-        self.min_max_values = min_max_values
 
     def auction(self, session_round):
         return self.auctions[session_round - 1]
-
-    def auction_min_max(self, session_round):
-        return self.min_max_values[session_round - 1]
 
 
 class PhaseThreeAuctionCollection:
