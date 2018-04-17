@@ -15,11 +15,7 @@ class AuctionCollectionFactory:
 
     @staticmethod
     def phase_two_rounds():
-        rounds = 0
-        for key, value in PHASE_TWO_AUCTION_GROUP.items():
-            if key == 'auction_ids':
-                rounds += len(value)
-        return rounds
+        return len(AUCTIONS)
 
     @staticmethod
     def phase_three_rounds():
@@ -41,32 +37,40 @@ class AuctionCollectionFactory:
 
             left_auction = AUCTIONS[pair_ids[0]]
             left_auctions.append(Auction(
-                id=left_auction['id'],
-                type=left_auction['type'],
+                aid=left_auction['id'],
+                atype=left_auction['type'],
                 matrix=left_auction['matrix'],
-                signals=left_auction['matrix'],
+                signals=left_auction['signals'],
+                min_max=left_auction['min_max'],
             ))
 
             right_auction = AUCTIONS[pair_ids[1]]
             right_auctions.append(Auction(
-                id=right_auction['id'],
-                type=right_auction['type'],
+                aid=right_auction['id'],
+                atype=right_auction['type'],
                 matrix=right_auction['matrix'],
-                signals=right_auction['matrix'],
+                signals=right_auction['signals'],
+                min_max=right_auction['min_max'],
             ))
 
         return PhaseOneAuctionCollection(left_auctions, right_auctions)
 
     @staticmethod
     def phase_two_auctions():
+        auction_ids = [aid for aid, value in AUCTIONS]
+        random.shuffle(auction_ids)
         auctions = []
-        min_max_values = []
-        # for group in PHASE_TWO_AUCTION_GROUP:
-        #     for auction_id in group['auction_ids']:
-        #         auctions.append(AUCTIONS[auction_id])
-        #         min_max_values.append(group['min_max'])
-        #
-        # return PhaseTwoAuctionCollection(auctions, min_max_values)
+        for aid in auction_ids:
+            auction = AUCTIONS[aid]
+            auctions.append(Auction(
+                aid=auction['id'],
+                atype=auction['type'],
+                matrix=auction['matrix'],
+                signals=auction['signals'],
+                min_max=auction['min_max'],
+            ))
+
+        return PhaseTwoAuctionCollection(auctions)
 
     @staticmethod
     def phase_three_auctions():
