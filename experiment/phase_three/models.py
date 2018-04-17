@@ -1,9 +1,8 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from auction.factory import AuctionCollectionFactory
+from auction.factory import AuctionCollectionFactory as Factory
 
 author = 'Your name here'
 
@@ -18,15 +17,18 @@ class Constants(BaseConstants):
     # --------------------------------------------
     name_in_url = 'phase_three'
     players_per_group = 2
-    num_rounds = AuctionCollectionFactory.phase_two_rounds()
+    num_rounds = Factory.phase_two_rounds()
     # Experiment Constants
     # --------------------------------------------
     INSTRUCTIONS_ROUND = 1
-    auctions = AuctionCollectionFactory.phase_three_auctions()
 
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        if self.round_number == 1:
+            for player in self.get_players():
+                auctions = Factory.phase_three_auctions()
+                player.participant.vars['phase_three_auctions'] = auctions
 
 
 class Group(BaseGroup):
