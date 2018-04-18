@@ -1,13 +1,12 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
-
 
 author = 'Your name here'
 
 doc = """
-Your app description
+Phase 4: Payoff determination
+https://github.com/cesslab/Experiment-WinnersCurseCommonValueAuctions
 """
 
 
@@ -18,7 +17,11 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        if self.round_number == 1:
+            for player in self.get_players():
+                auctions = Factory.phase_two_auctions()
+                player.participant.vars['phase_two_auctions'] = auctions
 
 
 class Group(BaseGroup):
