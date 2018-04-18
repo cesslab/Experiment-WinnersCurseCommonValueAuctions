@@ -36,4 +36,4 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    bid = models.CurrencyField()
+    bid = models.FloatField(blank=False)
