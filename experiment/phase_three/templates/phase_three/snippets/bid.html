@@ -26,8 +26,15 @@
     </div>
 
     <div>
-        <input type="number" name="bid" required id="id_bid" class="form-control" placeholder="Enter Your Bid">
+        <input type="number" step="any" name="bid" required id="id_bid" class="form-control"
+               value="{{ form.bid.value|default_if_none:"" }}"
+               placeholder="Enter Your Bid">
         <small id="bidhelp" class="form-text text-muted">Your bid must be between 0 and {{ auction.max_value }}</small>
+        {% if form.bid.errors %}
+            <div class="alert alert-danger">
+                {{ form.bid.errors }}
+            </div>
+        {% endif %}
     </div>
 </div>
 </div>
