@@ -28,13 +28,12 @@ class BidPage(Page):
             'low_update': auction.low_update(signal),
             'high_update': auction.high_update(signal)}
 
-    def bid_min(self):
-        return 0
-
-    def bid_max(self):
+    def bid_error_message(self, bid):
         auction_collection = self.player.participant.vars['phase_three_auctions']
         auction = auction_collection.auction(self.round_number)
-        return auction.max_value
+        max_bid = auction.max_value
+        if not 0 <= bid <= max_bid:
+            return 'The bid value must be between 0 and {}.'.format(max_bid)
 
 
 class Results(Page):
