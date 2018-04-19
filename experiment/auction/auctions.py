@@ -69,9 +69,10 @@ class Auction:
 
 
 class PhaseOneAuctionCollection:
-    def __init__(self, left_auctions, right_auctions):
+    def __init__(self, left_auctions, right_auctions, auctions):
         self.left_auctions = left_auctions
         self.right_auctions = right_auctions
+        self.auctions = auctions
 
     def left_auction(self, session_round):
         return self.left_auctions[session_round - 1]
