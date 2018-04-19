@@ -1,5 +1,4 @@
-from otree.api import Currency as c, currency_range
-from ._builtin import Page, WaitPage
+from ._builtin import Page
 from .models import Constants
 
 
@@ -23,9 +22,7 @@ class CutoffSelectionPage(Page):
         return auction.max_value
 
     def cutoff_min(self):
-        auction_collection = self.player.participant.vars['phase_two_auctions']
-        auction = auction_collection.auction(self.round_number)
-        return auction.min_value
+        return 0
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
