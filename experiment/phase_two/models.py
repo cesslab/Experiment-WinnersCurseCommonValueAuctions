@@ -1,6 +1,5 @@
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-    Currency as c, currency_range
+    models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
 from auction.factory import AuctionCollectionFactory as Factory
@@ -17,7 +16,7 @@ class Constants(BaseConstants):
     # oTree Constants
     # --------------------------------------------
     name_in_url = 'phase_two'
-    players_per_group = 2
+    players_per_group = None
     num_rounds = Factory.phase_two_rounds()
     # Experiment Constants
     # --------------------------------------------

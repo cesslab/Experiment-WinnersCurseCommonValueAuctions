@@ -16,7 +16,7 @@ class Constants(BaseConstants):
     # oTree Constants
     # --------------------------------------------
     name_in_url = 'phase_three'
-    players_per_group = 2
+    players_per_group = None
     num_rounds = Factory.phase_two_rounds()
     # Experiment Constants
     # --------------------------------------------
