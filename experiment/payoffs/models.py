@@ -2,7 +2,7 @@ from otree.api import (
     BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-author = 'Your name here'
+author = 'Anwar A. Ruff'
 
 doc = """
 Phase 4: Payoff determination
@@ -17,11 +17,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        if self.round_number == 1:
-            for player in self.get_players():
-                auctions = Factory.phase_two_auctions()
-                player.participant.vars['phase_two_auctions'] = auctions
+    pass
 
 
 class Group(BaseGroup):
