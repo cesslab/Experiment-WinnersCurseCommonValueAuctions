@@ -1,5 +1,6 @@
-from otree.api import Currency as c, currency_range
-from phase_one._builtin import Page, WaitPage
+import random
+
+from phase_one._builtin import Page
 from .models import Constants
 
 
@@ -23,6 +24,22 @@ class SelectAuctionPage(Page):
         if value not in [left_auction.aid, right_auction.aid, 0]:
             return 'You must choose Auction A, Auction B, or Indifferent'
 
+    def before_next_page(self):
+        payoff_round_a = self.player.participant.vars['round_a']
+        payoff_round_b = self.player.participant.vars['round_b']
+        if self.round_number == payoff_round_a or self.round_number == payoff_round_b:
+            round_label = 'round_a_auction' if self.round_number == payoff_round_a else 'round_b_auction'
+            auction_collection = self.player.participant.vars['phase_one_auctions']
+
+            if self.player.preference == Constants.INDIFFERENT:
+                if random.random() < 0.5:
+                    self.player.participant.vars[round_label] = auction_collection.left_auction(self.round_number)
+                else:
+                    self.player.participant.vars[round_label] = auction_collection.right_auction(
+                        self.round_number)
+            else:
+                self.player.participant.vars[round_label] = auction_collection.auctions[self.player.preference]
+
 
 class InstructionsPage(Page):
     def is_displayed(self):
@@ -40,6 +57,4 @@ class Results(Page):
 page_sequence = [
     InstructionsPage,
     SelectAuctionPage,
-    # ResultsWaitPage,
-    # Results
 ]
