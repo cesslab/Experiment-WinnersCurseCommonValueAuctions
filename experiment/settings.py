@@ -1,8 +1,8 @@
 import os
 from os import environ
+
 import dj_database_url
 import otree.settings
-
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
 # in SESSION_CONFIGS, except those that explicitly override it.
@@ -20,10 +20,10 @@ SESSION_CONFIGS = [
         'name': 'phase_one',
         'display_name': "Winner's Curse",
         'num_demo_participants': 2,
-        'app_sequence': ['phase_one', 'phase_two', 'phase_three'],
+        'app_sequence': ['phase_one', 'phase_two', 'phase_three', 'payoffs'],
+        'use_browser_bots': True,
     },
 ]
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -35,11 +35,10 @@ USE_POINTS = True
 
 ROOMS = [
     {
-    'name': 'cess_lab',
-    'display_name': 'CESS Lab',
+        'name': 'cess_lab',
+        'display_name': 'CESS Lab',
     },
 ]
-
 
 # AUTH_LEVEL:
 # this setting controls which parts of your site are freely accessible,
@@ -58,7 +57,6 @@ ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
-
 # Consider '', None, and '0' to be empty/false
 DEBUG = (environ.get('OTREE_PRODUCTION') in {None, '', '0'})
 
@@ -66,7 +64,6 @@ DEMO_PAGE_INTRO_HTML = """ """
 
 # don't share this with anybody.
 SECRET_KEY = '*vy9nr_v2j_9kj(f@7s((47cf5hr@rp9a08rybj4&g8i5&)m^5'
-
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -85,9 +82,7 @@ DATABASES = {
     )
 }
 
-
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
-
 
 otree.settings.augment_settings(globals())
