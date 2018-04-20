@@ -1,3 +1,5 @@
+import random
+
 from ._builtin import Page, WaitPage
 
 
@@ -12,29 +14,30 @@ class ResultsWaitPage(WaitPage):
         # payoff auctions, bids, and cutoffs  in their respective rounds
         #
         # ----------------------------------------------------------------------------------------------
-        # players = self.group.get_players()[:]
-        # for i in range(len(players)):
-        #     for player in players:
-        #         # find a pair member
-        #         pair_member = random.choice(players[:i] + players[i + 1:])
-        #         # Choose a random round for phase one
-        #         num_phase_one_rounds = PhaseOneConstants.num_rounds
-        #         round_a = random.randint(1, num_phase_one_rounds)
-        #         round_b = random.randint(1, num_phase_one_rounds)
-        #         # retrieve the player's selected preference for round a ad b
-        #         phase_one_auction_collection = player.participant.vars['phase_one_auctions']
-        #
-        #         preference_round_a = player.in_round(round_a).preference
-        #         if preference_round_a == PhaseOneConstants.INDIFFERENT:
-        #             if random.random() > 0.5:
-        #                 auction = phase_one_auction_collection.left_auction(round_a)
-        #             else:
-        #                 auction = phase_one_auction_collection.right_auction(round_a)
-        #         else:
-        #             auction = phase_one_auction_collection.auctions[preference_round_a]
+        players = self.group.get_players()[:]
+        for i in range(len(players)):
+            for player in players:
+                other_player = random.choice(players[:i] + players[i + 1:])
+                if self.player_win_auction(player, other_player):
+                    pass
+                else:
+                    player.payoff = 0
 
-        # preference_round_b = player.in_round(round_b).preference
-        pass
+    def player_win_auction(self, player, other):
+        player_participant_vars = player.participant.vars
+        other_participant_vars = other.participant.vars
+        aid = player_participant_vars['auction_a_id']
+        player_auction = player_participant_vars['auctions'][aid]
+        other_auction = other_participant_vars['auctions'][aid]
+
+        # Get the player's bid for the first randomly chosen payoff relevant auction-signal pair
+        player_bid = player_auction.bids[player_auction.random_signal]
+        other_bid = other_auction.bids[player_auction.random_signal]
+
+        if player_bid == other_bid:
+            return random.randint(0, 1) == 1
+        else:
+            return player_bid > other_bid
 
 
 class Results(Page):
