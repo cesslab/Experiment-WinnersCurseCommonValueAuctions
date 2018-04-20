@@ -1,4 +1,5 @@
 from typing import List
+import random
 
 
 class Auction:
@@ -15,6 +16,12 @@ class Auction:
         self.matrix = matrix
         self.signals = signals
         self.min_max = min_max
+        self.cutoff = None
+        self.bids = {}
+        self.random_signal = random.choice(signals)
+
+        for signal in signals:
+            self.bids[signal] = None
 
     @property
     def val_low(self):
