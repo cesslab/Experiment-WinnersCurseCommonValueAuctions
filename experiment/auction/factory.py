@@ -25,7 +25,7 @@ class AuctionCollectionFactory:
         return rounds
 
     @staticmethod
-    def phase_one_auctions():
+    def auctions():
         auctions = {}
         for aid, params in AUCTIONS.items():
             auctions[aid] = Auction(
@@ -35,6 +35,11 @@ class AuctionCollectionFactory:
                 signals=params['signals'],
                 min_max=params['min_max'],
             )
+        return auctions
+
+    @staticmethod
+    def phase_one_auction_collection():
+        auctions = AuctionCollectionFactory.auctions()
 
         shuffled_pair = PHASE_ONE_AUCTION_PAIRS[:]
         random.shuffle(shuffled_pair)
@@ -65,7 +70,7 @@ class AuctionCollectionFactory:
         return PhaseOneAuctionCollection(left_auctions, right_auctions, auctions)
 
     @staticmethod
-    def phase_two_auctions():
+    def phase_two_auction_collection():
         auction_ids = [aid for aid, value in AUCTIONS.items()]
         random.shuffle(auction_ids)
         auctions = []
@@ -82,7 +87,7 @@ class AuctionCollectionFactory:
         return PhaseTwoAuctionCollection(auctions)
 
     @staticmethod
-    def phase_three_auctions():
+    def phase_three_auction_collection():
         auction_signal_pairs = []
         for aid, auction_params in AUCTIONS.items():
             for signal in auction_params['signals']:
