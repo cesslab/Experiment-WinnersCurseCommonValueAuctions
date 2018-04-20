@@ -27,8 +27,8 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             for player in self.get_players():
-                auctions = Factory.phase_three_auctions()
-                player.participant.vars['phase_three_auctions'] = auctions
+                auctions = Factory.phase_three_auction_collection()
+                player.participant.vars['phase_three_auction_collection'] = auctions
 
 
 class Group(BaseGroup):

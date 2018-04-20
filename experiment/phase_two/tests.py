@@ -11,10 +11,10 @@ class PlayerBot(Bot):
         if self.round_number == 1:
             yield (pages.InstructionsPage)
 
+        participant_vars = self.player.participant.vars
+        auction_collection = participant_vars['phase_two_auction_collection']
+        auction = auction_collection.auction(self.round_number)
         if self.round_number == 1:
-            auction_collection = self.player.participant.vars['phase_two_auctions']
-            auction = auction_collection.auction(self.round_number)
-
             yield SubmissionMustFail(pages.CutoffSelectionPage, {'cutoff': - 1, 'clicked': 1})
             yield SubmissionMustFail(pages.CutoffSelectionPage, {'cutoff': auction.max_value + 1, 'clicked': 1})
             yield SubmissionMustFail(pages.CutoffSelectionPage, {'cutoff': 0, 'clicked': 0})
@@ -22,10 +22,8 @@ class PlayerBot(Bot):
             yield (pages.CutoffSelectionPage, {'cutoff': 0, 'clicked': 1})
             assert self.player.cutoff == 0
         else:
-            auction_collection = self.player.participant.vars['phase_two_auctions']
-            auction = auction_collection.auction(self.round_number)
-
             random_cutoff = random.randint(0, auction.max_value)
-
             yield (pages.CutoffSelectionPage, {'cutoff': random_cutoff, 'clicked': 1})
             assert self.player.cutoff == random_cutoff, "actual cutoff was {}".format(self.player.cutoff)
+
+        assert participant_vars['auctions'][auction.aid].cutoff is not None

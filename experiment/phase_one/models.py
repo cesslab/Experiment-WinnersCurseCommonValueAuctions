@@ -31,8 +31,9 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             for player in self.get_players():
-                auctions = Factory.phase_one_auctions()
-                player.participant.vars['phase_one_auctions'] = auctions
+                phase_one_auction_collection = Factory.phase_one_auction_collection()
+                player.participant.vars['phase_one_auction_collection'] = phase_one_auction_collection
+                player.participant.vars['auctions'] = Factory.auctions()
 
                 rounds = list(range(1, Constants.num_rounds + 1))
                 random.shuffle(rounds)
