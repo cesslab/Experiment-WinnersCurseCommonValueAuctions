@@ -36,5 +36,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    cutoff = models.IntegerField(blank=False)
+    cutoff = models.DecimalField(blank=False, max_digits=4, decimal_places=2)
     clicked = models.IntegerField()
