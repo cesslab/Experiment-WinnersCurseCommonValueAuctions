@@ -22,7 +22,9 @@ class CutoffSelectionPage(Page):
         return auction.max_value
 
     def cutoff_min(self):
-        return 0
+        auction_collection = self.player.participant.vars['phase_two_auction_collection']
+        auction = auction_collection.auction(self.round_number)
+        return auction.min_value
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
