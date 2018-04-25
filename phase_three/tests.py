@@ -27,5 +27,6 @@ class PlayerBot(Bot):
             assert self.player.bid == random_bid, "actual bid was {}".format(self.player.bid)
 
         if self.round_number == Constants.num_rounds:
-            for pair in auction_collection.auction_signal_pairs:
-                assert pair['auction'].bids[pair['signal']] is not None
+            for aid, auction in self.player.participant.vars['auctions'].items():
+                for signal in auction.signals:
+                    assert auction.bids[signal] is not None
