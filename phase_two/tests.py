@@ -26,4 +26,4 @@ class PlayerBot(Bot):
             yield (pages.CutoffSelectionPage, {'cutoff': random_cutoff, 'clicked': 1})
             assert self.player.cutoff == random_cutoff, "actual cutoff was {}".format(self.player.cutoff)
 
-        assert participant_vars['auctions'][auction.aid].cutoff is not None
+        assert self.player.participant.vars['auctions'][auction.aid].cutoff is not None
