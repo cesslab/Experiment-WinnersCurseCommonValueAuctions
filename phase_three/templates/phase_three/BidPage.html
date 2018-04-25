@@ -60,7 +60,11 @@
                 </div>
 
                 <div class="text-center">
-                    <h5>{{ low_update }} &#8804; v &#8804; {{ high_update }}</h5>
+                    {% if low_update < 1 or high_update < 1 %}
+                        <h5>{% widthratio low_update 1 100 %}&#37; &#8804; v &#8804; {% widthratio high_update 1 100 %}&#37;</h5>
+                    {% else %}
+                        <h5>{{ low_update|floatformat }} &#8804; v &#8804; {{ high_update|floatformat }}</h5>
+                    {% endif %}
                 </div>
             </div>
 
