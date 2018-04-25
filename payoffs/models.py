@@ -14,6 +14,10 @@ class Constants(BaseConstants):
     name_in_url = 'payoffs'
     players_per_group = None
     num_rounds = 1
+    # -------------------------
+    # Game Constants
+    # -------------------------
+    Endowment = 100
 
 
 class Subsession(BaseSubsession):
