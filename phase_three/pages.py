@@ -40,7 +40,8 @@ class BidPage(Page):
         auction = auction_collection.auction(self.round_number)
         signal = auction_collection.signal(self.round_number)
 
-        participant_vars['auctions'][auction.aid].bids[signal] = self.player.bid
+        assert self.player.bid is not None
+        self.player.participant.vars['auctions'][auction.aid].bids[signal] = self.player.bid
 
 
 page_sequence = [
