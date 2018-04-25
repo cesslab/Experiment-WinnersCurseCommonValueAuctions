@@ -35,12 +35,10 @@ class BidPage(Page):
         list.
         :return: None
         """
-        participant_vars = self.player.participant.vars
-        auction_collection = participant_vars['phase_three_auction_collection']
+        auction_collection = self.player.participant.vars['phase_three_auction_collection']
         auction = auction_collection.auction(self.round_number)
         signal = auction_collection.signal(self.round_number)
 
-        assert self.player.bid is not None
         self.player.participant.vars['auctions'][auction.aid].bids[signal] = self.player.bid
 
 
