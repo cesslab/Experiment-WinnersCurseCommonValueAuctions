@@ -19,3 +19,13 @@ def test_rounds_number_is_equal_to_auctions():
 def test_auction_min_is_less_than_max():
     for auction in AuctionCollectionFactory.phase_two_auction_collection().auctions:
         assert auction.min_value <= auction.max_value
+
+
+def test_type_four_five_auctions_have_float_signals():
+    for auction in AuctionCollectionFactory.phase_two_auction_collection().auctions:
+        if auction.atype == 4 or auction.atype == 5:
+            for signal in auction.signals:
+                assert isinstance(signal, float)
+        else:
+            for signal in auction.signals:
+                assert isinstance(signal, int)
