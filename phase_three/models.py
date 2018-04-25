@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     # --------------------------------------------
     name_in_url = 'phase_three'
     players_per_group = None
-    num_rounds = Factory.phase_two_rounds()
+    num_rounds = Factory.phase_three_rounds()
     # Experiment Constants
     # --------------------------------------------
     INSTRUCTIONS_ROUND = 1
