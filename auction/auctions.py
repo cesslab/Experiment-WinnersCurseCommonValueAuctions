@@ -24,19 +24,19 @@ class Auction:
             self.bids[signal] = None
 
     @property
-    def val_low(self):
+    def low_values(self):
         return self.matrix[Auction.VALUE][Auction.LOW]
 
     @property
-    def val_high(self):
+    def high_values(self):
         return self.matrix[Auction.VALUE][Auction.HIGH]
 
     @property
-    def prob_low(self):
+    def low_probabilities(self):
         return self.matrix[Auction.PROBABILITY][Auction.LOW]
 
     @property
-    def prob_high(self):
+    def high_probabilities(self):
         return self.matrix[Auction.PROBABILITY][Auction.HIGH]
 
     @property
@@ -50,23 +50,51 @@ class Auction:
     def low_update(self, signal):
         assert (2 <= self.atype <= 5)
         if self.atype == 2:
-            return (self.val_low[Auction.LOW] + signal) / 2
+            return (self.low_values[Auction.LOW] + signal) / 2
         elif self.atype == 3:
-            return (self.val_high[Auction.LOW] + signal) / 2
+            return (self.high_values[Auction.LOW] + signal) / 2
         elif self.atype == 4:
-            return (self.prob_high[Auction.LOW] + signal) / 2
+            return (self.high_probabilities[Auction.LOW] + signal) / 2
         else:
-            return (self.prob_low[Auction.LOW] + signal) / 2
+            return (self.low_probabilities[Auction.LOW] + signal) / 2
 
     def high_update(self, signal):
         if self.atype == 2:
-            return (self.val_low[Auction.HIGH] + signal) / 2
+            return (self.low_values[Auction.HIGH] + signal) / 2
         if self.atype == 3:
-            return (self.val_high[Auction.HIGH] + signal) / 2
+            return (self.high_values[Auction.HIGH] + signal) / 2
         if self.atype == 4:
-            return (self.prob_high[Auction.HIGH] + signal) / 2
+            return (self.high_probabilities[Auction.HIGH] + signal) / 2
         if self.atype == 5:
-            return (self.prob_low[Auction.HIGH] + signal) / 2
+            return (self.low_probabilities[Auction.HIGH] + signal) / 2
+
+    def low_value(self, player_signal, other_signal):
+        if self.atype == 2:
+            return (player_signal + other_signal) / 2
+        else:
+            return self.low_values[0]
+
+    def high_value(self, player_signal, other_signal):
+        if self.atype == 3:
+            return (player_signal + other_signal) / 2
+        else:
+            return self.high_values[0]
+
+    def low_probability(self, player_signal, other_signal):
+        if self.atype == 5:
+            return (player_signal + other_signal) / 2
+        elif self.atype == 4:
+            return 1 - (player_signal + other_signal) / 2
+        else:
+            return self.low_probabilities[0]
+
+    def high_probability(self, player_signal, other_signal):
+        if self.atype == 4:
+            return (player_signal + other_signal) / 2
+        elif self.atype == 5:
+            return 1 - (player_signal + other_signal) / 2
+        else:
+            return self.high_probabilities[0]
 
     def __str__(self):
         return 'Auction ' % self.aid

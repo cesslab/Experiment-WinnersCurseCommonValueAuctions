@@ -39,30 +39,30 @@ def is_correct_auction_format(auction):
     temp = "Auction {} type {} must have {{}} value(s) in the {{}} position"
     message = temp.format(aid, atype)
     if atype == 1:
-        assert len(auction.val_low) == 1, message.format(1, 'val_low')
-        assert len(auction.val_high) == 1, message.format(1, 'val_high')
-        assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
-        assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
+        assert len(auction.low_values) == 1, message.format(1, 'low_values')
+        assert len(auction.high_values) == 1, message.format(1, 'high_values')
+        assert len(auction.low_probabilities) == 1, message.format(1, 'low_probabilities')
+        assert len(auction.high_probabilities) == 1, message.format(1, 'high_probabilities')
     elif atype == 2:
-        assert len(auction.val_low) == 2, message.format(2, 'val_low')
-        assert len(auction.val_high) == 1, message.format(1, 'val_high')
-        assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
-        assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
+        assert len(auction.low_values) == 2, message.format(2, 'low_values')
+        assert len(auction.high_values) == 1, message.format(1, 'high_values')
+        assert len(auction.low_probabilities) == 1, message.format(1, 'low_probabilities')
+        assert len(auction.high_probabilities) == 1, message.format(1, 'high_probabilities')
     elif atype == 3:
-        assert len(auction.val_low) == 1, message.format(1, 'val_low')
-        assert len(auction.val_high) == 2, message.format(2, 'val_high')
-        assert len(auction.prob_low) == 1, message.format(1, 'prob_low')
-        assert len(auction.prob_high) == 1, message.format(1, 'prob_high')
+        assert len(auction.low_values) == 1, message.format(1, 'low_values')
+        assert len(auction.high_values) == 2, message.format(2, 'high_values')
+        assert len(auction.low_probabilities) == 1, message.format(1, 'low_probabilities')
+        assert len(auction.high_probabilities) == 1, message.format(1, 'high_probabilities')
     elif atype == 4:
-        assert len(auction.val_low) == 1, message.format(1, 'val_low')
-        assert len(auction.val_high) == 1, message.format(1, 'val_high')
-        assert len(auction.prob_low) == 0, message.format(0, 'prob_low')
-        assert len(auction.prob_high) == 2, message.format(2, 'prob_high')
+        assert len(auction.low_values) == 1, message.format(1, 'low_values')
+        assert len(auction.high_values) == 1, message.format(1, 'high_values')
+        assert len(auction.low_probabilities) == 0, message.format(0, 'low_probabilities')
+        assert len(auction.high_probabilities) == 2, message.format(2, 'high_probabilities')
     elif atype == 5:
-        assert len(auction.val_low) == 1, message.format(1, 'val_low')
-        assert len(auction.val_high) == 1, message.format(1, 'val_high')
-        assert len(auction.prob_low) == 2, message.format(2, 'prob_low')
-        assert len(auction.prob_high) == 0, message.format(0, 'prob_high')
+        assert len(auction.low_values) == 1, message.format(1, 'low_values')
+        assert len(auction.high_values) == 1, message.format(1, 'high_values')
+        assert len(auction.low_probabilities) == 2, message.format(2, 'low_probabilities')
+        assert len(auction.high_probabilities) == 0, message.format(0, 'high_probabilities')
 
 
 def test_left_auctions_have_valid_type_ids():
