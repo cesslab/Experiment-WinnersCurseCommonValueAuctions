@@ -89,18 +89,18 @@ class AuctionCollectionFactory:
     @staticmethod
     def phase_three_auction_collection():
         auction_signal_pairs = []
-        for aid, auction_params in AUCTIONS.items():
-            for signal in auction_params['signals']:
+        keys = random.shuffle(list(AUCTIONS.keys()))
+        for aid in keys:
+            for signal in AUCTIONS[aid]['signals']:
                 auction_signal_pairs.append(
                     {
                         'auction': Auction(
-                            aid=auction_params['id'],
-                            atype=auction_params['type'],
-                            matrix=auction_params['matrix'],
-                            signals=auction_params['signals'],
-                            min_max=auction_params['min_max']),
+                            aid=AUCTIONS[aid]['id'],
+                            atype=AUCTIONS[aid]['type'],
+                            matrix=AUCTIONS[aid]['matrix'],
+                            signals=AUCTIONS[aid]['signals'],
+                            min_max=AUCTIONS[aid]['min_max']),
                         'signal': signal
                     })
 
-        random.shuffle(auction_signal_pairs)
         return PhaseThreeAuctionCollection(auction_signal_pairs)
