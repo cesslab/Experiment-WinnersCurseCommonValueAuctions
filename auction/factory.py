@@ -1,10 +1,7 @@
 import random
 
-from .auctions import (
-    PhaseOneAuctionCollection, PhaseTwoAuctionCollection,
-    PhaseThreeAuctionCollection, Auction)
-from .treatment_one import (
-    AUCTIONS, PHASE_ONE_AUCTION_PAIRS)
+from .auctions import (PhaseOneAuctionCollection, PhaseTwoAuctionCollection, PhaseThreeAuctionCollection, Auction)
+from .treatment_one import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS)
 
 
 class AuctionCollectionFactory:
@@ -89,7 +86,8 @@ class AuctionCollectionFactory:
     @staticmethod
     def phase_three_auction_collection():
         auction_signal_pairs = []
-        keys = random.shuffle(list(AUCTIONS.keys()))
+        keys = list(AUCTIONS.keys())
+        random.shuffle(keys)
         for aid in keys:
             for signal in AUCTIONS[aid]['signals']:
                 auction_signal_pairs.append(
