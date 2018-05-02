@@ -39,6 +39,11 @@ class BidPage(Page):
         auction = auction_collection.auction(self.round_number)
         signal = auction_collection.signal(self.round_number)
 
+        self.player.auction = auction.aid
+        self.player.signal = signal
+        self.player.low_update = auction.low_update(signal)
+        self.player.high_update = auction.high_update(signal)
+
         self.player.participant.vars['auctions'][auction.aid].bids[signal] = self.player.bid
 
 
