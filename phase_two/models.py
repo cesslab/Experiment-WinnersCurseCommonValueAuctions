@@ -37,4 +37,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     cutoff = models.DecimalField(blank=False, max_digits=4, decimal_places=2)
+    auction = models.IntegerField(blank=False)
     clicked = models.IntegerField()

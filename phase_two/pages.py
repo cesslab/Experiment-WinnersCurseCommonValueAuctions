@@ -39,6 +39,7 @@ class CutoffSelectionPage(Page):
         participant_vars = self.player.participant.vars
         auction_collection = self.player.participant.vars['phase_two_auction_collection']
         auction = auction_collection.auction(self.round_number)
+        self.player.auction = auction.aid
         participant_vars['auctions'][auction.aid].cutoff = self.player.cutoff
 
 
