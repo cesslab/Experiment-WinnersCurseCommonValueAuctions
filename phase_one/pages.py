@@ -37,27 +37,29 @@ class SelectAuctionPage(Page):
         round_a = self.player.participant.vars['round_a']
         participant_vars = self.player.participant.vars
 
+        self.set_left_right_auctions()
+
         if self.round_number == round_a:
-            auction_collection = participant_vars['phase_one_auction_collection']
-            if self.player.preference == Constants.INDIFFERENT:
-                if random.random() < 0.5:
-                    participant_vars['auction_a_id'] = auction_collection.left_auction(self.round_number).aid
-                else:
-                    participant_vars['auction_a_id'] = auction_collection.right_auction(self.round_number).aid
-            else:
-                participant_vars['auction_a_id'] = self.player.preference
+            self.set_payment_round_auction_id(participant_vars, 'auction_a_id')
 
-        payoff_round_b = participant_vars['round_b']
-        if self.round_number == payoff_round_b:
-            auction_collection = participant_vars['phase_one_auction_collection']
-            if self.player.preference == Constants.INDIFFERENT:
-                if random.random() < 0.5:
-                    participant_vars['auction_b_id'] = auction_collection.left_auction(self.round_number).aid
-                else:
-                    participant_vars['auction_b_id'] = auction_collection.right_auction(self.round_number).aid
-            else:
-                participant_vars['auction_b_id'] = self.player.preference
+        round_b = participant_vars['round_b']
+        if self.round_number == round_b:
+            self.set_payment_round_auction_id(participant_vars, 'auction_b_id')
 
+    def set_left_right_auctions(self):
+        auction_collection = self.player.participant.vars['phase_one_auction_collection']
+        self.player.left_auction = auction_collection.left_auction(self.round_number).aid
+        self.player.right_auction = auction_collection.right_auction(self.round_number).aid
+
+    def set_payment_round_auction_id(self, participant_vars, auction_id):
+        auction_collection = participant_vars['phase_one_auction_collection']
+        if self.player.preference == Constants.INDIFFERENT:
+            if random.random() < 0.5:
+                participant_vars[auction_id] = auction_collection.left_auction(self.round_number).aid
+            else:
+                participant_vars[auction_id] = auction_collection.right_auction(self.round_number).aid
+        else:
+            participant_vars[auction_id] = self.player.preference
 
 class InstructionsPage(Page):
     def is_displayed(self):
