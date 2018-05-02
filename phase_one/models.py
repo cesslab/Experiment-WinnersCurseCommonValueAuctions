@@ -47,3 +47,5 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     preference = models.IntegerField(blank=False)
+    left_auction = models.IntegerField(blank=False)
+    right_auction = models.IntegerField(blank=False)
