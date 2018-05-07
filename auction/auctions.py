@@ -47,26 +47,33 @@ class Auction:
     def max_value(self):
         return self.min_max[Auction.MAX]
 
-    def low_update(self, signal):
+    def range_low(self):
         assert (2 <= self.atype <= 5)
         if self.atype == 2:
-            return (self.low_values[Auction.LOW] + signal) / 2
+            return self.low_values[Auction.LOW]
         elif self.atype == 3:
-            return (self.high_values[Auction.LOW] + signal) / 2
+            return self.high_values[Auction.LOW]
         elif self.atype == 4:
-            return (self.high_probabilities[Auction.LOW] + signal) / 2
+            return self.high_probabilities[Auction.LOW]
         else:
-            return (self.low_probabilities[Auction.LOW] + signal) / 2
+            return self.low_probabilities[Auction.LOW]
+
+    def range_high(self):
+        assert (2 <= self.atype <= 5)
+        if self.atype == 2:
+            return self.low_values[Auction.HIGH]
+        elif self.atype == 3:
+            return self.high_values[Auction.HIGH]
+        elif self.atype == 4:
+            return self.high_probabilities[Auction.HIGH]
+        else:
+            return self.low_probabilities[Auction.HIGH]
+
+    def low_update(self, signal):
+        return (self.range_low() + signal) / 2
 
     def high_update(self, signal):
-        if self.atype == 2:
-            return (self.low_values[Auction.HIGH] + signal) / 2
-        if self.atype == 3:
-            return (self.high_values[Auction.HIGH] + signal) / 2
-        if self.atype == 4:
-            return (self.high_probabilities[Auction.HIGH] + signal) / 2
-        if self.atype == 5:
-            return (self.low_probabilities[Auction.HIGH] + signal) / 2
+        return (self.range_high() + signal) / 2
 
     def low_value(self, player_signal, other_signal):
         if self.atype == 2:
