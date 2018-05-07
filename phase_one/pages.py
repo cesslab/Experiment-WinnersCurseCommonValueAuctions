@@ -25,15 +25,6 @@ class SelectAuctionPage(Page):
             return 'You must choose Auction A, Auction B, or Indifferent'
 
     def before_next_page(self):
-        """
-        If this round is payoff relevant the preferred Auction is saved to the participants var
-        list. If the subjects did not have a preference then one of the two auctions show is
-        selected at random.
-
-        Note: This function is executed by each player before leaving the Select Auction Screen.
-
-        :return: None
-        """
         round_a = self.player.participant.vars['round_a']
         participant_vars = self.player.participant.vars
 
@@ -52,6 +43,7 @@ class SelectAuctionPage(Page):
         self.player.right_auction = auction_collection.right_auction(self.round_number).aid
 
     def set_payment_round_auction_id(self, participant_vars, auction_id):
+        self.player.participant.vars[auction_id + '_choice'] = self.player.preference
         auction_collection = participant_vars['phase_one_auction_collection']
         if self.player.preference == Constants.INDIFFERENT:
             if random.random() < 0.5:
