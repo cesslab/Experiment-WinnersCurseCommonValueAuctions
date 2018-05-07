@@ -6,9 +6,43 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Your payoff is {{ player.payoff }}</h4>
-
-    {% next_button %}
+    <h3>Earnings #1</h3>
+    <ul>
+        <li>
+            Round {{ player.round_1 }}
+        </li>
+        <li>
+            {% if player.choice_1 == 0 %}
+                You were indifferent between the left and right so the following auction {{ player.auction_1 }} was chosen at random:
+            {% endif %}
+        </li>
+        <li>
+            The signal chosen for you was {{ player.signal_1 }}.
+        </li>
+        <li>
+            The signal chosen for your pair member was {{ player.other_signal_1 }}.
+        </li>
+        <li>
+            Your bid was {{ player.bid_1 }}.
+        </li>
+        <li>
+            Your pair member's bid was {{ player.other_bid_1 }}.
+        </li>
+        {% if winner_1 %}
+            <li>
+                Your won the auction.
+            </li>
+        {% else %}
+            <li>
+                Your did not win the auction.
+            </li>
+        {% endif %}
+        <li>
+            Your #1 earnings is {{ player.earnings_1 }}
+        </li>
+    </ul>
+    <h3>Earnings #2</h3>
 {% endblock %}
 
-
+{% block scripts %}
+{% endblock %}
