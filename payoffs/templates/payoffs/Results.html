@@ -2,19 +2,38 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Page title
 {% endblock %}
 
 {% block content %}
     <h3>Earnings #1</h3>
     <ul>
         <li>
-            Round {{ player.round_1 }}
+            The auction pair in round {{ player.round_1 }} of phase 1 was selected.
         </li>
         <li>
             {% if player.choice_1 == 0 %}
-                You were indifferent between the left and right so the following auction {{ player.auction_1 }} was chosen at random:
+                You were indifferent between the left and right auction. As a result the following auction was selected
+                at random:
+            {% else %}
+                Your preferred auction was:
             {% endif %}
+            <div class="grid-auction-container">
+                <div class="">
+                </div>
+                <div class="">
+                    {% if auction_1.atype == 1 %}
+                        {% include 'payoffs/snippets_1/type_1.html' %}
+                    {% elif auction_1.atype == 2 %}
+                        {% include 'payoffs/snippets_1/type_2.html' %}
+                    {% elif auction_1.atype == 3 %}
+                        {% include 'payoffs/snippets_1/type_3.html' %}
+                    {% elif auction_1.atype == 4 %}
+                        {% include 'payoffs/snippets_1/type_4.html' %}
+                    {% else %}
+                        {% include 'payoffs/snippets_1/type_5.html' %}
+                    {% endif %}
+                </div>
+            </div>
         </li>
         <li>
             The signal chosen for you was {{ player.signal_1 }}.
@@ -28,7 +47,7 @@
         <li>
             Your pair member's bid was {{ player.other_bid_1 }}.
         </li>
-        {% if winner_1 %}
+        {% if player.winner_1 %}
             <li>
                 Your won the auction.
             </li>
