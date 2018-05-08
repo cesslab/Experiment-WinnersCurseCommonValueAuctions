@@ -21,7 +21,7 @@ SESSION_CONFIGS = [
         'display_name': "Winner's Curse",
         'num_demo_participants': 2,
         'app_sequence': ['phase_one', 'phase_two', 'phase_three', 'payoffs'],
-        'use_browser_bots': bool(environ.get('OTREE_USE_BROWSER_BOTS', False)),
+        'use_browser_bots': (environ.get('OTREE_USE_BROWSER_BOTS') in {'1', 'true', 'True', 'TRUE'}),
     },
 ]
 
