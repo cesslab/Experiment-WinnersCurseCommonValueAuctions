@@ -54,13 +54,13 @@
       <div class="col-md-auto">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-success" id="id-preference-1">
-            <input type="radio" name="preference" value="{{left_auction.aid}}" autocomplete="off"> Auction A
+            <input type="radio" name="preference" value="{{left_auction.aid}}" id="left_auction" autocomplete="off"> Auction A
           </label>
-          <label class="btn btn-success">
-            <input type="radio" name="preference" value="0" autocomplete="off"> Indifferent
+          <label class="btn btn-success" id="id-preference-0">
+            <input type="radio" name="preference" value="0" autocomplete="off" id="neither_auction"> Indifferent
           </label>
           <label class="btn btn-success" id="id-preference-3">
-            <input type="radio" name="preference" value="{{right_auction.aid}}" autocomplete="off"> Auction B
+            <input type="radio" name="preference" value="{{right_auction.aid}}" id="right_auction" autocomplete="off"> Auction B
           </label>
         </div>
       </div>
