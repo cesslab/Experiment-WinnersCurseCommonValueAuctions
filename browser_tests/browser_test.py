@@ -1,8 +1,11 @@
+import random
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from auction.treatment_one import PHASE_ONE_AUCTION_PAIRS
+from auction.factory import AuctionCollectionFactory
 
 
 def play_instructions(driver):
@@ -16,6 +19,15 @@ def play_phase_one_screen(driver):
 
 def play_phase_two_screen(driver):
     driver.execute_script("""$('input[type="range"]').val(10).change();""")
+    driver.find_element(By.XPATH, "//input[@id='clicked']").value = '1'
+    driver.find_element(By.XPATH, '//button').click()
+
+
+def play_phase_three_screen(driver):
+    input_field = driver.find_element(By.XPATH, "//input[@id='id_bid']")
+    input_field.clear()
+    input_field.send_keys(str(random.randint(0, 28)))
+    driver.find_element(By.XPATH, '//button').click()
 
 
 def start_two_player_session(driver, url):
@@ -26,21 +38,37 @@ def start_two_player_session(driver, url):
     for link in links:
         link.send_keys(Keys.COMMAND + Keys.ENTER)
 
-    print("There are {} tabs open.".format(len(driver.window_handles)))
+    return len(driver.window_handles)
+
+def play_phase_one(driver):
+    play_instructions(driver)
+    for round in range(AuctionCollectionFactory.phase_one_rounds()):
+        play_phase_one_screen(driver)
+
+
+def play_phase_two(driver):
+    play_instructions(driver)
+    for round in range(AuctionCollectionFactory.phase_two_rounds()):
+        play_phase_two_screen(driver)
+
+
+def play_phase_three(driver):
+    play_instructions(driver)
+    for round in range(AuctionCollectionFactory.phase_three_rounds()):
+        play_phase_three_screen(driver)
 
 
 # Run with python -m browser_tests.browser_test
 if __name__ == "__main__":
     driver = webdriver.Chrome()
     driver.implicitly_wait(30)
-    start_two_player_session(driver, "http://127.0.0.1:8000/demo/phase_one/")
+    num_tabs = start_two_player_session(driver, "http://127.0.0.1:8000/demo/phase_one/")
 
-    driver.switch_to.window(driver.window_handles[1])
-    play_instructions(driver)
-    for pair in PHASE_ONE_AUCTION_PAIRS:
-        play_phase_one_screen(driver)
+    for i in range(1, num_tabs):
+        driver.switch_to.window(driver.window_handles[i])
+        play_phase_one(driver)
+        play_phase_two(driver)
+        play_phase_three(driver)
 
-    play_instructions(driver)
-    play_phase_two_screen(driver)
 
 
