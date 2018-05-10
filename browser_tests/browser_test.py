@@ -4,7 +4,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from auction.treatment_one import PHASE_ONE_AUCTION_PAIRS
 from auction.factory import AuctionCollectionFactory
 
 
