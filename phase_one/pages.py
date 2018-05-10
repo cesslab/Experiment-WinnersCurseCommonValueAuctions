@@ -14,8 +14,11 @@ class SelectAuctionPage(Page):
         right_auction = auction_collection.right_auction(self.round_number)
         left_type = left_auction.atype
         right_type = right_auction.atype
-        return {'left_auction': left_auction, 'right_auction': right_auction,
-                'ltype': left_type, 'rtype': right_type}
+        return {
+            'left_auction': left_auction,
+            'right_auction': right_auction,
+            'ltype': left_type,
+            'rtype': right_type}
 
     def preference_error_message(self, value):
         auction_collection = self.player.participant.vars['phase_one_auction_collection']
@@ -25,6 +28,9 @@ class SelectAuctionPage(Page):
             return 'You must choose Auction A, Auction B, or Indifferent'
 
     def before_next_page(self):
+        """
+        Save data to player model, and to participant vars for payoff calculation
+        """
         round_a = self.player.participant.vars['round_a']
         participant_vars = self.player.participant.vars
 
