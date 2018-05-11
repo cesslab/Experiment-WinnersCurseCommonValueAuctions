@@ -13,3 +13,4 @@ __pycache__/
 .cache/
 .pytest_cache/
 .envrc
+_builtin/
