@@ -1,10 +1,8 @@
 import random
 
-from auction.factory import AuctionCollectionFactory
+from exp.auction.factory import AuctionFactory
 
 from ._builtin import Page, WaitPage
-
-from .models import Constants
 
 
 class MyPage(Page):
@@ -147,7 +145,7 @@ class ResultsWaitPage(WaitPage):
 
 class Results(Page):
     def vars_for_template(self):
-        auctions = AuctionCollectionFactory.auctions()
+        auctions = AuctionFactory.auctions()
         aid = self.player.participant.vars['auction_a_id']
 
         return {'auction_1': auctions[aid]}

@@ -2,7 +2,7 @@ from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from auction.factory import AuctionCollectionFactory as Factory
+from exp.auction.factory import AuctionFactory as Factory
 
 author = 'Your name here'
 
@@ -24,11 +24,7 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        if self.round_number == 1:
-            for player in self.get_players():
-                auctions = Factory.phase_three_auction_collection()
-                player.participant.vars['phase_three_auction_collection'] = auctions
+    pass
 
 
 class Group(BaseGroup):

@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from auction.factory import AuctionCollectionFactory
+from exp.auction.factory import AuctionFactory
 
 
 def play_instructions(driver):
@@ -41,19 +41,19 @@ def start_two_player_session(driver, url):
 
 def play_phase_one(driver):
     play_instructions(driver)
-    for round in range(AuctionCollectionFactory.phase_one_rounds()):
+    for round in range(AuctionFactory.phase_one_rounds()):
         play_phase_one_screen(driver)
 
 
 def play_phase_two(driver):
     play_instructions(driver)
-    for round in range(AuctionCollectionFactory.phase_two_rounds()):
+    for round in range(AuctionFactory.phase_two_rounds()):
         play_phase_two_screen(driver)
 
 
 def play_phase_three(driver):
     play_instructions(driver)
-    for round in range(AuctionCollectionFactory.phase_three_rounds()):
+    for round in range(AuctionFactory.phase_three_rounds()):
         play_phase_three_screen(driver)
 
 
