@@ -18,7 +18,6 @@ class Auction:
         self.min_max = min_max
         self.cutoff = None
         self.bids = {}
-        self.random_signal = random.choice(signals)
 
         for signal in signals:
             self.bids[signal] = None
@@ -46,6 +45,9 @@ class Auction:
     @property
     def max_value(self):
         return self.min_max[Auction.MAX]
+
+    def random_signal(self):
+        return random.choice(self.signals)
 
     def range_low(self):
         assert (2 <= self.atype <= 5)
@@ -110,33 +112,3 @@ class Auction:
         return "Auction: {}, Type: {}".format(self.aid, self.atype)
 
 
-class PhaseOneAuctionCollection:
-    def __init__(self, left_auctions, right_auctions, auctions):
-        self.left_auctions = left_auctions
-        self.right_auctions = right_auctions
-        self.auctions = auctions
-
-    def left_auction(self, session_round):
-        return self.left_auctions[session_round - 1]
-
-    def right_auction(self, session_round):
-        return self.right_auctions[session_round - 1]
-
-
-class PhaseTwoAuctionCollection:
-    def __init__(self, auctions):
-        self.auctions = auctions
-
-    def auction(self, session_round):
-        return self.auctions[session_round - 1]
-
-
-class PhaseThreeAuctionCollection:
-    def __init__(self, auction_signal_pairs):
-        self.auction_signal_pairs = auction_signal_pairs
-
-    def auction(self, session_round):
-        return self.auction_signal_pairs[session_round - 1]['auction']
-
-    def signal(self, session_round):
-        return self.auction_signal_pairs[session_round - 1]['signal']
