@@ -1,7 +1,7 @@
-import random
-
 from phase_one._builtin import Page
 from .models import Constants
+
+from exp.util import Participant
 
 
 class SelectAuctionPage(Page):
@@ -9,55 +9,22 @@ class SelectAuctionPage(Page):
     form_fields = ['preference']
 
     def vars_for_template(self):
-        auction_collection = self.player.participant.vars['phase_one_auction_collection']
-        left_auction = auction_collection.left_auction(self.round_number)
-        right_auction = auction_collection.right_auction(self.round_number)
-        left_type = left_auction.atype
-        right_type = right_auction.atype
-        return {
-            'left_auction': left_auction,
-            'right_auction': right_auction,
-            'ltype': left_type,
-            'rtype': right_type}
+        experiment = Participant.get_experiment(self.player)
+        return experiment.phase_one.get_auction_pair_dict(self.round_number)
 
     def preference_error_message(self, value):
-        auction_collection = self.player.participant.vars['phase_one_auction_collection']
-        left_auction = auction_collection.left_auction(self.round_number)
-        right_auction = auction_collection.right_auction(self.round_number)
-        if value not in [left_auction.aid, right_auction.aid, 0]:
+        experiment = Participant.get_experiment(self.player)
+        if not experiment.phase_one.is_valid_auction_id(self.round_number, int(value)):
             return 'You must choose Auction A, Auction B, or Indifferent'
 
     def before_next_page(self):
-        """
-        Save data to player model, and to participant vars for payoff calculation
-        """
-        round_a = self.player.participant.vars['round_a']
-        participant_vars = self.player.participant.vars
+        experiment = Participant.get_experiment(self.player)
 
-        self.set_left_right_auctions()
+        self.player.left_auction = experiment.phase_one.left_auction(self.round_number)
+        self.player.right_auction = experiment.phase_one.right_auction(self.round_number)
 
-        if self.round_number == round_a:
-            self.set_payment_round_auction_id(participant_vars, 'auction_a_id')
+        experiment.phase_one.set_preference(self.round_number, self.player.preference)
 
-        round_b = participant_vars['round_b']
-        if self.round_number == round_b:
-            self.set_payment_round_auction_id(participant_vars, 'auction_b_id')
-
-    def set_left_right_auctions(self):
-        auction_collection = self.player.participant.vars['phase_one_auction_collection']
-        self.player.left_auction = auction_collection.left_auction(self.round_number).aid
-        self.player.right_auction = auction_collection.right_auction(self.round_number).aid
-
-    def set_payment_round_auction_id(self, participant_vars, auction_id):
-        self.player.participant.vars[auction_id + '_choice'] = self.player.preference
-        auction_collection = participant_vars['phase_one_auction_collection']
-        if self.player.preference == Constants.INDIFFERENT:
-            if random.random() < 0.5:
-                participant_vars[auction_id] = auction_collection.left_auction(self.round_number).aid
-            else:
-                participant_vars[auction_id] = auction_collection.right_auction(self.round_number).aid
-        else:
-            participant_vars[auction_id] = self.player.preference
 
 class InstructionsPage(Page):
     def is_displayed(self):

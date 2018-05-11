@@ -4,7 +4,10 @@ from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from auction.factory import AuctionCollectionFactory as Factory
+from exp.auction.factory import AuctionFactory as Factory
+from exp.experiment import Experiment
+from exp.util import Participant
+
 
 author = 'Anwar A Ruff'
 
@@ -31,14 +34,7 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         if self.round_number == 1:
             for player in self.get_players():
-                phase_one_auction_collection = Factory.phase_one_auction_collection()
-                player.participant.vars['phase_one_auction_collection'] = phase_one_auction_collection
-                player.participant.vars['auctions'] = Factory.auctions()
-
-                rounds = list(range(1, Constants.num_rounds + 1))
-                random.shuffle(rounds)
-                player.participant.vars['round_a'] = rounds.pop()
-                player.participant.vars['round_b'] = rounds.pop()
+                Participant.set_experiment(player, Experiment())
 
 
 class Group(BaseGroup):

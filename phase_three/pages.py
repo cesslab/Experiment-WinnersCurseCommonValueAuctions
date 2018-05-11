@@ -1,6 +1,8 @@
 from ._builtin import Page
 from .models import Constants
 
+from exp.util import Participant
+
 
 class InstructionsPage(Page):
     def is_displayed(self):
@@ -12,39 +14,28 @@ class BidPage(Page):
     form_fields = ['bid']
 
     def vars_for_template(self):
-        auction_collection = self.player.participant.vars['phase_three_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        signal = auction_collection.signal(self.round_number)
-
+        experiment = Participant.get_experiment(self.player)
         return {
-            'auction': auction,
-            'signal': signal,
-            'low_update': auction.low_update(signal),
-            'high_update': auction.high_update(signal)}
+            'auction': experiment.phase_three.auction(self.round_number),
+            'signal': experiment.phase_three.signal(self.round_number),
+            'low_update': experiment.phase_three.low_update(self.round_number),
+            'high_update': experiment.phase_three.high_update(self.round_number)}
 
     def bid_error_message(self, bid):
-        auction_collection = self.player.participant.vars['phase_three_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        max_bid = auction.max_value
-        if not 0 <= bid <= max_bid:
-            return 'The bid value must be between 0 and {}.'.format(max_bid)
+        experiment = Participant.get_experiment(self.player)
+        min_value = experiment.phase_three.auction(self.round_number).min_value
+        max_value = experiment.phase_three.auction(self.round_number).max_value
+        if not min_value <= bid <= max_value:
+            return 'The bid value must be between {} and {}.'.format(min_value, max_value)
 
     def before_next_page(self):
-        """
-        If the auction displayed for this round is payoff relevant, the bid is saved to the participants var
-        list.
-        :return: None
-        """
-        auction_collection = self.player.participant.vars['phase_three_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        signal = auction_collection.signal(self.round_number)
+        experiment = Participant.get_experiment(self.player)
+        experiment.phase_three.set_bid(self.round_number, self.player.bid)
 
-        self.player.auction = auction.aid
-        self.player.signal = signal
-        self.player.low_update = auction.low_update(signal)
-        self.player.high_update = auction.high_update(signal)
-
-        self.player.participant.vars['auctions'][auction.aid].bids[signal] = self.player.bid
+        self.player.auction = experiment.phase_three.auction(self.round_number).aid
+        self.player.signal = experiment.phase_three.signal(self.round_number)
+        self.player.low_update = experiment.phase_three.low_update(self.round_number)
+        self.player.high_update = experiment.phase_three.high_update(self.round_number)
 
 
 page_sequence = [

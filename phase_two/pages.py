@@ -1,6 +1,8 @@
 from ._builtin import Page
 from .models import Constants
 
+from exp.util import Participant
+
 
 class InstructionsPage(Page):
     def is_displayed(self):
@@ -12,35 +14,26 @@ class CutoffSelectionPage(Page):
     form_fields = ['cutoff', 'clicked']
 
     def vars_for_template(self):
-        auction_collection = self.player.participant.vars['phase_two_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        return {'auction': auction}
+        experiment = Participant.get_experiment(self.player)
+        return {'auction': experiment.phase_two.get_auction(self.round_number)}
 
     def cutoff_max(self):
-        auction_collection = self.player.participant.vars['phase_two_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        return auction.max_value
+        experiment = Participant.get_experiment(self.player)
+        return experiment.phase_two.get_auction(self.round_number).max_value
 
     def cutoff_min(self):
-        auction_collection = self.player.participant.vars['phase_two_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        return auction.min_value
+        experiment = Participant.get_experiment(self.player)
+        return experiment.phase_two.get_auction(self.round_number).min_value
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
             return 'You must make a bid for this auction.'
 
     def before_next_page(self):
-        """
-        If the auction displayed for this round is payoff relevant, the cutoff is saved to the participants var
-        list.
-        :return: None
-        """
-        participant_vars = self.player.participant.vars
-        auction_collection = self.player.participant.vars['phase_two_auction_collection']
-        auction = auction_collection.auction(self.round_number)
-        self.player.auction = auction.aid
-        participant_vars['auctions'][auction.aid].cutoff = self.player.cutoff
+        experiment = Participant.get_experiment(self.player)
+        experiment.phase_two.set_cutoff(self.round_number, self.player.cutoff)
+
+        self.player.auction = experiment.phase_two.get_auction(self.round_number).aid
 
 
 page_sequence = [
