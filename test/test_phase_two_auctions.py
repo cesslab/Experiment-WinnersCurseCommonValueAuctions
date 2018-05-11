@@ -1,5 +1,5 @@
-from auction.auctions import PhaseTwoAuctionCollection
-from auction.factory import AuctionCollectionFactory
+from exp.auction import PhaseTwoAuctionCollection
+from exp.auction.factory import AuctionCollectionFactory
 
 
 def test_auction_collection_not_empty():

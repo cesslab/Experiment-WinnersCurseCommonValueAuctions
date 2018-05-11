@@ -1,4 +1,4 @@
-from auction.factory import AuctionCollectionFactory
+from exp.auction.factory import AuctionCollectionFactory
 
 
 def test_auction_collection_contain_auctions():

@@ -1,5 +1,5 @@
-from auction.auctions import PhaseOneAuctionCollection, Auction
-from auction.factory import AuctionCollectionFactory
+from exp.auction import PhaseOneAuctionCollection, Auction
+from exp.auction.factory import AuctionCollectionFactory
 
 
 def test_auction_collection_contain_auctions():
