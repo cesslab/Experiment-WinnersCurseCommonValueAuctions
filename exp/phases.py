@@ -81,6 +81,9 @@ class PhaseTwo:
     def set_cutoff(self, round_number: int, cutoff: float) -> None:
         self.auctions[round_number - 1].cutoff = cutoff
 
+    def random_round(self) -> int:
+        return random.randint(1, len(self.auctions))
+
 
 class PhaseThree:
     def __init__(self, auctions: Dict[int, Auction]):
