@@ -20,8 +20,8 @@ class SelectAuctionPage(Page):
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
 
-        self.player.left_auction = experiment.phase_one.left_auction(self.round_number)
-        self.player.right_auction = experiment.phase_one.right_auction(self.round_number)
+        self.player.left_auction = experiment.phase_one.left_auction(self.round_number).aid
+        self.player.right_auction = experiment.phase_one.right_auction(self.round_number).aid
 
         experiment.phase_one.set_preference(self.round_number, self.player.preference)
 
