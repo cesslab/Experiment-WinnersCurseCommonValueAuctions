@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 import random
 
 
@@ -111,4 +111,19 @@ class Auction:
     def __rpr__(self):
         return "Auction: {}, Type: {}".format(self.aid, self.atype)
 
+
+class AuctionFactory:
+
+    @staticmethod
+    def auctions(auction_params: Dict) -> Dict[int, Auction]:
+        auctions = {}
+        for aid, params in auction_params.items():
+            auctions[aid] = Auction(
+                aid=params['id'],
+                atype=params['type'],
+                matrix=params['matrix'],
+                signals=params['signals'],
+                min_max=params['min_max'],
+            )
+        return auctions
 
