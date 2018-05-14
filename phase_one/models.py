@@ -1,10 +1,7 @@
-import random
-
 from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from exp.auction.factory import AuctionFactory as Factory
 from exp.experiment import Experiment
 from exp.util import Participant
 
@@ -22,7 +19,7 @@ class Constants(BaseConstants):
     # --------------------------------------------
     name_in_url = 'wc'
     players_per_group = None
-    num_rounds = Factory.phase_one_rounds()
+    num_rounds = Experiment.phase_one_rounds()
     # --------------------------------------------
     # Experiment Constants
     # --------------------------------------------
