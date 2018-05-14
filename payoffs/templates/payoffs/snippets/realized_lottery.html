@@ -1,0 +1,17 @@
+{% extends 'global/experiment/base_auction_table.html' %}
+
+{% block top_left %}
+  {{ low_value }}
+{% endblock %}
+
+{% block top_right %}
+  {{ high_value }}
+{% endblock %}
+
+{% block bottom_left %}
+  <span>{{ low_prob }}&#37;</span>
+{% endblock %}
+
+{% block bottom_right %}
+  <span>{{ high_prob }}&#37;</span>
+{% endblock %}
