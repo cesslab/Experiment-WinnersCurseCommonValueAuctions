@@ -1,12 +1,11 @@
 import random
-from typing import Dict
+from typing import Dict, List
 
-from exp.treatment_one import PHASE_ONE_AUCTION_PAIRS
 from exp.auctions import Auction
 
 
 class PhaseOne:
-    def __init__(self, auctions: Dict[int, Auction]):
+    def __init__(self, auctions: Dict[int, Auction], auction_pairs: List[List[int]]):
         self.left_auctions = []
         self.right_auctions = []
         self.preference = {}
@@ -14,7 +13,7 @@ class PhaseOne:
         self.RIGHT = 1
         self.INDIFFERENT = 2
 
-        shuffled_pair = PHASE_ONE_AUCTION_PAIRS[:]
+        shuffled_pair = auction_pairs[:]
         random.shuffle(shuffled_pair)
 
         for pair_ids in shuffled_pair:
@@ -91,7 +90,7 @@ class PhaseThree:
         keys = list(auctions.keys())
         random.shuffle(keys)
         for aid in keys:
-            for signal in auctions[aid]['signals']:
+            for signal in auctions[aid].signals:
                 auction_signal_pairs.append(
                     {
                         'auction': auctions[aid],
