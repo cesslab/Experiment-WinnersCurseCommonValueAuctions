@@ -39,8 +39,8 @@ class PaymentMethod:
         else:
             results.win_lottery = results.bid > results.other_bid
 
+        results.other_random_signal = results.auction.random_signal()
         if results.win_lottery:
-            results.other_random_signal = results.auction.random_signal()
             results.low_prob = results.auction.low_probability(results.random_signal, results.other_random_signal)
             results.high_prob = results.auction.high_probability(results.random_signal, results.other_random_signal)
             results.low_value = results.auction.low_value(results.random_signal, results.other_random_signal)
