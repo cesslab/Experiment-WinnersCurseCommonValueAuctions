@@ -32,14 +32,14 @@ class PaymentOneResults(Page):
         experiment = Participant.get_experiment(self.player)
         results = Participant.get_payment_one_results(self.player)
 
-        random_position = ''
+        random_position = 'Left' if results.left_auction.aid == results.auction.aid else 'Right'
+
         if results.preferred_position == experiment.phase_one.LEFT:
             preferred_position = 'Left'
         elif results.preferred_position == experiment.phase_one.RIGHT:
             preferred_position = 'Right'
         else:
             preferred_position = 'Indifferent'
-            random_position = 'Left' if results.left_auction.aid == results.auction.aid else 'Right'
 
         return {
             'preferred_position': preferred_position,
