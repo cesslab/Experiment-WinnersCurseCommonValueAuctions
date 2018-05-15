@@ -1,129 +1,71 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree %}
 
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'payoffs/method_one.css' %}">
+{% endblock %}
+
 {% block title %}
+  Earnings #1
 {% endblock %}
 
 {% block content %}
-    <div class="card">
-      <div class="card-header">
-        Earnings #1
-      </div>
-      <div class="card-body">
-      <div class="row">
-        <h3>Decision in Stage 1</h3>
-      </div>
-        <! -- Round Auctions -->
-        <div class="row">
-          <! -- Auction A -->
-          <div class="col">
-            <h4>Left Auction</h4>
-            {% if left_auction.atype == 1 %}
-              {% include 'phase_one/snippets/type_1_left.html' %}
-            {% elif left_auction.atype == 2 %}
-              {% include 'phase_one/snippets/type_2_left.html' %}
-            {% elif left_auction.atype == 3 %}
-              {% include 'phase_one/snippets/type_3_left.html' %}
-            {% elif left_auction.atype == 4 %}
-              {% include 'phase_one/snippets/type_4_left.html' %}
-            {% else %}
-              {% include 'phase_one/snippets/type_5_left.html' %}
-            {% endif %}
-          </div>
-          <!-- Auction B -->
-          <div class="col">
-            <h4>Right Auction</h4>
-            {% if right_auction.atype == 1 %}
-              {% include 'phase_one/snippets/type_1_right.html' %}
-            {% elif right_auction.atype == 2 %}
-              {% include 'phase_one/snippets/type_2_right.html' %}
-            {% elif right_auction.atype == 3 %}
-              {% include 'phase_one/snippets/type_3_right.html' %}
-            {% elif right_auction.atype == 4 %}
-              {% include 'phase_one/snippets/type_4_right.html' %}
-            {% else %}
-              {% include 'phase_one/snippets/type_5_right.html' %}
-            {% endif %}
-          </div>
-        </div>
-        <! -- Chosen Auction -->
-        <div class="row">
-          {% if preferred_position == 'Indifferent' %}
-            <p>
-              Of the options, left auction, right auction, don't care, you chose <b>don't care</b>.
-              For your payment the <b>{{ random_position }}</b> auction was chosen for you at random.
-            </p>
-          {% else %}
-            <span>You stated that you preferred the {{ preferred_position }} auction shown below.</span>
-          {% endif %}
-        </div>
-        <! -- Chosen Auction -->
-        <div class="row">
-          <div class="col">
-            <div class="">
-              <h4>{{ random_position }} Auction</h4>
-            </div>
-            <div class="">
-              {% if auction.atype == 1 %}
-                {% include 'phase_two/snippets/type_1.html' %}
-              {% elif auction.atype == 2 %}
-                {% include 'phase_two/snippets/type_2.html' %}
-              {% elif auction.atype == 3 %}
-                {% include 'phase_two/snippets/type_3.html' %}
-              {% elif auction.atype == 4 %}
-                {% include 'phase_two/snippets/type_4.html' %}
-              {% else %}
-                {% include 'phase_two/snippets/type_5.html' %}
-              {% endif %}
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <h3>Decision in Stage 3</h3>
-        </div>
-        <! -- Bids -->
-        <div class="row">
-        <ul>
-          <li>The signal that was randomly chosen for you was {{ signal }}.</li>
-          <li>Your bid for this lottery given the signal {{ signal }} was {{ bid }}.</li>
-        </ul>
-        <ul>
-          <li>The signal that was randomly chosen for the person you were paired with was {{ others_signal }}.</li>
-          <li>The other person's bid for this lottery given the signal {{ others_signal }} was {{ others_bid }}.</li>
-        </ul>
-        </div>
-        <div class="row">
-          <ul>
-            {% if bid == others_bid %}
-              <li>A coin was tossed to break the tie.</li>
-            {% endif %}
-            {% if winner %}
-              <li>You won the lottery.</li>
-            {% else %}
-              <li>You did not win the lottery.</li>
-            {% endif %}
-          </ul>
-        </div>
-        <div class="row">
-          <h5>Given your and the other bidder's signal, the following lottery will be played.</h5>
-          {% include 'payoffs/snippets/realized_lottery.html' %}
-        </div>
-        <div class="row">
-          <ul>
-            {% if high_chosen %}
-              <li>The lottery will pay the high value of {{ high_value }}.</li>
-            {% else %}
-              <li>The lottery will pay the low value of {{ low_value }}.</li>
-            {% endif %}
-            {% if winner %}
-              <li>You won the lottery, therefore your earnings are {{ earnings }}</li>
-            {% else %}
-              <li>You did not win the lottery, therefore your earnings are {{ earnings }}.</li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
+  <div class="main-container">
+    <div class="title-item">
+      <h3>Decision in Stage 1</h3>
     </div>
+
+    {% include 'payoffs/snippets/game_pair.html' %}
+
+    <div class="span-item">
+      {% if preferred_position == 'Indifferent' %}
+        <p>
+          Of the options, left auction, right auction, don't care, you chose <b>don't care</b>.
+          For your payment the <b>{{ random_position }}</b> auction was chosen for you at random.
+        </p>
+      {% else %}
+        <span>You stated that you preferred the {{ preferred_position }} auction shown below.</span>
+      {% endif %}
+    </div>
+
+    <div class="title-item">
+      <h3>Decision in Stage 3</h3>
+    </div>
+    {% include 'payoffs/snippets/chosen_auction.html' with side=random_position %}
+
+    <div class="plain-title-item">
+      <h4>
+      {% if bid == others_bid %}
+        A coin was tossed to break the tie and,
+      {% endif %}
+      {% if winner %}
+        You won the lottery
+      {% else %}
+        You did not win the lottery
+      {% endif %}
+      </h4>
+    </div>
+
+    <div>
+      <h5>Given your and the other bidder's signal, the following lottery will be played.</h5>
+      {% include 'payoffs/snippets/realized_lottery.html' %}
+    </div>
+
+    <div>
+      <ul>
+        {% if high_chosen %}
+          <li>The lottery will pay the high value of {{ high_value }}.</li>
+        {% else %}
+          <li>The lottery will pay the low value of {{ low_value }}.</li>
+        {% endif %}
+        {% if winner %}
+          <li>You won the lottery, therefore your earnings are {{ earnings }}</li>
+        {% else %}
+          <li>You did not win the lottery, therefore your earnings are {{ earnings }}.</li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}

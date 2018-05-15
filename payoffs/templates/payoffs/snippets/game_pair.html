@@ -1,0 +1,30 @@
+<! -- Auction A -->
+<div>
+  <h3>Left Auction</h3>
+  {% if left_auction.atype == 1 %}
+    {% include 'phase_one/snippets/type_1_left.html' %}
+  {% elif left_auction.atype == 2 %}
+    {% include 'phase_one/snippets/type_2_left.html' %}
+  {% elif left_auction.atype == 3 %}
+    {% include 'phase_one/snippets/type_3_left.html' %}
+  {% elif left_auction.atype == 4 %}
+    {% include 'phase_one/snippets/type_4_left.html' %}
+  {% else %}
+    {% include 'phase_one/snippets/type_5_left.html' %}
+  {% endif %}
+</div>
+<!-- Auction B -->
+<div>
+  <h3>Right Auction</h3>
+  {% if right_auction.atype == 1 %}
+    {% include 'phase_one/snippets/type_1_right.html' %}
+  {% elif right_auction.atype == 2 %}
+    {% include 'phase_one/snippets/type_2_right.html' %}
+  {% elif right_auction.atype == 3 %}
+    {% include 'phase_one/snippets/type_3_right.html' %}
+  {% elif right_auction.atype == 4 %}
+    {% include 'phase_one/snippets/type_4_right.html' %}
+  {% else %}
+    {% include 'phase_one/snippets/type_5_right.html' %}
+  {% endif %}
+</div>
