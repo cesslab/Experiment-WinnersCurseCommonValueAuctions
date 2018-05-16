@@ -36,3 +36,9 @@ output {
 .slider-item {
   grid-column : 1 / span 2;
 }
+
+.underscored {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid lightgrey;
+}

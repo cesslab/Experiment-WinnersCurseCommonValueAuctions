@@ -13,7 +13,9 @@
   grid-column : 1 / span 2;
 }
 
-
+.end {
+  align-self: end;
+}
 
 .title-item {
   border-bottom: 1px solid lightgrey;
@@ -49,8 +51,8 @@
   grid-template-rows    : auto auto auto;
 }
 
-input[type=number].form-control {
-  max-width: 100%;
-  text-align: center
+.underscored {
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid lightgrey;
 }
-
