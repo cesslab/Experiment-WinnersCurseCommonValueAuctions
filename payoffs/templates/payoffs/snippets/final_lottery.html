@@ -1,0 +1,41 @@
+{% extends 'global/experiment/base_auction_table.html' %}
+
+{% block top_left %}
+  {% if low_prize_chosen %}<b>{% endif %}
+  {% if auction_type == 2 %}
+    v = ({{ signal }} + {{ others_signal }}) / 2 <br>
+    v = {{ low_value }}
+  {% else %}
+    {{ low_value }}
+  {% endif %}
+  {% if low_prize_chosen %}</b>{% endif %}
+{% endblock %}
+
+{% block top_right %}
+  {% if high_prize_chosen %}<b>{% endif %}
+  {% if auction_type == 3 %}
+    v = ({{ signal }} + {{ others_signal }}) / 2 <br>
+    v = {{ high_value }}
+  {% else %}
+    {{ high_value }}
+  {% endif %}
+{% if high_prize_chosen %}</b>{% endif %}
+{% endblock %}
+
+{% block bottom_left %}
+  {% if auction_type == 5 %}
+    p = ({{ signal }} + {{ others_signal }}) / 2 <br>
+    p = {{ low_prob }}&#37;
+  {% else %}
+    {{ low_prob }}&#37;
+  {% endif %}
+{% endblock %}
+
+{% block bottom_right %}
+  {% if auction_type == 4 %}
+    p = ({{ signal }} + {{ others_signal }}) / 2 <br>
+    p = {{ high_prob }}&#37;
+  {% else %}
+    {{ high_prob }}&#37;
+  {% endif %}
+{% endblock %}
