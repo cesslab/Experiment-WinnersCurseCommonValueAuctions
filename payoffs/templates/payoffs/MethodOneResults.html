@@ -1,0 +1,68 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'payoffs/method_one.css' %}">
+{% endblock %}
+
+{% block title %}
+  Earnings #1
+{% endblock %}
+
+{% block content %}
+  <div class="main-container">
+    <div class="title-item">
+      <h3>Decision in Stage 1</h3>
+    </div>
+
+    {% include 'payoffs/snippets/game_pair.html' %}
+
+    {% if preferred_position == 'Indifferent' %}
+      <div class="plain-title-item">
+        <h5>
+            When asked which of the two selected auctions you preferred you selected  <b>don't care</b>.
+        </h5>
+      </div>
+      <div class="plain-title-item">
+        <h5>
+          For your payment the <b>{{ random_position }}</b> auction was chosen at random.
+        </h5>
+      </div>
+    {% else %}
+      <div class="plain-title-item">
+        <h5>
+          When asked which of the two selected auctions you preferred you selected  <b>don't care</b>.
+        </h5>
+      </div>
+    {% endif %}
+
+    <div class="title-item">
+      <h3>Decision in Stage 3</h3>
+    </div>
+    {% include 'payoffs/snippets/chosen_auction.html' with side=random_position %}
+
+    <div class="plain-title-item">
+      <h5>
+      {% if bid == others_bid %}
+        A coin was tossed to break the tie.
+      {% endif %}
+      </h5>
+    </div>
+
+    <div class="plain-title-item">
+      <h5>
+      {% if winner %}
+        You won the lottery.
+      {% else %}
+        You did not win the lottery.
+      {% endif %}
+      </h5>
+    </div>
+
+    {% include 'payoffs/snippets/realized_lottery.html' %}
+  </div>
+  {% next_button %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
