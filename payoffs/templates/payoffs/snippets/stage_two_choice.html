@@ -1,0 +1,35 @@
+<div class="grid-container">
+  <div class="header-item">
+    <p>Description of decision task goes here</p>
+  </div>
+
+  <div class="grid-auction-container">
+    <div class="">
+      <h3>Auction A</h3>
+    </div>
+    <div class="">
+      {% if cutoff_auction.atype == 1 %}
+        {% include 'phase_two/snippets/type_1.html' %}
+      {% elif cutoff_auction.atype == 2 %}
+        {% include 'phase_two/snippets/type_2.html' %}
+      {% elif cutoff_auction.atype == 3 %}
+        {% include 'phase_two/snippets/type_3.html' %}
+      {% elif cutoff_auction.atype == 4 %}
+        {% include 'phase_two/snippets/type_4.html' %}
+      {% else %}
+        {% include 'phase_two/snippets/type_5.html' %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="grid-slider-container">
+
+    <div class="item text-center">
+      <h5>Your Bid</h5>
+    </div>
+
+    <div class="item text-center">
+      <h5>{{  cutoff }}</h5>
+    </div>
+  </div>
+</div>

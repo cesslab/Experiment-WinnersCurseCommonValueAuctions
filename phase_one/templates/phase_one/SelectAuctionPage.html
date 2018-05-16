@@ -16,34 +16,49 @@
   <!-- Auction B -->
   <div class="container">
     <div class="row">
+
       <div class="col">
-        <h4>Auction A</h4>
-        {% if left_auction.atype == 1 %}
-          {% include 'phase_one/snippets/type_1_left.html' %}
-        {% elif left_auction.atype == 2 %}
-          {% include 'phase_one/snippets/type_2_left.html' %}
-        {% elif left_auction.atype == 3 %}
-          {% include 'phase_one/snippets/type_3_left.html' %}
-        {% elif left_auction.atype == 4 %}
-          {% include 'phase_one/snippets/type_4_left.html' %}
-        {% else %}
-          {% include 'phase_one/snippets/type_5_left.html' %}
-        {% endif %}
+        <div class="card">
+          <h4 class="card-header">Left Auction</h4>
+          <div class="card-body">
+            <div class="underscored">
+              <h5>Lottery</h5>
+            </div>
+            {% if left_auction.atype == 1 %}
+              {% include 'phase_one/snippets/type_1_left.html' %}
+            {% elif left_auction.atype == 2 %}
+              {% include 'phase_one/snippets/type_2_left.html' %}
+            {% elif left_auction.atype == 3 %}
+              {% include 'phase_one/snippets/type_3_left.html' %}
+            {% elif left_auction.atype == 4 %}
+              {% include 'phase_one/snippets/type_4_left.html' %}
+            {% else %}
+              {% include 'phase_one/snippets/type_5_left.html' %}
+            {% endif %}
+          </div>
+        </div>
       </div>
       <!-- Auction B -->
       <div class="col">
-        <h4>Auction B</h4>
-        {% if right_auction.atype == 1 %}
-          {% include 'phase_one/snippets/type_1_right.html' %}
-        {% elif right_auction.atype == 2 %}
-          {% include 'phase_one/snippets/type_2_right.html' %}
-        {% elif right_auction.atype == 3 %}
-          {% include 'phase_one/snippets/type_3_right.html' %}
-        {% elif right_auction.atype == 4 %}
-          {% include 'phase_one/snippets/type_4_right.html' %}
-        {% else %}
-          {% include 'phase_one/snippets/type_5_right.html' %}
-        {% endif %}
+        <div class="card">
+          <h4 class="card-header">Right Auction</h4>
+          <div class="card-body">
+            <div class="underscored">
+              <h5>Lottery</h5>
+            </div>
+            {% if right_auction.atype == 1 %}
+              {% include 'phase_one/snippets/type_1_right.html' %}
+            {% elif right_auction.atype == 2 %}
+              {% include 'phase_one/snippets/type_2_right.html' %}
+            {% elif right_auction.atype == 3 %}
+              {% include 'phase_one/snippets/type_3_right.html' %}
+            {% elif right_auction.atype == 4 %}
+              {% include 'phase_one/snippets/type_4_right.html' %}
+            {% else %}
+              {% include 'phase_one/snippets/type_5_right.html' %}
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -54,13 +69,13 @@
       <div class="col-md-auto">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-success" id="id-preference-1">
-            <input type="radio" name="preference" value="{{left_auction.aid}}" id="left_auction" autocomplete="off"> Auction A
+            <input type="radio" name="preference" value="{{left_auction.aid}}" id="left_auction" autocomplete="off"> Left Auction
           </label>
           <label class="btn btn-success" id="id-preference-0">
             <input type="radio" name="preference" value="-1" autocomplete="off" id="neither_auction"> Indifferent
           </label>
           <label class="btn btn-success" id="id-preference-3">
-            <input type="radio" name="preference" value="{{right_auction.aid}}" id="right_auction" autocomplete="off"> Auction B
+            <input type="radio" name="preference" value="{{right_auction.aid}}" id="right_auction" autocomplete="off"> Right Auction
           </label>
         </div>
       </div>

@@ -1,17 +1,16 @@
-{% extends 'global/experiment/base_auction_table.html' %}
+<div class="grid-container">
+  <div>
+    <h5>Given your and the other bidder's signal, the following lottery will be played.</h5>
+    {% include 'payoffs/snippets/final_lottery.html' %}
+  </div>
 
-{% block top_left %}
-  {{ low_value }}
-{% endblock %}
+  <div class="signal-update-container">
+    <div class="end plain-title-item">
+      <h5 class="underscored">Realized Value</h5>
+    </div>
 
-{% block top_right %}
-  {{ high_value }}
-{% endblock %}
-
-{% block bottom_left %}
-  <span>{{ low_prob }}&#37;</span>
-{% endblock %}
-
-{% block bottom_right %}
-  <span>{{ high_prob }}&#37;</span>
-{% endblock %}
+    <div class="plain-title-item">
+      <h5>{{ realized }}</h5>
+    </div>
+  </div>
+</div>

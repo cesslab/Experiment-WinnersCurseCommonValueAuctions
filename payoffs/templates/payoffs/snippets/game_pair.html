@@ -1,30 +1,40 @@
 <! -- Auction A -->
-<div>
-  <h3>Left Auction</h3>
-  {% if left_auction.atype == 1 %}
-    {% include 'phase_one/snippets/type_1_left.html' %}
-  {% elif left_auction.atype == 2 %}
-    {% include 'phase_one/snippets/type_2_left.html' %}
-  {% elif left_auction.atype == 3 %}
-    {% include 'phase_one/snippets/type_3_left.html' %}
-  {% elif left_auction.atype == 4 %}
-    {% include 'phase_one/snippets/type_4_left.html' %}
-  {% else %}
-    {% include 'phase_one/snippets/type_5_left.html' %}
-  {% endif %}
-</div>
+  <div class="card">
+    <h4 class="card-header">Auction</h4>
+    <div class="card-body">
+      <div class="underscored">
+        <h5>Left Lottery</h5>
+      </div>
+      {% if left_auction.atype == 1 %}
+        {% include 'phase_one/snippets/type_1_left.html' %}
+      {% elif left_auction.atype == 2 %}
+        {% include 'phase_one/snippets/type_2_left.html' %}
+      {% elif left_auction.atype == 3 %}
+        {% include 'phase_one/snippets/type_3_left.html' %}
+      {% elif left_auction.atype == 4 %}
+        {% include 'phase_one/snippets/type_4_left.html' %}
+      {% else %}
+        {% include 'phase_one/snippets/type_5_left.html' %}
+      {% endif %}
+    </div>
+  </div>
 <!-- Auction B -->
-<div>
-  <h3>Right Auction</h3>
-  {% if right_auction.atype == 1 %}
-    {% include 'phase_one/snippets/type_1_right.html' %}
-  {% elif right_auction.atype == 2 %}
-    {% include 'phase_one/snippets/type_2_right.html' %}
-  {% elif right_auction.atype == 3 %}
-    {% include 'phase_one/snippets/type_3_right.html' %}
-  {% elif right_auction.atype == 4 %}
-    {% include 'phase_one/snippets/type_4_right.html' %}
-  {% else %}
-    {% include 'phase_one/snippets/type_5_right.html' %}
-  {% endif %}
+<div class="card">
+  <h4 class="card-header">Auction</h4>
+  <div class="card-body">
+    <div class="underscored">
+      <h5>Right Lottery</h5>
+    </div>
+    {% if right_auction.atype == 1 %}
+      {% include 'phase_one/snippets/type_1_right.html' %}
+    {% elif right_auction.atype == 2 %}
+      {% include 'phase_one/snippets/type_2_right.html' %}
+    {% elif right_auction.atype == 3 %}
+      {% include 'phase_one/snippets/type_3_right.html' %}
+    {% elif right_auction.atype == 4 %}
+      {% include 'phase_one/snippets/type_4_right.html' %}
+    {% else %}
+      {% include 'phase_one/snippets/type_5_right.html' %}
+    {% endif %}
+  </div>
 </div>
