@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'payoffs/method_one.css' %}">
+{% endblock %}
+
+{% block title %}
+  Earnings #2
+{% endblock %}
+
+{% block content %}
+  <div class="main-container">
+    <div class="title-item">
+      <h3>Decision in Stage 2</h3>
+    </div>
+
+    {% include 'payoffs/snippets/stage_two_choice.html' with auction=cutoff_auction %}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
