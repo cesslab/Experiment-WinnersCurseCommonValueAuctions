@@ -15,7 +15,8 @@ class FinalPayoffResults(Page):
             'payoff': (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE,
             'endowment': experiment.ENDOWMENT,
             'method_1': method_one.earnings,
-            'method_2': method_two.earnings
+            'method_2': method_two.earnings,
+            'rate': experiment.CONVERSION_RATE
         }
 
 
