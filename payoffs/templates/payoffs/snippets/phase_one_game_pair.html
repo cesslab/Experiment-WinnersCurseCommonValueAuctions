@@ -1,9 +1,9 @@
 <! -- Auction A -->
   <div class="card">
-    <h4 class="card-header">Auction</h4>
+    <h4 class="card-header">Left Auction</h4>
     <div class="card-body">
       <div class="underscored">
-        <h5>Left Lottery</h5>
+        <h5>Lottery</h5>
       </div>
       {% if left_auction.atype == 1 %}
         {% include 'phase_one/snippets/type_1_left.html' %}
@@ -20,10 +20,10 @@
   </div>
 <!-- Auction B -->
 <div class="card">
-  <h4 class="card-header">Auction</h4>
+  <h4 class="card-header">Right Auction</h4>
   <div class="card-body">
     <div class="underscored">
-      <h5>Right Lottery</h5>
+      <h5>Lottery</h5>
     </div>
     {% if right_auction.atype == 1 %}
       {% include 'phase_one/snippets/type_1_right.html' %}
