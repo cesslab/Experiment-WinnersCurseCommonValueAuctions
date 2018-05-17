@@ -15,7 +15,7 @@
       <h3>Decision in Stage 1</h3>
     </div>
 
-    {% include 'payoffs/snippets/game_pair.html' %}
+    {% include 'payoffs/snippets/phase_one_game_pair.html' %}
 
     {% if preferred_position == 'Indifferent' %}
       <div class="plain-title-item">
@@ -39,7 +39,7 @@
     <div class="title-item">
       <h3>Decision in Stage 3</h3>
     </div>
-    {% include 'payoffs/snippets/chosen_auction.html' with side=random_position %}
+    {% include 'payoffs/snippets/phase_one_selected_auction.html' with side=random_position %}
 
     <div class="plain-title-item">
       <h5>
@@ -59,7 +59,7 @@
       </h5>
     </div>
 
-    {% include 'payoffs/snippets/realized_lottery.html' %}
+    {% include 'payoffs/snippets/phase_one_lottery.html' %}
   </div>
   {% next_button %}
 {% endblock %}
