@@ -1,13 +1,10 @@
 <div class="grid-container">
-  <div class="header-item">
-    <p>Description of decision task goes here</p>
-  </div>
-
-  <div class="grid-auction-container">
-    <div class="">
-      <h3>Auction A</h3>
-    </div>
-    <div class="">
+  <div class="card">
+    <h4 class="card-header">Auction</h4>
+    <div class="card-body">
+      <div class="underscored">
+        <h5>Lottery</h5>
+      </div>
       {% if cutoff_auction.atype == 1 %}
         {% include 'phase_two/snippets/type_1.html' %}
       {% elif cutoff_auction.atype == 2 %}
@@ -22,14 +19,20 @@
     </div>
   </div>
 
-  <div class="grid-slider-container">
 
-    <div class="item text-center">
-      <h5>Your Bid</h5>
+  <div class="signal-update-container">
+
+    <div class="end underscored">
+      <h5>Your Cutoff</h5>
     </div>
-
-    <div class="item text-center">
-      <h5>{{  cutoff }}</h5>
+    <div class="end underscored">
+      <h5>Random Price</h5>
+    </div>
+    <div class="text-center">
+      <h5>{{ cutoff }}</h5>
+    </div>
+    <div class="text-center">
+      <h5>{{ random_offer }}</h5>
     </div>
   </div>
 </div>
