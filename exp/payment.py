@@ -6,14 +6,17 @@ from exp.experiment import Experiment
 class Results:
     def __init__(self):
         self.player_id = -1
-        self.other_id = -1
+        self.other_player_id = -1
         self.phase_one_round = - 1
         self.preferred_position = - 1
         self.indifferent_random_value = -1
         self.lottery_random_value = -1
         self.auction = None
+        self.auction_id = -1
         self.left_auction = None
+        self.left_auction_id = -1
         self.right_auction = None
+        self.right_auction_id = -1
         self.bid = -1
         self.other_bid = -1
         self.low_prize_chosen = False
@@ -44,12 +47,14 @@ class PaymentMethod:
     def method_one_payment(self, results: Results):
         # Selecting an auction from phase one
         results.player_id = self.player_id
-        results.other_id = self.other_id
+        results.other_player_id = self.other_id
         phase_one = self.player_experiment.phase_one
         results.phase_one_round = phase_one.random_round()
 
         results.left_auction = phase_one.left_auction(results.phase_one_round)
+        results.left_auction_id = results.left_auction.aid
         results.right_auction = phase_one.right_auction(results.phase_one_round)
+        results.right_auction_id = results.right_auction.aid
 
         results.preferred_position = phase_one.preferred_position(results.phase_one_round)
         if results.preferred_position == phase_one.INDIFFERENT:
@@ -60,6 +65,8 @@ class PaymentMethod:
                 results.auction = phase_one.right_auction(results.phase_one_round)
         else:
             results.auction = phase_one.preffered_auction(results.phase_one_round)
+
+        results.auction_id = results.auction.aid
 
         # Selecting a random signal
         results.random_signal = results.auction.random_signal()
@@ -112,6 +119,8 @@ class PaymentMethod:
             results.offer_accepted = False
 
         results.auction = results.cutoff_auction
+        results.auction_id = results.auction.aid
+
         results.random_signal = results.auction.random_signal()
         results.bid = results.auction.bids[results.random_signal]
         results.other_bid = self.other_experiment.auctions[results.auction.aid].bids[results.random_signal]
