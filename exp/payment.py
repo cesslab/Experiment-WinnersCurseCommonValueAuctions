@@ -34,7 +34,6 @@ class Results:
         self.random_offer = -1
         self.offer_accepted = False
 
-
 class PaymentMethod:
     def __init__(self, player_id: int, other_id: int, player_experiment: Experiment, other_experiment: Experiment):
         self.player_id = player_id
@@ -43,6 +42,7 @@ class PaymentMethod:
         self.other_experiment = other_experiment
 
     def method_one_payment(self, results: Results):
+        # Selecting an auction from phase one
         results.player_id = self.player_id
         results.other_id = self.other_id
         phase_one = self.player_experiment.phase_one
@@ -61,6 +61,7 @@ class PaymentMethod:
         else:
             results.auction = phase_one.preffered_auction(results.phase_one_round)
 
+        # Selecting a random signal
         results.random_signal = results.auction.random_signal()
         results.bid = results.auction.bids[results.random_signal]
         results.other_bid = self.other_experiment.auctions[results.auction.aid].bids[results.random_signal]
@@ -78,13 +79,19 @@ class PaymentMethod:
         results.high_value = results.auction.high_value(results.random_signal, results.other_random_signal)
 
         results.lottery_random_value = random.random()
+
         if results.lottery_random_value < results.low_prob:
             results.low_prize_chosen = True
             results.realized = results.low_value
-            results.earnings = results.low_value - results.bid
         else:
             results.high_prize_chosen = True
             results.realized = results.high_value
+
+        if not results.win_lottery:
+            results.earnings = 0
+        elif results.low_prize_chosen:
+            results.earnings = results.low_value - results.bid
+        else:
             results.earnings = results.high_value - results.bid
 
         return results
@@ -103,6 +110,40 @@ class PaymentMethod:
             return results
         else:
             results.offer_accepted = False
-            return self.method_one_payment(results)
+
+        results.auction = results.cutoff_auction
+        results.random_signal = results.auction.random_signal()
+        results.bid = results.auction.bids[results.random_signal]
+        results.other_bid = self.other_experiment.auctions[results.auction.aid].bids[results.random_signal]
+
+        if results.bid == results.other_bid:
+            results.win_lottery = random.randint(0, 1) == 1
+        else:
+            results.win_lottery = results.bid > results.other_bid
+
+        results.other_random_signal = results.auction.random_signal()
+
+        results.low_prob = results.auction.low_probability(results.random_signal, results.other_random_signal)
+        results.high_prob = results.auction.high_probability(results.random_signal, results.other_random_signal)
+        results.low_value = results.auction.low_value(results.random_signal, results.other_random_signal)
+        results.high_value = results.auction.high_value(results.random_signal, results.other_random_signal)
+
+        results.lottery_random_value = random.random()
+
+        if results.lottery_random_value < results.low_prob:
+            results.low_prize_chosen = True
+            results.realized = results.low_value
+        else:
+            results.high_prize_chosen = True
+            results.realized = results.high_value
+
+        if not results.win_lottery:
+            results.earnings = 0
+        elif results.low_prize_chosen:
+            results.earnings = results.low_value - results.bid
+        else:
+            results.earnings = results.high_value - results.bid
+
+        return results
 
 
