@@ -114,6 +114,7 @@ class PaymentMethod:
         results.random_offer = (max_value - min_value) * random.random() + min_value
         if results.random_offer >= results.cutoff:
             results.offer_accepted = True
+            results.earnings = results.random_offer
             return results
         else:
             results.offer_accepted = False
