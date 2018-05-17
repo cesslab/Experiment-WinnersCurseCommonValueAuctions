@@ -4,6 +4,9 @@ from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS)
 
 
 class Experiment:
+    ENDOWMENT = 100
+    CONVERSION_RATE = 0.5
+
     def __init__(self):
         self.auctions = AuctionFactory.auctions(AUCTIONS)
         self.phase_one = PhaseOne(self.auctions, PHASE_ONE_AUCTION_PAIRS)

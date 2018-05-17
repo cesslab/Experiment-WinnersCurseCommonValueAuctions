@@ -6,25 +6,38 @@ from exp.util import Participant
 from exp.payment import PaymentMethod, Results
 
 
-class MyPage(Page):
-    pass
+class FinalPayoffResults(Page):
+    def vars_for_template(self):
+        experiment = Participant.get_experiment(self.player)
+        method_one = Participant.get_payment_one_results(self.player)
+        method_two = Participant.get_payment_two_results(self.player)
+        return {
+            'payoff': (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE,
+            'endowment': experiment.ENDOWMENT,
+            'method_1': method_one.earnings,
+            'method_2': method_two.earnings
+        }
 
 
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         players = self.group.get_players()[:]
-        for i in range(len(players)):
-            for player in players:
-                player_id = player.participant.id_in_session
-                other_player = random.choice(players[:i] + players[i + 1:])
-                other_id = other_player.participant.id_in_session
-                experiment = Participant.get_experiment(player)
-                other_experiment = Participant.get_experiment(other_player)
-                payment_method = PaymentMethod(player_id, other_id, experiment, other_experiment)
+        for i, player in enumerate(players):
+            player_id = player.participant.id_in_session
+            others = players[:i] + players[i+1:]
+            other_player = others.pop()
+            other_id = other_player.participant.id_in_session
+            experiment = Participant.get_experiment(player)
+            other_experiment = Participant.get_experiment(other_player)
+            payment_method = PaymentMethod(player_id, other_id, experiment, other_experiment)
 
-                Participant.set_payment_one_results(player, payment_method.method_one_payment(Results()))
-                Participant.set_payment_two_results(player, payment_method.method_two_payment(Results()))
+            method_one_results = payment_method.method_one_payment(Results())
+            method_two_results = payment_method.method_two_payment(Results())
+            Participant.set_payment_one_results(player, method_one_results)
+            Participant.set_payment_two_results(player, method_two_results)
+
+            player.save_results(method_one_results, method_two_results)
 
 
 class MethodOneResults(Page):
@@ -42,6 +55,8 @@ class MethodOneResults(Page):
             preferred_position = 'Indifferent'
 
         return {
+            'player_id': results.player_id,
+            'other_id': results.other_player_id,
             'preferred_position': preferred_position,
             'left_auction': results.left_auction,
             'right_auction': results.right_auction,
@@ -70,6 +85,8 @@ class MethodTwoResults(Page):
         results = Participant.get_payment_two_results(self.player)
 
         context = {
+            'player_id': results.player_id,
+            'other_id': results.other_player_id,
             'cutoff_auction': results.cutoff_auction,
             'cutoff': results.cutoff,
             'random_offer': round(results.random_offer, 2),
@@ -103,4 +120,5 @@ page_sequence = [
     ResultsWaitPage,
     MethodOneResults,
     MethodTwoResults,
+    FinalPayoffResults
 ]

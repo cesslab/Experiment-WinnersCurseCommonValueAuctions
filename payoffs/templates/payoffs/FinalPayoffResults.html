@@ -2,10 +2,11 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Page title
+   Final Earnings
 {% endblock %}
 
 {% block content %}
+  <h4>Your final earnings is {{ payoff }} = ({{ endowment }} + {{ method_1 }} + {{ method_2 }}) * {{ rate }}</h4>
 
     {% next_button %}
 
