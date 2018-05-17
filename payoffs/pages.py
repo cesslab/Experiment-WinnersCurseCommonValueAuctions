@@ -54,8 +54,8 @@ class MethodOneResults(Page):
             'others_signal': results.other_random_signal,
             'low_value': results.low_value,
             'high_value': results.high_value,
-            'low_prob': results.low_prob * 100,
-            'high_prob': results.high_prob * 100,
+            'low_prob': round(results.low_prob * 100, 2),
+            'high_prob': round(results.high_prob * 100, 2),
             'high_chosen': results.high_prize_chosen,
             'earnings': results.earnings,
             'realized': results.realized,
@@ -67,31 +67,18 @@ class MethodOneResults(Page):
 
 class MethodTwoResults(Page):
     def vars_for_template(self):
-        experiment = Participant.get_experiment(self.player)
         results = Participant.get_payment_two_results(self.player)
 
         context = {
             'cutoff_auction': results.cutoff_auction,
             'cutoff': results.cutoff,
-            'random_offer': results.random_offer,
+            'random_offer': round(results.random_offer, 2),
             'offer_accepted': results.offer_accepted,
         }
 
         if not results.offer_accepted:
-            random_position = 'Left' if results.left_auction.aid == results.auction.aid else 'Right'
-
-            if results.preferred_position == experiment.phase_one.LEFT:
-                preferred_position = 'Left'
-            elif results.preferred_position == experiment.phase_one.RIGHT:
-                preferred_position = 'Right'
-            else:
-                preferred_position = 'Indifferent'
             context.update({
-                'preferred_position': preferred_position,
-                'left_auction': results.left_auction,
-                'right_auction': results.right_auction,
                 'auction': results.auction,
-                'random_position': random_position,
                 'bid': results.bid,
                 'others_bid': results.other_bid,
                 'winner': results.win_lottery,
