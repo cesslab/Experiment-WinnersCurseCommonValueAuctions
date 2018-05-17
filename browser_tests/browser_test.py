@@ -25,7 +25,7 @@ def play_phase_two_screen(driver):
 def play_phase_three_screen(driver):
     input_field = driver.find_element(By.XPATH, "//input[@id='id_bid']")
     input_field.clear()
-    input_field.send_keys(str(random.randint(0, 28)))
+    input_field.send_keys(str(random.randint(1, 28)))
     driver.find_element(By.XPATH, '//button').click()
 
 
