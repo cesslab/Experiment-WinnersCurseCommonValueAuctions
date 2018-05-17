@@ -39,7 +39,7 @@
     <div class="title-item">
       <h3>Decision in Stage 3</h3>
     </div>
-    {% include 'payoffs/snippets/phase_one_selected_auction.html' with side=random_position %}
+    {% include 'payoffs/snippets/chosen_auction.html' with side=random_position %}
 
     <div class="plain-title-item">
       <h5>
@@ -49,17 +49,38 @@
       </h5>
     </div>
 
-    <div class="plain-title-item">
-      <h5>
-      {% if winner %}
-        You won the lottery.
-      {% else %}
-        You did not win the lottery.
-      {% endif %}
-      </h5>
-    </div>
+    {% if winner %}
+      <div class="plain-title-item">
+        <h5>
+          <b>You won the lottery.</b>
+        </h5>
+      </div>
+      <div class="plain-title-item">
+        <h5>The lottery was played using your signal and the other player's signal.</h5>
+      </div>
+    {% else %}
+      <div class="plain-title-item">
+        <h5>
+          You did not win the lottery.
+        </h5>
+      </div>
+      <div class="plain-title-item">
+        <h5>
+          Your earnings #1 is <b>0</b>.
+        </h5>
+      </div>
+    {% endif %}
+
 
     {% include 'payoffs/snippets/phase_one_lottery.html' %}
+
+    {% if winner %}
+      <div class="plain-title-item">
+        <h5>
+          Your earnings #1 is <b>{{ earnings }}</b> (= {{ low_value }} - {{ bid }}).
+        </h5>
+      </div>
+    {% endif %}
   </div>
   {% next_button %}
 {% endblock %}
