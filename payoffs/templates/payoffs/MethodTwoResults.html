@@ -16,7 +16,69 @@
     </div>
 
     {% include 'payoffs/snippets/stage_two_choice.html' with auction=cutoff_auction %}
+
+    {% if offer_accepted %}
+      <div class="plain-title-item">
+        <h5>
+          <b>The random price of {{ random_offer }} was greater than or equal to your willingness to accept value of {{ cutoff }}.</b>
+        </h5>
+      </div>
+      <div class="plain-title-item">
+        <h5>Your earnings #2 is the random price {{ random_offer }}.</h5>
+      </div>
+    {% else %}
+      <div class="plain-title-item">
+        <h5>
+          <b>The random price of {{ random_offer }} was less than your willingness to accept value of {{ cutoff }}.</b>
+        </h5>
+      </div>
+      <div class="title-item">
+        <h3>Decision in Stage 3</h3>
+      </div>
+      {% include 'payoffs/snippets/chosen_auction.html' with auction=cutoff_auction %}
+
+      <div class="plain-title-item">
+        <h5>
+          {% if bid == others_bid %}
+            A coin was tossed to break the tie.
+          {% endif %}
+        </h5>
+      </div>
+
+      {% if winner %}
+        <div class="plain-title-item">
+          <h5>
+            <b>You won the lottery.</b>
+          </h5>
+        </div>
+        <div class="plain-title-item">
+          <h5>The lottery was played using your signal and the other player's signal.</h5>
+        </div>
+      {% else %}
+        <div class="plain-title-item">
+          <h5>
+            You did not win the lottery.
+          </h5>
+        </div>
+        <div class="plain-title-item">
+          <h5>
+            Your earnings #1 is <b>0</b>.
+          </h5>
+        </div>
+      {% endif %}
+
+      {% include 'payoffs/snippets/phase_one_lottery.html' %}
+
+      {% if winner %}
+        <div class="plain-title-item">
+          <h5>
+            Your earnings #2 is <b>{{ earnings }}</b> (= {{ low_value }} - {{ bid }}).
+          </h5>
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
+  {% next_button %}
 {% endblock %}
 
 {% block scripts %}
