@@ -11,8 +11,9 @@ class FinalPayoffResults(Page):
         experiment = Participant.get_experiment(self.player)
         method_one = Participant.get_payment_one_results(self.player)
         method_two = Participant.get_payment_two_results(self.player)
+        payoff = (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE
         return {
-            'payoff': (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE,
+            'payoff': round(payoff, 2),
             'endowment': experiment.ENDOWMENT,
             'method_1': method_one.earnings,
             'method_2': method_two.earnings,
@@ -26,7 +27,7 @@ class ResultsWaitPage(WaitPage):
         players = self.group.get_players()[:]
         for i, player in enumerate(players):
             player_id = player.participant.id_in_session
-            others = players[:i] + players[i+1:]
+            others = players[:i] + players[i + 1:]
             other_player = others.pop()
             other_id = other_player.participant.id_in_session
             experiment = Participant.get_experiment(player)
