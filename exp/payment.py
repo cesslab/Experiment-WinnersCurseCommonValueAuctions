@@ -37,6 +37,7 @@ class Results:
         self.random_offer = -1
         self.offer_accepted = False
 
+
 class PaymentMethod:
     def __init__(self, player_id: int, other_id: int, player_experiment: Experiment, other_experiment: Experiment):
         self.player_id = player_id
@@ -64,7 +65,7 @@ class PaymentMethod:
             else:
                 results.auction = phase_one.right_auction(results.phase_one_round)
         else:
-            results.auction = phase_one.preffered_auction(results.phase_one_round)
+            results.auction = phase_one.preferred_auction(results.phase_one_round)
 
         results.auction_id = results.auction.aid
 
@@ -155,5 +156,3 @@ class PaymentMethod:
             results.earnings = results.high_value - results.bid
 
         return results
-
-
