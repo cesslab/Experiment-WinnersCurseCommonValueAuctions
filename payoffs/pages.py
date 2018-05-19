@@ -15,8 +15,8 @@ class FinalPayoffResults(Page):
         return {
             'payoff': round(payoff, 2),
             'endowment': experiment.ENDOWMENT,
-            'method_1': method_one.earnings,
-            'method_2': method_two.earnings,
+            'method_1': round(method_one.earnings, 2),
+            'method_2': round(method_two.earnings, 2),
             'rate': experiment.CONVERSION_RATE
         }
 
