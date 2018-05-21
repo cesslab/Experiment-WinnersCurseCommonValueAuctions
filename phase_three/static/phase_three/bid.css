@@ -27,6 +27,10 @@ output {
   grid-gap : 1em;
 }
 
+.center-input {
+  text-align: center;
+}
+
 .signal-update-container {
   display  : grid;
   grid-template-columns : auto auto;
