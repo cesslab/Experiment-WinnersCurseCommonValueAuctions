@@ -21,7 +21,7 @@
     {% if preferred_position == 'Indifferent' %}
       <div class="plain-title-item">
         <h5>
-            When asked which of the two selected auctions you preferred you selected  <b>don't care</b>.
+            When asked which of the two selected auctions you preferred you selected the option <b>don't care</b>.
         </h5>
       </div>
       <div class="plain-title-item">
@@ -32,7 +32,7 @@
     {% else %}
       <div class="plain-title-item">
         <h5>
-          When asked which of the two selected auctions you preferred you selected  <b>don't care</b>.
+          When asked which of the two selected auctions you preferred you selected the {{ preferred_position }} Auction.
         </h5>
       </div>
     {% endif %}
@@ -57,7 +57,7 @@
         </h5>
       </div>
       <div class="plain-title-item">
-        <h5>The lottery was played using your signal and the other player's signal.</h5>
+        <h5>The lottery was played using your signal and the other bidder's signal.</h5>
       </div>
     {% else %}
       <div class="plain-title-item">
@@ -67,7 +67,7 @@
       </div>
       <div class="plain-title-item">
         <h5>
-          Your earnings #1 is <b>0</b>.
+          Your earnings #1 are <b>0</b>.
         </h5>
       </div>
     {% endif %}
@@ -78,7 +78,11 @@
     {% if winner %}
       <div class="plain-title-item">
         <h5>
-          Your earnings #1 is <b>{{ earnings|floatformat }}</b> (= {{ low_value|floatformat }} - {{ bid|floatformat }}).
+          {% if low_prize_chosen %}
+          Your earnings #1 are <b>{{ earnings|floatformat }}</b> (= {{ low_value|floatformat }} - {{ bid|floatformat }}).
+          {% else %}
+            Your earnings #1 are <b>{{ earnings|floatformat }}</b> (= {{ high_value|floatformat }} - {{ bid|floatformat }}).
+          {% endif %}
         </h5>
       </div>
     {% endif %}
