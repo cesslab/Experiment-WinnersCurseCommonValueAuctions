@@ -26,7 +26,9 @@ class Results:
         self.low_prob = -1
         self.high_prob = -1
         self.random_signal = -1
+        self.random_signal_is_percentage = False
         self.other_random_signal = -1
+        self.other_random_signal_is_percentage = False
         self.win_lottery = False
         self.earnings = -1
         self.realized = -1
@@ -71,6 +73,7 @@ class PaymentMethod:
 
         # Selecting a random signal
         results.random_signal = results.auction.random_signal()
+        results.random_signal_is_percentage = results.auction.signal_is_percentage
         results.bid = results.auction.bids[results.random_signal]
         results.other_bid = self.other_experiment.auctions[results.auction.aid].bids[results.random_signal]
 
@@ -80,6 +83,7 @@ class PaymentMethod:
             results.win_lottery = results.bid > results.other_bid
 
         results.other_random_signal = results.auction.random_signal()
+        results.other_random_signal_is_percentage = results.auction.signal_is_percentage
 
         results.low_prob = results.auction.low_probability(results.random_signal, results.other_random_signal)
         results.high_prob = results.auction.high_probability(results.random_signal, results.other_random_signal)

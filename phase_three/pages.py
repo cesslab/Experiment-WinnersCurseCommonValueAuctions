@@ -15,8 +15,10 @@ class BidPage(Page):
 
     def vars_for_template(self):
         experiment = Participant.get_experiment(self.player)
+        auction = experiment.phase_three.auction(self.round_number)
         return {
-            'auction': experiment.phase_three.auction(self.round_number),
+            'signal_is_percentage': auction.signal_is_percentage,
+            'auction': auction,
             'signal': experiment.phase_three.signal(self.round_number),
             'low_update': experiment.phase_three.low_update(self.round_number),
             'high_update': experiment.phase_three.high_update(self.round_number)}

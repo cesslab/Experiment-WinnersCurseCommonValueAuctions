@@ -56,6 +56,15 @@ class MethodOneResults(Page):
         else:
             preferred_position = 'Indifferent'
 
+        if results.random_signal_is_percentage:
+            random_signal = round(results.random_signal*100, 2)
+        else:
+            random_signal = results.random_signal
+
+        if results.other_random_signal_is_percentage:
+            others_random_signal = round(results.other_random_signal*100, 2)
+        else:
+            others_random_signal = results.other_random_signal
         return {
             'player_id': results.player_id,
             'other_id': results.other_player_id,
@@ -67,8 +76,10 @@ class MethodOneResults(Page):
             'bid': results.bid,
             'others_bid': results.other_bid,
             'winner': results.win_lottery,
-            'signal': results.random_signal,
-            'others_signal': results.other_random_signal,
+            'signal_is_percentage': results.random_signal_is_percentage,
+            'signal': random_signal,
+            'others_signal': others_random_signal,
+            'others_signal_is_percentage': results.other_random_signal_is_percentage,
             'low_value': results.low_value,
             'high_value': results.high_value,
             'low_prob': round(results.low_prob * 100, 2),

@@ -15,7 +15,7 @@
 {% block content %}
     <div class="grid-container">
         <div class="header-item">
-            <p>Description of decision task goes here</p>
+            <p>Consider your signal about the following lottery. What is your bid?</p>
         </div>
 
         <div class="card">
@@ -57,7 +57,7 @@
                     <h5>Update</h5>
                 </div>
                 <div class="text-center">
-                    {% if signal < 1 %}
+                    {% if signal_is_percentage %}
                         <h5>{% widthratio signal 1 100 %}&#37;</h5>
                     {% else %}
                         <h5>{{ signal }}</h5>
@@ -65,8 +65,8 @@
                 </div>
 
                 <div class="text-center">
-                    {% if low_update < 1 or high_update < 1 %}
-                        <h5>{% widthratio low_update 1 100 %}&#37; &#8804; v &#8804; {% widthratio high_update 1 100 %}&#37;</h5>
+                    {% if signal_is_percentage %}
+                        <h5>{% widthratio low_update 1 100 %}&#37; &#8804; p &#8804; {% widthratio high_update 1 100 %}&#37;</h5>
                     {% else %}
                         <h5>{{ low_update|floatformat }} &#8804; v &#8804; {{ high_update|floatformat }}</h5>
                     {% endif %}
