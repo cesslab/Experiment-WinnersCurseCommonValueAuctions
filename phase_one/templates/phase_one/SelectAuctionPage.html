@@ -10,7 +10,8 @@
 
 {% block content %}
   <div class="container">
-  <p>Description of decision task goes here</p>
+  <p>Consider the lottery that the winner gets in each of the following auctions. Which auction would you prefer to
+    participate in?</p>
   </div>
 
   <!-- Auction B -->
@@ -19,10 +20,10 @@
 
       <div class="col">
         <div class="card">
-          <h4 class="card-header">Left Auction</h4>
+          <h4 class="card-header">Left auction</h4>
           <div class="card-body">
             <div class="underscored">
-              <h5>Lottery</h5>
+              <h5>Lottery prize</h5>
             </div>
             {% if left_auction.atype == 1 %}
               {% include 'phase_one/snippets/type_1_left.html' %}
@@ -41,10 +42,10 @@
       <!-- Auction B -->
       <div class="col">
         <div class="card">
-          <h4 class="card-header">Right Auction</h4>
+          <h4 class="card-header">Right auction</h4>
           <div class="card-body">
             <div class="underscored">
-              <h5>Lottery</h5>
+              <h5>Lottery prize</h5>
             </div>
             {% if right_auction.atype == 1 %}
               {% include 'phase_one/snippets/type_1_right.html' %}
