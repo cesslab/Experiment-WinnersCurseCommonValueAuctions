@@ -21,16 +21,16 @@
     {% if offer_accepted %}
       <div class="plain-title-item">
         <h5>
-          <b>The random price of {{ random_offer }} was greater than or equal to your willingness to accept value of {{ cutoff }}.</b>
+          <b>The random price of {{ random_offer }} was greater than or equal to your minimum compensation of {{ cutoff }}.</b>
         </h5>
       </div>
       <div class="plain-title-item">
-        <h5>Your earnings #2 is the random price {{ random_offer }}.</h5>
+        <h5>Your earnings #2 are the random price {{ random_offer }}.</h5>
       </div>
     {% else %}
       <div class="plain-title-item">
         <h5>
-          <b>The random price of {{ random_offer }} was less than your willingness to accept value of {{ cutoff }}.</b>
+          <b>The random price of {{ random_offer }} was less than your minimum compensation of {{ cutoff }}.</b>
         </h5>
       </div>
       <div class="title-item">
@@ -53,7 +53,7 @@
           </h5>
         </div>
         <div class="plain-title-item">
-          <h5>The lottery was played using your signal and the other player's signal.</h5>
+          <h5>The lottery was played using your signal and the other bidder's signal.</h5>
         </div>
       {% else %}
         <div class="plain-title-item">
@@ -63,7 +63,7 @@
         </div>
         <div class="plain-title-item">
           <h5>
-            Your earnings #1 is <b>0</b>.
+            Your earnings #2 are <b>0</b>.
           </h5>
         </div>
       {% endif %}
@@ -73,7 +73,12 @@
       {% if winner %}
         <div class="plain-title-item">
           <h5>
-            Your earnings #2 is <b>{{ earnings }}</b> (= {{ low_value }} - {{ bid }}).
+            {% if low_prize_chosen %}
+              Your earnings #2 are <b>{{ earnings|floatformat }}</b> (= {{ low_value|floatformat }} - {{ bid|floatformat }}).
+            {% else %}
+              Your earnings #2 are <b>{{ earnings|floatformat }}</b> (= {{ high_value|floatformat }} - {{ bid|floatformat }}).
+            {% endif %}
+
           </h5>
         </div>
       {% endif %}

@@ -74,11 +74,11 @@
             </div>
 
             <div>
-                <input type="number" step="any" name="bid" required id="id_bid" class="form-control"
+                <input type="text" step="any" name="bid" required id="id_bid" class="center-input form-control" size="5" maxlength="5"
                        value="{{ form.bid.value|default_if_none:"" }}"
                        placeholder="Enter Your Bid">
-                <small id="bidhelp" class="form-text text-muted">Your bid must be between 0
-                    and {{ auction.max_value }}</small>
+                <small id="bidhelp" class="form-text text-muted">Your bid must be between 0.00
+                    and {{ auction.max_value }}.00</small>
                 {% if form.bid.errors %}
                     <div class="alert alert-danger">
                         {{ form.bid.errors }}

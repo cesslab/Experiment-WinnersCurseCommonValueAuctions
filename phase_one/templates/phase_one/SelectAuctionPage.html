@@ -23,7 +23,7 @@
           <h4 class="card-header">Left auction</h4>
           <div class="card-body">
             <div class="underscored">
-              <h5>Lottery prize</h5>
+              <h5>Lottery</h5>
             </div>
             {% if left_auction.atype == 1 %}
               {% include 'phase_one/snippets/type_1_left.html' %}
@@ -45,7 +45,7 @@
           <h4 class="card-header">Right auction</h4>
           <div class="card-body">
             <div class="underscored">
-              <h5>Lottery prize</h5>
+              <h5>Lottery</h5>
             </div>
             {% if right_auction.atype == 1 %}
               {% include 'phase_one/snippets/type_1_right.html' %}
@@ -73,7 +73,7 @@
             <input type="radio" name="preference" value="{{left_auction.aid}}" id="left_auction" autocomplete="off"> Left Auction
           </label>
           <label class="btn btn-success" id="id-preference-0">
-            <input type="radio" name="preference" value="-1" autocomplete="off" id="neither_auction"> Indifferent
+            <input type="radio" name="preference" value="-1" autocomplete="off" id="neither_auction"> Don't Care
           </label>
           <label class="btn btn-success" id="id-preference-3">
             <input type="radio" name="preference" value="{{right_auction.aid}}" id="right_auction" autocomplete="off"> Right Auction
