@@ -31,7 +31,7 @@
       </div>
 
       <div class="text-center">
-        {% if signal < 1 %}
+        {% if signal_is_percentage %}
           <h5>{% widthratio signal 1 100 %}&#37;</h5>
         {% else %}
           <h5>{{ signal }}</h5>
@@ -39,7 +39,7 @@
       </div>
 
       <div class="text-center">
-        {% if others_signal < 1 %}
+        {% if others_signal_is_percentage %}
           <h5>{% widthratio others_signal 1 100 %}&#37;</h5>
         {% else %}
           <h5>{{ others_signal }}</h5>
