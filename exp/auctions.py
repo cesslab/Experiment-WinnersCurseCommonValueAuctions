@@ -9,15 +9,13 @@ class Auction:
     MAX = 1
     VALUE = 0
     PROBABILITY = 1
-    INT_TYPE = 0
-    FLOAT_TYPE = 1
 
     def __init__(self, aid: int, atype: int, matrix: List = [], signals: List = [], min_max: List = []):
         self.aid = aid
         self.atype = atype
         self.matrix = matrix
         self.signals = signals
-        self.stype = Auction.FLOAT_TYPE if aid == 4 or aid == 5 else Auction.INT_TYPE
+        self.signal_is_percentage = (atype == 4 or atype == 5)
         self.min_max = min_max
         self.cutoff = None
         self.bids = {}
