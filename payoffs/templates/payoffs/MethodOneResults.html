@@ -16,7 +16,7 @@
       <h3>Decision in Stage 1</h3>
     </div>
 
-    {% include 'payoffs/snippets/phase_one_game_pair.html' %}
+    {% include 'payoffs/snippets/decision_in_stage_one.html' %}
 
     {% if preferred_position == 'Indifferent' %}
       <div class="plain-title-item">
@@ -73,12 +73,12 @@
     {% endif %}
 
 
-    {% include 'payoffs/snippets/phase_one_lottery.html' %}
+    {% include 'payoffs/snippets/realized_lottery.html' %}
 
     {% if winner %}
       <div class="plain-title-item">
         <h5>
-          Your earnings #1 is <b>{{ earnings }}</b> (= {{ low_value }} - {{ bid }}).
+          Your earnings #1 is <b>{{ earnings|floatformat }}</b> (= {{ low_value|floatformat }} - {{ bid|floatformat }}).
         </h5>
       </div>
     {% endif %}

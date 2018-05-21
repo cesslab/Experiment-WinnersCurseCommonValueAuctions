@@ -3,7 +3,7 @@
     <h4 class="card-header">Auction</h4>
     <div class="card-body">
       <div class="underscored">
-        <h5>Lottery</h5>
+        <h5>Lottery prize</h5>
       </div>
 
       {% if auction.atype == 1 %}
@@ -32,7 +32,7 @@
 
       <div class="text-center">
         {% if signal_is_percentage %}
-          <h5>{% widthratio signal 1 100 %}&#37;</h5>
+          <h5>{{signal|floatformat}}&#37;</h5>
         {% else %}
           <h5>{{ signal }}</h5>
         {% endif %}
@@ -40,7 +40,7 @@
 
       <div class="text-center">
         {% if others_signal_is_percentage %}
-          <h5>{% widthratio others_signal 1 100 %}&#37;</h5>
+          <h5>{{others_signal|floatformat}}&#37;</h5>
         {% else %}
           <h5>{{ others_signal }}</h5>
         {% endif %}
@@ -57,11 +57,11 @@
       </div>
 
       <div class="text-center">
-        <h5>{{ bid }}</h5>
+        <h5>{{ bid|floatformat }}</h5>
       </div>
 
       <div class="text-center">
-        <h5>{{ others_bid }}</h5>
+        <h5>{{ others_bid|floatformat }}</h5>
       </div>
     </div>
   </div>

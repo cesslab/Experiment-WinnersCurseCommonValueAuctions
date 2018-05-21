@@ -24,18 +24,18 @@
 
 {% block bottom_left %}
   {% if auction_type == 5 %}
-    p = ({{ signal }} + {{ others_signal }}) / 2 <br>
-    p = {{ low_prob }}&#37;
+    p = ({{ signal|floatformat }} + {{ others_signal|floatformat }}) / 2 <br>
+    p = {{ low_prob|floatformat }}&#37;
   {% else %}
-    {{ low_prob }}&#37;
+    {{ low_prob|floatformat }}&#37;
   {% endif %}
 {% endblock %}
 
 {% block bottom_right %}
   {% if auction_type == 4 %}
-    p = ({{ signal }}&#37 + {{ others_signal }}&#37) / 2 <br>
-    p = {{ high_prob }}&#37;
+    p = ({{ signal|floatformat }}&#37 + {{ others_signal|floatformat }}&#37) / 2 <br>
+    p = {{ high_prob|floatformat }}&#37;
   {% else %}
-    {{ high_prob }}&#37;
+    {{ high_prob|floatformat }}&#37;
   {% endif %}
 {% endblock %}

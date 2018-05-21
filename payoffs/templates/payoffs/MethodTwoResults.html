@@ -16,7 +16,7 @@
       <h3>Decision in Stage 2</h3>
     </div>
 
-    {% include 'payoffs/snippets/stage_two_choice.html' with auction=cutoff_auction %}
+    {% include 'payoffs/snippets/decision_in_stage_two.html' with auction=cutoff_auction %}
 
     {% if offer_accepted %}
       <div class="plain-title-item">
@@ -68,7 +68,7 @@
         </div>
       {% endif %}
 
-      {% include 'payoffs/snippets/phase_one_lottery.html' %}
+      {% include 'payoffs/snippets/realized_lottery.html' %}
 
       {% if winner %}
         <div class="plain-title-item">
