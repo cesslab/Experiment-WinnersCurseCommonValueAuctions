@@ -27,7 +27,7 @@ class CutoffSelectionPage(Page):
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
-            return 'You must make a bid for this auction.'
+            return ' You must specify how much would you be willing to receive to NOT participate in this lottery'
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
