@@ -1,0 +1,112 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css">
+  <link rel="stylesheet" href="{% static 'phase_two/cutoff.css' %}">
+  <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
+{% endblock %}
+
+{% block body_main %}
+  {% include 'phase_one/snippets/navbar.html' %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="grid-container">
+    <div class="header-item">
+      <p>Text required</p>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="underscored">
+          <h5>Lottery</h5>
+        </div>
+        <div class="grid-auction-container">
+          <div class="">
+            {% if auction.atype == 1 %}
+              {% include 'phase_two/snippets/type_1.html' %}
+            {% elif auction.atype == 2 %}
+              {% include 'phase_two/snippets/type_2.html' %}
+            {% elif auction.atype == 3 %}
+              {% include 'phase_two/snippets/type_3.html' %}
+            {% elif auction.atype == 4 %}
+              {% include 'phase_two/snippets/type_4.html' %}
+            {% else %}
+              {% include 'phase_two/snippets/type_5.html' %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-slider-container">
+
+      <div class="item text-center">
+        <h5>Your minimum compensation for this lottery</h5>
+      </div>
+
+      <div class="item text-center">
+        <h4 id="output">&ndash;</h4>
+      </div>
+      <div class="grid-slider-label-container">
+        <div class="slider-item">
+          <input
+              id="cutoff"
+              name="cutoff"
+              type="range"
+              min="{{ auction.min_value }}"
+              max="{{ auction.max_value }}"
+              step="0.5"
+          >
+          <input type="hidden" name="clicked" id="clicked" value="0">
+        </div>
+      </div>
+    </div>
+  </div>
+  {% next_button %}
+{% endblock %}
+
+
+
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
+  <script>
+      var $element = $('input#cutoff');
+      var $hidden = $('input#clicked');
+      var $output = $('#output');
+
+      function updateOutput(el, val) {
+          el.textContent = val;
+      }
+
+      $element.rangeslider({
+          polyfill: false,
+          onInit: function () {
+              $('.rangeslider__handle').hide();
+              $('.rangeslider__fill').hide();
+          },
+
+          // Callback function
+          onSlide: function (position, value) {
+              $('.rangeslider__handle').show();
+              $('.rangeslider__fill').show();
+              $element.val(value)
+              $hidden.val(1)
+              updateOutput($output[0], value)
+          },
+
+          // Callback function
+          onSlideEnd: function (position, value) {
+          }
+      });
+
+
+      $(function () {
+          $('input#cutoff').val(0);
+      })
+  </script>
+{% endblock %}
