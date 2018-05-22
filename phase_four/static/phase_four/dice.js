@@ -6,35 +6,35 @@ function dado() {
     setTimeout(function () {
         platform.removeClass('playing').addClass('stop');
         var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-        var number = Math.floor(Math.random() * 6);
+        var number = Math.floor(Math.random() * 6) + 1;
         var x = 0, y = 20, z = -20;
         switch (number) {
-            case 0:
+            case 1:
                 x = 0;
                 y = 20;
                 z = -20;
                 break;
-            case 1:
+            case 2:
                 x = -100;
                 y = -150;
                 z = 10;
                 break;
-            case 2:
+            case 3:
                 x = 0;
                 y = -100;
                 z = -10;
                 break;
-            case 3:
+            case 4:
                 x = 0;
                 y = 100;
                 z = -10;
                 break;
-            case 4:
+            case 5:
                 x = 80;
                 y = 120;
                 z = -10;
                 break;
-            case 5:
+            case 6:
                 x = 0;
                 y = 200;
                 x = 10;
@@ -49,7 +49,8 @@ function dado() {
             'transform': 'translate3d(0,0, 0px)'
         });
 
-        $('#outcome').text(letters[number]);
+        $('#outcome').text(letters[number - 1]);
+        $('input#side').val(number);
 
     }, 1120);
 }
