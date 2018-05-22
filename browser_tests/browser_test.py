@@ -4,6 +4,7 @@ from os import environ
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 
 from exp.experiment import Experiment
 
@@ -71,8 +72,10 @@ def play_phase_three(driver):
 
 # Run with python -m browser_tests.browser_test
 if __name__ == "__main__":
-    driver = webdriver.Chrome()
-    driver.set_window_size(1300, 1400)
+    chrome_options = Options()
+    chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument('--window-size=1300,1400')
+    driver = webdriver.Chrome(chrome_options=chrome_options)
     driver.implicitly_wait(30)
     num_tabs = start_two_player_session(driver, "http://127.0.0.1:8000/demo/phase_one/")
 
@@ -81,6 +84,3 @@ if __name__ == "__main__":
         play_phase_one(driver)
         play_phase_two(driver)
         play_phase_three(driver)
-
-
-
