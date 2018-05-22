@@ -1,6 +1,7 @@
 from exp.auctions import AuctionFactory
+from exp.questions import QuestionFactory
 from exp.phases import (PhaseOne, PhaseTwo, PhaseThree, PhaseFour)
-from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS)
+from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
 
 
 class Experiment:
@@ -9,10 +10,11 @@ class Experiment:
 
     def __init__(self):
         self.auctions = AuctionFactory.auctions(AUCTIONS)
+        self.questions = QuestionFactory.questions(QUESTIONS)
         self.phase_one = PhaseOne(self.auctions, PHASE_ONE_AUCTION_PAIRS)
         self.phase_two = PhaseTwo(self.auctions)
         self.phase_three = PhaseThree(self.auctions)
-        self.phase_four = PhaseFour(self.auctions)
+        self.phase_four = PhaseFour(self.questions)
 
     @staticmethod
     def phase_one_rounds() -> int:

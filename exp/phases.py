@@ -2,6 +2,7 @@ import random
 from typing import Dict, List
 
 from exp.auctions import Auction
+from exp.questions import Question
 
 
 class PhaseOne:
@@ -117,20 +118,26 @@ class PhaseThree:
 
 
 class PhaseFour:
-    def __init__(self, auctions: Dict[int, Auction]):
-        auction_ids = [aid for aid, value in auctions.items()]
-        random.shuffle(auction_ids)
-        shuffled_auctions = []
-        for aid in auction_ids:
-            shuffled_auctions.append(auctions[aid])
-        self.auctions = shuffled_auctions
+    def __init__(self, questions: Dict[int, Question]):
+        question_ids = [qid for qid, value in questions.items()]
+        random.shuffle(question_ids)
+        self.die_sides = [i for i in range(1, 7)]
+        random.shuffle(self.die_sides)
+        self.die_side = -1
 
-    def get_auction(self, session_round: int) -> Auction:
-        return self.auctions[session_round - 1]
+        shuffled_questions = []
+        for qid in question_ids:
+            shuffled_questions.append(questions[qid])
+        self.questions = shuffled_questions
+
+    def get_question(self, session_round: int) -> Question:
+        return self.questions[session_round - 1]
 
     def set_cutoff(self, round_number: int, cutoff: float) -> None:
-        self.auctions[round_number - 1].cutoff = cutoff
+        self.questions[round_number - 1].cutoff = cutoff
 
     def random_round(self) -> int:
-        return random.randint(1, len(self.auctions))
+        return random.randint(1, len(self.questions))
 
+    def set_die_side(self, die_side):
+        self.die_side = die_side
