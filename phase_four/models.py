@@ -3,7 +3,6 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-
 author = 'Your name here'
 
 doc = """
@@ -26,4 +25,5 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    cutoff = models.DecimalField(blank=False, max_digits=4, decimal_places=2)
+    question = models.IntegerField(blank=False)
