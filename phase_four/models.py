@@ -13,7 +13,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'phase_four'
     players_per_group = None
-    num_rounds = 1
+    num_rounds = 6
 
 
 class Subsession(BaseSubsession):
@@ -25,5 +25,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    die_side = models.IntegerField(blank=False)
     cutoff = models.DecimalField(blank=False, max_digits=4, decimal_places=2)
+    clicked = models.IntegerField()
     question = models.IntegerField(blank=False)
