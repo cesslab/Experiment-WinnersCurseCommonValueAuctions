@@ -1,6 +1,5 @@
 from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
-from .models import Constants
 
 from exp.util import Participant
 
@@ -9,16 +8,18 @@ class InstructionsPage(Page):
     def is_displayed(self):
         return self.round_number == 1
 
-    pass
-
 
 class RollDicePage(Page):
     def is_displayed(self):
         return self.round_number == 1
 
     def error_message(self, values):
-        if not (1 <= int(values['side']) <= 6):
+        if not ('side' not in values or 1 <= int(values['side']) <= 6):
             return 'You must roll the die before continuing.'
+
+    def before_next_page(self):
+        experiment = Participant.get_experiment(self.player)
+        experiment.phase_four.set_die_side(self.player.die_side)
 
 
 class MinBuyoutForLotteryPage(Page):
@@ -27,7 +28,7 @@ class MinBuyoutForLotteryPage(Page):
 
     def vars_for_template(self):
         experiment = Participant.get_experiment(self.player)
-        return {'auction': experiment.phase_two.get_auction(self.round_number)}
+        return {'auction': experiment.phase_four.get_question(self.round_number)}
 
     def cutoff_max(self):
         experiment = Participant.get_experiment(self.player)
@@ -39,13 +40,13 @@ class MinBuyoutForLotteryPage(Page):
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
-            return 'You must make a bid for this auction.'
+            return ' You must specify how much would you be willing to receive to NOT participate in this lottery'
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
-        experiment.phase_two.set_cutoff(self.round_number, self.player.cutoff)
 
-        self.player.auction = experiment.phase_two.get_auction(self.round_number).aid
+        experiment.phase_two.set_cutoff(self.round_number, self.player.cutoff)
+        self.player.question = experiment.phase_two.get_auction(self.round_number).aid
 
 
 # class ResultsWaitPage(WaitPage):
