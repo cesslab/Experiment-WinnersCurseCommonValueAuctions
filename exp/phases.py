@@ -114,3 +114,23 @@ class PhaseThree:
 
     def set_bid(self, round_number: int, bid):
         self.auction(round_number).bids[self.signal(round_number)] = bid
+
+
+class PhaseFour:
+    def __init__(self, auctions: Dict[int, Auction]):
+        auction_ids = [aid for aid, value in auctions.items()]
+        random.shuffle(auction_ids)
+        shuffled_auctions = []
+        for aid in auction_ids:
+            shuffled_auctions.append(auctions[aid])
+        self.auctions = shuffled_auctions
+
+    def get_auction(self, session_round: int) -> Auction:
+        return self.auctions[session_round - 1]
+
+    def set_cutoff(self, round_number: int, cutoff: float) -> None:
+        self.auctions[round_number - 1].cutoff = cutoff
+
+    def random_round(self) -> int:
+        return random.randint(1, len(self.auctions))
+
