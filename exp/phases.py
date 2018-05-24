@@ -2,7 +2,7 @@ import random
 from typing import Dict, List
 
 from exp.auctions import Auction
-from exp.questions import Question
+from exp.lottery import Lottery
 
 
 class PhaseOne:
@@ -118,7 +118,7 @@ class PhaseThree:
 
 
 class PhaseFour:
-    def __init__(self, questions: Dict[int, Question]):
+    def __init__(self, questions: Dict[int, Lottery]):
         question_ids = [qid for qid, value in questions.items()]
         random.shuffle(question_ids)
         self.die_sides = [i for i in range(1, 7)]
@@ -130,7 +130,7 @@ class PhaseFour:
             shuffled_questions.append(questions[qid])
         self.questions = shuffled_questions
 
-    def get_question(self, session_round: int) -> Question:
+    def get_question(self, session_round: int) -> Lottery:
         return self.questions[session_round - 1]
 
     def set_cutoff(self, round_number: int, cutoff: float) -> None:

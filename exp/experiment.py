@@ -1,5 +1,5 @@
 from exp.auctions import AuctionFactory
-from exp.questions import QuestionFactory
+from exp.lottery import LotteryFactory
 from exp.phases import (PhaseOne, PhaseTwo, PhaseThree, PhaseFour)
 from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
 
@@ -10,7 +10,7 @@ class Experiment:
 
     def __init__(self):
         self.auctions = AuctionFactory.auctions(AUCTIONS)
-        self.questions = QuestionFactory.questions(QUESTIONS)
+        self.questions = LotteryFactory.questions(QUESTIONS)
         self.phase_one = PhaseOne(self.auctions, PHASE_ONE_AUCTION_PAIRS)
         self.phase_two = PhaseTwo(self.auctions)
         self.phase_three = PhaseThree(self.auctions)
