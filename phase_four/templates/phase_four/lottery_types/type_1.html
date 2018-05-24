@@ -1,0 +1,69 @@
+<div class="grid-container">
+  <div class="header-item">
+    <p>Text required</p>
+  </div>
+
+  <div class="lottery-container">
+    <div class="card">
+      <div class="card-body">
+        <div class="underscored">
+          <h5>Bet on Red</h5>
+        </div>
+        <div class="grid-auction-container">
+          <div class="">
+            {% include 'phase_four/lottery_types/red_type_1.html' %}
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-danger" onclick="betRed()">Red</button>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="underscored">
+          <h5>Bet on Blue</h5>
+        </div>
+        <div class="grid-auction-container">
+          <div class="">
+            {% include 'phase_four/lottery_types/blue_type_1.html' %}
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary" onclick="betBlue()">Blue</button>
+    </div>
+
+  </div>
+
+  <div class="grid-slider-container">
+    <div class="item text-center">
+      <h5>Your Bet</h5>
+    </div>
+    <div class="item text-center">
+      <h5 id="your-bet"></h5>
+    </div>
+
+    <div class="item text-center">
+      <h5>Your minimum compensation for this lottery</h5>
+    </div>
+
+    <div class="item text-center">
+      <h4 id="output">&ndash;</h4>
+    </div>
+    <div class="grid-slider-label-container">
+      <div class="slider-item">
+        <input
+            id="cutoff"
+            name="cutoff"
+            type="range"
+            min="{{ lottery.min_cutoff }}"
+            max="{{ lottery.max_cutoff }}"
+            step="0.5"
+        >
+        <input type="hidden" name="bet" id="bet" value="-1">
+        <input type="hidden" name="clicked" id="clicked" value="0">
+      </div>
+    </div>
+  </div>
+</div>

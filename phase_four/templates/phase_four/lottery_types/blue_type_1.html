@@ -1,0 +1,17 @@
+{% extends 'global/experiment/lottery_table.html' %}
+
+{% block top_left %}
+  {{ lottery.blue_value }}
+{% endblock %}
+
+{% block top_right %}
+  {{ lottery.red_value }}
+{% endblock %}
+
+{% block bottom_left %}
+  {{ lottery.blue_number }}
+{% endblock %}
+
+{% block bottom_right %}
+  {{ lottery.red_number }}
+{% endblock %}
