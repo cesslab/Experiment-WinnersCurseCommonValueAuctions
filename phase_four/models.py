@@ -26,6 +26,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     die_side = models.IntegerField(blank=False)
+    bet = models.IntegerField(blank=False)
     cutoff = models.DecimalField(blank=False, max_digits=4, decimal_places=2)
     clicked = models.IntegerField()
-    question = models.IntegerField(blank=False)
+    lottery = models.IntegerField(blank=False)
