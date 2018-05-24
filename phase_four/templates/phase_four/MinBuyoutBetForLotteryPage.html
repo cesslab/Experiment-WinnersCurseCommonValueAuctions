@@ -1,0 +1,83 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.css">
+  <link rel="stylesheet" href="{% static 'phase_four/buyout_bet_lottery.css' %}">
+{% endblock %}
+
+{% block body_main %}
+  {% include 'phase_four/navbar.html' %}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  {% if lottery.ltype == 1 %}
+    {% include 'phase_four/lottery_types/type_1.html' %}
+  {% elif lottery.ltype == 2 %}
+    {% include 'phase_four/lottery_types/type_2.html' %}
+  {% else %}
+    {% include 'phase_four/lottery_types/type_3.html' %}
+  {% endif %}
+
+  <button class="btn btn-info next-button">Next</button>
+{% endblock %}
+
+
+
+
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
+  <script>
+      const $element = $('input#cutoff');
+      const $hidden = $('input#clicked');
+      const $output = $('#output');
+      let betInput = document.getElementById("bet");
+      const betDisplayElement = document.getElementById("your-bet");
+
+      function betBlue() {
+          betDisplayElement.classList.remove('text-danger');
+          betDisplayElement.classList.add('text-primary');
+          betDisplayElement.textContent = 'Blue';
+          betInput.value = {{ lottery.BLUE }};
+      }
+
+      function betRed() {
+          betDisplayElement.classList.remove('text-primary');
+          betDisplayElement.classList.add('text-danger');
+          betDisplayElement.textContent = 'Red';
+          betInput.value = {{ lottery.RED }};
+      }
+
+      function updateOutput(el, val) {
+          el.textContent = val;
+      }
+
+      $element.rangeslider({
+          polyfill: false,
+          onInit: function () {
+              $('.rangeslider__handle').hide();
+              $('.rangeslider__fill').hide();
+          },
+
+          // Callback function
+          onSlide: function (position, value) {
+              $('.rangeslider__handle').show();
+              $('.rangeslider__fill').show();
+              $element.val(value);
+              $hidden.val(1);
+              updateOutput($output[0], value)
+          },
+
+          // Callback function
+          onSlideEnd: function (position, value) {
+          }
+      });
+
+
+      $(function () {
+          $('input#cutoff').val(0);
+      })
+  </script>
+{% endblock %}
