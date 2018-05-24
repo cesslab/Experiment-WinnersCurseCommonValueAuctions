@@ -22,13 +22,13 @@ class RollDicePage(Page):
         experiment.phase_four.set_die_side(self.player.die_side)
 
 
-class MinBuyoutForLotteryPage(Page):
+class MinBuyoutBetForLotteryPage(Page):
     form_model = 'player'
     form_fields = ['cutoff', 'clicked']
 
     def vars_for_template(self):
         experiment = Participant.get_experiment(self.player)
-        return {'auction': experiment.phase_four.get_question(self.round_number)}
+        return {'auction': experiment.phase_four.get_lottery(self.round_number)}
 
     def cutoff_max(self):
         experiment = Participant.get_experiment(self.player)
@@ -58,6 +58,6 @@ class MinBuyoutForLotteryPage(Page):
 page_sequence = [
     InstructionsPage,
     RollDicePage,
-    MinBuyoutForLotteryPage,
+    MinBuyoutBetForLotteryPage,
     # ResultsWaitPage,
 ]
