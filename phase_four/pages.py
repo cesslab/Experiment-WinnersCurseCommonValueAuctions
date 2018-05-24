@@ -2,6 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 
 from exp.util import Participant
+from exp.lottery import Lottery
 
 
 class InstructionsPage(Page):
@@ -24,40 +25,39 @@ class RollDicePage(Page):
 
 class MinBuyoutBetForLotteryPage(Page):
     form_model = 'player'
-    form_fields = ['cutoff', 'clicked']
+    form_fields = ['cutoff', 'bet', 'clicked']
 
     def vars_for_template(self):
         experiment = Participant.get_experiment(self.player)
-        return {'auction': experiment.phase_four.get_lottery(self.round_number)}
+        lottery = experiment.phase_four.get_lottery(self.round_number)
+        return {
+            'lottery': lottery,
+            'bags': [(i, lottery.total - i) for i in range(lottery.total + 1)]
+        }
 
     def cutoff_max(self):
         experiment = Participant.get_experiment(self.player)
-        return experiment.phase_two.get_auction(self.round_number).max_value
+        return experiment.phase_four.get_lottery(self.round_number).max_cutoff
 
     def cutoff_min(self):
         experiment = Participant.get_experiment(self.player)
-        return experiment.phase_two.get_auction(self.round_number).min_value
+        return experiment.phase_four.get_lottery(self.round_number).min_cutoff
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
             return ' You must specify how much would you be willing to receive to NOT participate in this lottery'
+        elif not (values['bet'] == Lottery.BLUE or values['bet'] == Lottery.RED):
+            return ' You must place a bet on either Blue or Red'
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
 
-        experiment.phase_two.set_cutoff(self.round_number, self.player.cutoff)
-        self.player.question = experiment.phase_two.get_auction(self.round_number).aid
-
-
-# class ResultsWaitPage(WaitPage):
-#
-#     def after_all_players_arrive(self):
-#         pass
+        experiment.phase_four.set_cutoff(self.round_number, self.player.cutoff)
+        self.player.question = experiment.phase_four.get_lottery(self.round_number).lid
 
 
 page_sequence = [
     InstructionsPage,
     RollDicePage,
     MinBuyoutBetForLotteryPage,
-    # ResultsWaitPage,
 ]
