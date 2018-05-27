@@ -4,6 +4,7 @@ from ._builtin import Page, WaitPage
 
 from exp.util import Participant
 from exp.payment import PaymentMethod, Results
+from exp.lottery import Lottery
 
 
 class FinalPayoffResults(Page):
@@ -36,10 +37,12 @@ class ResultsWaitPage(WaitPage):
 
             method_one_results = payment_method.method_one_payment(Results())
             method_two_results = payment_method.method_two_payment(Results())
+            method_three_results = payment_method.method_three_results(Results())
             Participant.set_payment_one_results(player, method_one_results)
             Participant.set_payment_two_results(player, method_two_results)
+            Participant.set_payment_three_results(player, method_three_results)
 
-            player.save_results(method_one_results, method_two_results)
+            player.save_results(method_one_results, method_two_results, method_three_results)
 
 
 class MethodOneResults(Page):
@@ -57,12 +60,12 @@ class MethodOneResults(Page):
             preferred_position = 'Indifferent'
 
         if results.random_signal_is_percentage:
-            random_signal = round(results.random_signal*100, 2)
+            random_signal = round(results.random_signal * 100, 2)
         else:
             random_signal = results.random_signal
 
         if results.other_random_signal_is_percentage:
-            others_random_signal = round(results.other_random_signal*100, 2)
+            others_random_signal = round(results.other_random_signal * 100, 2)
         else:
             others_random_signal = results.other_random_signal
         return {
@@ -129,9 +132,34 @@ class MethodTwoResults(Page):
         return context
 
 
+class MethodThreeResults(Page):
+    def vars_for_template(self):
+        results = Participant.get_payment_three_results(self.player)
+
+        context = {
+            'rolled_side': results.rolled_side,
+            'rolled_side_encoded': results.rolled_side_encoded,
+            'die_encoding': results.die_encoding,
+            'bet_color': 'Red' if results.bet_color == Lottery.HIGH else 'Blue',
+            'high_value': results.auction.high_value,
+            'low_value': results.auction.low_value,
+            'lottery': results.lottery,
+            'cutoff': results.cutoff,
+            'random_cutoff': results.random_cutoff,
+            'play_lottery': results.play_lottery,
+            'num_red': results.num_red,
+            'num_blue': results.num_blue,
+            'realized_value': results.realized_value,
+            'earnings': results.earnings
+        }
+
+        return context
+
+
 page_sequence = [
     ResultsWaitPage,
     MethodOneResults,
     MethodTwoResults,
+    MethodThreeResults,
     FinalPayoffResults
 ]
