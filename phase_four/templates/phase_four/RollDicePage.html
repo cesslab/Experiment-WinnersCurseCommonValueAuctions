@@ -60,11 +60,16 @@
   </div>
   <div class="single-column-container">
     <div class="item">
-      <input type="hidden" name="side" id="side" value="">
-      <button type="button" onclick="dado()" class="btn btn-success">Roll Die</button>
+      <input type="hidden" name="die_side" id='side' value="-1">
+      <button id="die-button" type="button" onclick="dado()" class="btn btn-success">Roll Die</button>
     </div>
   </div>
-  {% next_button %}
+  <button id="next-button" class="otree-btn-next btn btn-primary">Next</button>
+  {% if form.bid.die_side %}
+    <div class="alert alert-danger">
+      {{ form.bid.die_side }}
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block scripts %}
