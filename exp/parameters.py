@@ -4,7 +4,10 @@ PHASE_ONE_AUCTION_PAIRS = [
     [22, 24],
     [23, 25],
     [32, 34],
-    [33, 35]
+    [33, 35],
+    # consistency check
+    [12, 24],
+    [15, 23],
 ]
 
 AUCTIONS = {
@@ -101,46 +104,46 @@ QUESTIONS = {
         'matrix': [[100, 0], [10, 10]],
         'total': 20,
         'min': 0,
-        'max': 25
+        'max': 100
     },
     2: {
         'id': 2,
         'type': 2,
-        'matrix': [[25, 0], []],
+        'matrix': [[100, 0], []],
         'total': 20,
         'min': 0,
-        'max': 25
+        'max': 100
     },
     3: {
         'id': 3,
         'type': 3,
         # Type 3 will have an fixed number specified for red, but it will not be displayed to the subjects
-        'matrix': [[25, 0], [12, -1]],
+        'matrix': [[100, 0], [12, -1]],
         'total': 20,
         'min': 0,
         'max': 25
     },
     4: {
         'id': 4,
-        'type': 2,
-        'matrix': [[25, 0], []],
+        'type': 1,
+        'matrix': [[150, 0], [15, 15]],
         'total': 30,
         'min': 0,
-        'max': 25
+        'max': 150
     },
     5: {
         'id': 5,
-        'type': 1,
-        'matrix': [[25, 0], [10, 10]],
-        'total': 20,
+        'type': 2,
+        'matrix': [[150, 0], []],
+        'total': 30,
         'min': 0,
         'max': 25
     },
     6: {
         'id': 6,
         'type': 3,
-        'matrix': [[25, 0], [12, -1]],
-        'total': 20,
+        'matrix': [[150, 0], [12, -1]],
+        'total': 30,
         'min': 0,
         'max': 25
     },
