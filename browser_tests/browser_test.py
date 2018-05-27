@@ -41,6 +41,21 @@ def play_phase_three_screen(driver, round):
     driver.find_element(By.XPATH, '//button').click()
 
 
+def play_phase_four_screen(driver, round):
+    if round == 1:
+        driver.save_screenshot('screenshots/phase_four_choice_screen.png')
+
+    driver.find_element(By.XPATH, "//input[@id='clicked']").value = '1'
+    if random.randint(0, 1) == 0:
+        driver.find_element(By.XPATH, "//button[@id='red-bet-button']").click()
+    else:
+        driver.find_element(By.XPATH, "//button[@id='blue-bet-button']").click()
+
+    driver.execute_script("""$('input[type="range"]').val({}).change();""".format(random.randint(0, 10)))
+
+    driver.find_element(By.XPATH, "//button[@id='next-button']").click()
+
+
 def start_two_player_session(driver, url):
     driver.get(url)
 
@@ -50,6 +65,12 @@ def start_two_player_session(driver, url):
         link.send_keys(Keys.COMMAND + Keys.ENTER)
 
     return len(driver.window_handles)
+
+
+def play_roll_die(driver):
+    driver.save_screenshot('screenshots/phase_four_roll_die_screen.png')
+    driver.find_element(By.XPATH, "//button[@id='die-button']").click()
+    driver.find_element(By.XPATH, "//button[@id='next-button']").click()
 
 
 def play_phase_one(driver):
@@ -70,6 +91,13 @@ def play_phase_three(driver):
         play_phase_three_screen(driver, round)
 
 
+def play_phase_four(driver):
+    play_instructions(driver, 'four')
+    play_roll_die(driver)
+    # for round in range(Experiment.phase_four_rounds()):
+    #     play_phase_four_screen(driver, round)
+
+
 # Run with python -m browser_tests.browser_test
 if __name__ == "__main__":
     chrome_options = Options()
@@ -84,3 +112,4 @@ if __name__ == "__main__":
         play_phase_one(driver)
         play_phase_two(driver)
         play_phase_three(driver)
+        play_phase_four(driver)

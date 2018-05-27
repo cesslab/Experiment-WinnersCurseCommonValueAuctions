@@ -1,11 +1,19 @@
 {% extends 'global/experiment/lottery_table.html' %}
 
 {% block top_left %}
-  {{ lottery.red_value }}
+  {% if type == bet_high_red %}
+    {{ high_value }}
+  {% else %}
+    {{ low_value }}
+  {% endif %}
 {% endblock %}
 
 {% block top_right %}
-  {{ lottery.blue_value }}
+  {% if type == bet_high_blue %}
+    {{ high_value }}
+  {% else %}
+    {{ low_value }}
+  {% endif %}
 {% endblock %}
 
 {% block bottom_left %}
@@ -15,4 +23,3 @@
 {% block bottom_right %}
   {{ lottery.total }}  - R
 {% endblock %}
-
