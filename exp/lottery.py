@@ -2,10 +2,15 @@ from typing import List, Dict
 
 
 class Lottery:
-    RED = 0
-    BLUE = 1
+    HIGH = 0
+    LOW = 1
     VALUE = 0
     NUMBER = 1
+    ALL_KNOWN = 1
+    COMPOUND_RISK = 2
+    AMBIGUITY = 3
+    BET_HIGH_RED = 0
+    BET_HIGH_BLUE = 1
 
     def __init__(self, lid: int, ltype: int, total: int, matrix: List, min_cutoff: int, max_cutoff: int):
         self.lid = lid
@@ -19,22 +24,28 @@ class Lottery:
         self.bet = None
 
     @property
-    def red_value(self):
-        return self.matrix[Lottery.VALUE][Lottery.RED]
+    def high_value(self):
+        return self.matrix[Lottery.VALUE][Lottery.HIGH]
 
     @property
-    def blue_value(self):
-        return self.matrix[Lottery.VALUE][Lottery.BLUE]
+    def low_value(self):
+        return self.matrix[Lottery.VALUE][Lottery.LOW]
 
     @property
-    def red_number(self):
+    def number_red(self):
+        assert self.ltype == 1 or self.ltype == 3
+        return self.matrix[Lottery.NUMBER][Lottery.HIGH]
+
+    @property
+    def number_blue(self):
         assert self.ltype == 1
-        return self.matrix[Lottery.NUMBER][Lottery.RED]
+        return self.matrix[Lottery.NUMBER][Lottery.LOW]
 
-    @property
-    def blue_number(self):
-        assert self.ltype == 1
-        return self.matrix[Lottery.NUMBER][Lottery.BLUE]
+    def has_number_blue(self):
+        return self.ltype == 1
+
+    def has_number_red(self):
+        return self.ltype == 1 or self.ltype == 3
 
     def __str__(self):
         return 'Lottery ' % self.lid
