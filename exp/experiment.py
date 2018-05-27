@@ -30,3 +30,8 @@ class Experiment:
         for aid, auction_params in AUCTIONS.items():
             rounds += len(auction_params['signals'])
         return rounds
+
+    @staticmethod
+    def phase_four_rounds() -> int:
+        rounds = 6
+        return rounds
