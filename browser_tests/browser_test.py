@@ -94,8 +94,8 @@ def play_phase_three(driver):
 def play_phase_four(driver):
     play_instructions(driver, 'four')
     play_roll_die(driver)
-    # for round in range(Experiment.phase_four_rounds()):
-    #     play_phase_four_screen(driver, round)
+    for round in range(Experiment.phase_four_rounds()):
+        play_phase_four_screen(driver, round)
 
 
 # Run with python -m browser_tests.browser_test
