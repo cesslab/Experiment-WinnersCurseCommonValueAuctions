@@ -121,7 +121,7 @@ QUESTIONS = {
         'matrix': [[100, 0], [12, -1]],
         'total': 20,
         'min': 0,
-        'max': 25
+        'max': 100
     },
     4: {
         'id': 4,
@@ -137,7 +137,7 @@ QUESTIONS = {
         'matrix': [[150, 0], []],
         'total': 30,
         'min': 0,
-        'max': 25
+        'max': 150
     },
     6: {
         'id': 6,
@@ -145,6 +145,6 @@ QUESTIONS = {
         'matrix': [[150, 0], [12, -1]],
         'total': 30,
         'min': 0,
-        'max': 25
+        'max': 150
     },
 }
