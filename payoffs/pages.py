@@ -12,12 +12,15 @@ class FinalPayoffResults(Page):
         experiment = Participant.get_experiment(self.player)
         method_one = Participant.get_payment_one_results(self.player)
         method_two = Participant.get_payment_two_results(self.player)
+        method_three = Participant.get_payment_three_results(self.player)
         payoff = (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE
         return {
             'payoff': round(payoff, 2),
             'endowment': experiment.ENDOWMENT,
             'method_1': round(method_one.earnings, 2),
             'method_2': round(method_two.earnings, 2),
+            'method_3': round(method_three.earnings, 2),
+            'total_in_credits': round(method_one.earnings + method_two.earnings, 2),
             'rate': experiment.CONVERSION_RATE
         }
 
@@ -140,10 +143,13 @@ class MethodThreeResults(Page):
             'rolled_side': results.rolled_side,
             'rolled_side_encoded': results.rolled_side_encoded,
             'die_encoding': results.die_encoding,
-            'bet_color': 'Red' if results.bet_color == Lottery.HIGH else 'Blue',
-            'high_value': results.auction.high_value,
-            'low_value': results.auction.low_value,
+            'bet_color': Lottery.BET_HIGH_RED if results.bet_color == Lottery.BET_HIGH_RED else Lottery.BET_HIGH_BLUE,
+            'bet_high_red': Lottery.BET_HIGH_RED,
+            'bet_high_blue': Lottery.BET_HIGH_BLUE,
+            'high_value': results.high_value,
+            'low_value': results.low_value,
             'lottery': results.lottery,
+            'lottery_type': results.lottery.ltype,
             'cutoff': results.cutoff,
             'random_cutoff': results.random_cutoff,
             'play_lottery': results.play_lottery,
