@@ -63,6 +63,8 @@ class Results:
         self.bet_color = lottery.bet
         self.lottery_chosen = lottery.lid
         self.cutoff = lottery.cutoff
+        self.high_value = lottery.high_value
+        self.low_value = lottery.low_value
 
     def save_phase_three_die_info(self, phase_four: PhaseFour):
         self.rolled_side = phase_four.die_side
