@@ -1,5 +1,5 @@
 import random
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from exp.auctions import Auction
 from exp.lottery import Lottery
@@ -119,25 +119,30 @@ class PhaseThree:
 
 class PhaseFour:
     def __init__(self, lotteries: Dict[int, Lottery]):
-        lottery_ids = [lid for lid, value in lotteries.items()]
-        random.shuffle(lottery_ids)
-        self.die_sides = [i for i in range(1, 7)]
-        random.shuffle(self.die_sides)
+        self.lotteries = lotteries
+        self.die_labels = ['A', 'B', 'C', 'D', 'E', 'F']
+        self.lottery_ids = [lid for lid, value in lotteries.items()]
+        # shuffle the lotteries show they are not shown in sequential order
+        random.shuffle(self.lottery_ids)
         self.die_side = -1
 
-        shuffled_lotteries = []
-        for lid in lottery_ids:
-            shuffled_lotteries.append(lotteries[lid])
-        self.lotteries = shuffled_lotteries
-
-    def get_lottery(self, session_round: int) -> Lottery:
-        return self.lotteries[session_round - 1]
+    def get_lottery(self, round_number: int) -> Lottery:
+        lottery_id = self.lottery_ids[round_number - 1]
+        return self.lotteries[lottery_id]
 
     def set_cutoff(self, round_number: int, cutoff: float) -> None:
-        self.lotteries[round_number - 1].cutoff = cutoff
+        lottery_id = self.lottery_ids[round_number - 1]
+        self.lotteries[lottery_id].cutoff = cutoff
 
-    def random_round(self) -> int:
-        return random.randint(1, len(self.lotteries))
+    def die_side_encoding_pairs(self) -> List[Tuple[str, int]]:
+        return list(zip(self.die_labels, self.lottery_ids))
 
-    def set_die_side(self, die_side):
+    def die_side_encoded(self) -> str:
+        return self.die_labels[self.die_side - 1]
+
+    def chosen_lottery(self) -> Lottery:
+        rolled_lottery_id = self.lottery_ids[self.die_side - 1]
+        return self.lotteries[rolled_lottery_id]
+
+    def set_die_side(self, die_side: int):
         self.die_side = die_side
