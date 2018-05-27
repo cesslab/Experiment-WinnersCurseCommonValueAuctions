@@ -4,34 +4,35 @@
   </div>
 
   <div class="lottery-container">
-    <div class="card">
+
+    <div id="red-card" class="card">
       <div class="card-body">
         <div class="underscored">
-          <h5>Bet on Red</h5>
+          <h5>Bet: {{ high_value }} on Red, {{ low_value }} on Blue</h5>
         </div>
         <div class="grid-auction-container">
           <div class="">
-            {% include 'phase_four/lottery_types/red_type_1.html' %}
+            {% include 'phase_four/lottery_types/lottery_type_1.html' with type=bet_high_red %}
           </div>
         </div>
       </div>
 
-      <button type="button" class="btn btn-danger" onclick="betRed()">Red</button>
+      <button type="button" id="red-bet-button" class="btn btn-danger" onclick="betRed()">Red</button>
     </div>
 
-    <div class="card">
+    <div id="blue-card" class="card">
       <div class="card-body">
         <div class="underscored">
-          <h5>Bet on Blue</h5>
+          <h5>Bet: {{ high_value }} on Blue, {{ low_value }} on Red</h5>
         </div>
         <div class="grid-auction-container">
           <div class="">
-            {% include 'phase_four/lottery_types/blue_type_1.html' %}
+            {% include 'phase_four/lottery_types/lottery_type_1.html' with type=bet_high_blue %}
           </div>
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary" onclick="betBlue()">Blue</button>
+      <button type="button" id="blue-bet-button" class="btn btn-primary" onclick="betBlue()">Blue</button>
     </div>
 
   </div>
