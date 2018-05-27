@@ -13,15 +13,15 @@
 {% endblock %}
 
 {% block content %}
-  {% if lottery.ltype == 1 %}
+  {% if lottery_type == 1 %}
     {% include 'phase_four/lottery_types/type_1.html' %}
-  {% elif lottery.ltype == 2 %}
+  {% elif lottery_type == 2 %}
     {% include 'phase_four/lottery_types/type_2.html' %}
   {% else %}
     {% include 'phase_four/lottery_types/type_3.html' %}
   {% endif %}
 
-  <button class="btn btn-info next-button">Next</button>
+  <button id="next-button" class="btn btn-info next-button">Next</button>
 {% endblock %}
 
 
@@ -30,24 +30,30 @@
 {% block scripts %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.3.2/rangeslider.min.js"></script>
   <script>
-      const $element = $('input#cutoff');
-      const $hidden = $('input#clicked');
-      const $output = $('#output');
-      let betInput = document.getElementById("bet");
-      const betDisplayElement = document.getElementById("your-bet");
+      var $element = $('input#cutoff');
+      var $hidden = $('input#clicked');
+      var $output = $('#output');
+      var betInput = document.getElementById("bet");
+      var betDisplayElement = document.getElementById("your-bet");
+      var blueCard = document.getElementById("blue-card");
+      var redCard = document.getElementById("red-card");
 
       function betBlue() {
           betDisplayElement.classList.remove('text-danger');
           betDisplayElement.classList.add('text-primary');
-          betDisplayElement.textContent = 'Blue';
-          betInput.value = {{ lottery.BLUE }};
+          betDisplayElement.textContent = '{{ high_value }} on Blue, {{ low_value }} on Red';
+          betInput.value = {{ bet_high_blue }};
+          redCard.classList.remove('red-selected');
+          blueCard.classList.add('blue-selected');
       }
 
       function betRed() {
           betDisplayElement.classList.remove('text-primary');
           betDisplayElement.classList.add('text-danger');
-          betDisplayElement.textContent = 'Red';
-          betInput.value = {{ lottery.RED }};
+          betDisplayElement.textContent = '{{ high_value }} on Red, {{ low_value }} on Blue';
+          betInput.value = {{ bet_high_red }};
+          blueCard.classList.remove('blue-selected');
+          redCard.classList.add('red-selected');
       }
 
       function updateOutput(el, val) {
