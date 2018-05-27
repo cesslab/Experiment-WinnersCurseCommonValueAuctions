@@ -74,7 +74,21 @@ class Player(BasePlayer):
     method_2_realized_value = models.DecimalField(max_digits=6, decimal_places=2)
     method_2_earnings = models.DecimalField(max_digits=4, decimal_places=2)
 
-    def save_results(self, method_1: Results, method_2: Results):
+    method_3_die_side = models.IntegerField()
+    method_3_lottery_id = models.IntegerField()
+    method_3_random_price = models.DecimalField(max_digits=4, decimal_places=2)
+    method_3_lottery_played = models.BooleanField()
+    method_3_blue_chosen = models.BooleanField()
+    method_3_red_chosen = models.BooleanField()
+    method_3_num_red = models.IntegerField()
+    method_3_num_blue = models.IntegerField()
+    method_3_earnings = models.DecimalField(max_digits=4, decimal_places=2)
+    method_3_random_chip_id = models.DecimalField(max_digits=4, decimal_places=2)
+    method_3_realized_value = models.DecimalField(max_digits=4, decimal_places=2)
+    # Red = 0, Blue = 1
+    method_3_bet_color = models.IntegerField()
+
+    def save_results(self, method_1: Results, method_2: Results, method_3: Results):
         self.method_1_player_id = method_1.player_id
         self.method_1_other_player_id = method_1.other_player_id
         self.method_1_phase_one_round = method_1.phase_one_round
@@ -116,3 +130,16 @@ class Player(BasePlayer):
         self.method_2_others_signal = method_2.other_random_signal
         self.method_2_realized_value = method_2.realized
         self.method_2_earnings = method_2.earnings
+
+        self.method_3_die_side = method_3.rolled_side
+        self.method_3_lottery_id = method_3.lottery_chosen
+        self.method_3_bet_color = method_3.bet_color
+        self.method_3_random_price = method_3.random_cutoff
+        self.method_3_lottery_played = method_3.play_lottery
+        self.method_3_random_chip_id = method_3.random_number_red
+        self.method_3_num_red = method_3.num_red
+        self.method_3_num_blue = method_3.num_blue
+        self.method_3_blue_chosen = method_3.high_blue_chosen
+        self.method_3_red_chosen = method_3.high_red_chosen
+        self.method_3_realized_value = method_3.realized_value
+        self.method_3_earnings = method_3.earnings
