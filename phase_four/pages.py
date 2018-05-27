@@ -11,11 +11,15 @@ class InstructionsPage(Page):
 
 
 class RollDicePage(Page):
+    form_model = 'player'
+    form_fields = ['die_side']
+
     def is_displayed(self):
         return self.round_number == 1
 
     def error_message(self, values):
-        if not ('side' not in values or 1 <= int(values['side']) <= 6):
+        print(values)
+        if not ('die_side' not in values or 1 <= int(values['die_side']) <= 6):
             return 'You must roll the die before continuing.'
 
     def before_next_page(self):
@@ -32,6 +36,13 @@ class MinBuyoutBetForLotteryPage(Page):
         lottery = experiment.phase_four.get_lottery(self.round_number)
         return {
             'lottery': lottery,
+            'lottery_type': lottery.ltype,
+            'low_value': lottery.low_value,
+            'high_value': lottery.high_value,
+            'bet_high_red': lottery.BET_HIGH_RED,
+            'bet_high_blue': lottery.BET_HIGH_BLUE,
+            'num_red': lottery.number_red if lottery.has_number_red() else '',
+            'num_blue': lottery.number_blue if lottery.has_number_blue() else '',
             'bags': [(i, lottery.total - i) for i in range(lottery.total + 1)]
         }
 
@@ -46,7 +57,7 @@ class MinBuyoutBetForLotteryPage(Page):
     def error_message(self, values):
         if not int(values['clicked']) == 1:
             return ' You must specify how much would you be willing to receive to NOT participate in this lottery'
-        elif not (values['bet'] == Lottery.BLUE or values['bet'] == Lottery.RED):
+        elif not (values['bet'] == Lottery.BET_HIGH_RED or values['bet'] == Lottery.BET_HIGH_BLUE):
             return ' You must place a bet on either Blue or Red'
 
     def before_next_page(self):
