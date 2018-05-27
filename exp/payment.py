@@ -1,10 +1,13 @@
 import random
 
+from exp.phases import (PhaseOne, PhaseTwo, PhaseThree, PhaseFour)
 from exp.experiment import Experiment
+from exp.lottery import Lottery
 
 
 class Results:
     def __init__(self):
+        # method 1
         self.player_id = -1
         self.other_player_id = -1
         self.phase_one_round = - 1
@@ -32,12 +35,62 @@ class Results:
         self.win_lottery = False
         self.earnings = -1
         self.realized = -1
-        # type 2
+        # method 2
         self.phase_two_round = - 1
         self.cutoff_auction = None
         self.cutoff = -1
         self.random_offer = -1
         self.offer_accepted = False
+        # method 3
+        self.rolled_side = -1
+        self.bet_color = -1
+        self.rolled_side_encoded = None
+        self.total_num = -1
+        self.lottery_chosen = -1
+        self.die_encoding = None
+        self.random_cutoff = -1
+        self.play_lottery = False
+        self.num_red = -1
+        self.num_blue = -1
+        self.high_red_chosen = False
+        self.high_blue_chosen = False
+        self.random_number_red = -1
+        self.realized_value = -1
+        self.lottery = None
+
+    def save_phase_three_lottery(self, lottery: Lottery):
+        self.lottery = lottery
+        self.bet_color = lottery.bet
+        self.lottery_chosen = lottery.lid
+        self.cutoff = lottery.cutoff
+
+    def save_phase_three_die_info(self, phase_four: PhaseFour):
+        self.rolled_side = phase_four.die_side
+        self.rolled_side_encoded = phase_four.die_side_encoded()
+        self.die_encoding = phase_four.die_side_encoding_pairs()
+
+    def save_phase_three_random_cutoff(self, random_cutoff: float):
+        self.random_cutoff = random_cutoff
+
+    def save_phase_three_lottery_played(self, play_lottery: bool):
+        self.play_lottery = play_lottery
+
+    def save_phase_three_random_number_red(self, random_number_red: float):
+        self.random_number_red = random_number_red
+
+    def save_phase_three_num_red_blue(self, num_red: int, num_blue: int):
+        self.num_red = num_red
+        self.num_blue = num_blue
+
+    def save_phase_three_high_color_chosen(self, high_red_chosen: bool, high_blue_chosen: bool):
+        self.high_red_chosen = high_red_chosen
+        self.high_blue_chosen = high_blue_chosen
+
+    def save_phase_three_realized_value(self, realized_value: int):
+        self.realized_value = realized_value
+
+    def save_phase_three_earnings(self, earnings):
+        self.earnings = earnings
 
 
 class PaymentMethod:
@@ -47,7 +100,7 @@ class PaymentMethod:
         self.player_experiment = player_experiment
         self.other_experiment = other_experiment
 
-    def method_one_payment(self, results: Results):
+    def method_one_payment(self, results: Results) -> Results:
         # Selecting an auction from phase one
         results.player_id = self.player_id
         results.other_player_id = self.other_id
@@ -108,7 +161,7 @@ class PaymentMethod:
 
         return results
 
-    def method_two_payment(self, results: Results):
+    def method_two_payment(self, results: Results) -> Results:
         phase_two = self.player_experiment.phase_two
         results.phase_two_round = phase_two.random_round()
         results.cutoff_auction = phase_two.get_auction(results.phase_two_round)
@@ -158,5 +211,53 @@ class PaymentMethod:
             results.earnings = results.low_value - results.bid
         else:
             results.earnings = results.high_value - results.bid
+
+        return results
+
+    def method_three_results(self, results: Results) -> Results:
+        phase_four = self.player_experiment.phase_four
+        lottery = phase_four.chosen_lottery()
+        random_cutoff = random.randint(lottery.min_cutoff, lottery.max_cutoff)
+
+        results.save_phase_three_lottery(lottery)
+        results.save_phase_three_die_info(phase_four)
+        results.save_phase_three_random_cutoff(random_cutoff)
+
+        if random_cutoff < lottery.cutoff:
+            play_lottery = True
+        else:
+            results.save_phase_three_earnings(random_cutoff)
+            play_lottery = False
+        results.save_phase_three_lottery_played(play_lottery)
+
+        random_number_red = random.randint(0, lottery.total)
+        results.save_phase_three_random_number_red(random_number_red)
+
+        high_red_chosen = False
+        if lottery.ltype == Lottery.ALL_KNOWN:
+            num_red = lottery.number_red
+            if random_number_red <= num_red:
+                high_red_chosen = True
+        elif lottery.ltype == Lottery.COMPOUND_RISK:
+            num_red = random.randint(0, lottery.total)
+            if random_number_red <= num_red:
+                high_red_chosen = True
+        else:
+            num_red = lottery.number_red
+            if random_number_red <= num_red:
+                high_red_chosen = True
+
+        results.save_phase_three_num_red_blue(num_red, lottery.total - num_red)
+        results.save_phase_three_high_color_chosen(high_red_chosen, not high_red_chosen)
+
+        if high_red_chosen and lottery.bet == Lottery.BET_HIGH_RED:
+            realized_value = lottery.high_value
+        else:
+            realized_value = lottery.low_value
+
+        results.save_phase_three_realized_value(realized_value)
+
+        if play_lottery:
+            results.save_phase_three_earnings(realized_value)
 
         return results
