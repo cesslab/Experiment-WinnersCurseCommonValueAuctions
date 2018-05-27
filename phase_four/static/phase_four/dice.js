@@ -2,11 +2,11 @@ var platform = $('#platform');
 
 function dado() {
     platform.removeClass('stop').addClass('playing');
-    $('#dice');
+    var number = Math.floor(Math.random() * 6) + 1;
+    $('input#side').val(number);
     setTimeout(function () {
         platform.removeClass('playing').addClass('stop');
         var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
-        var number = Math.floor(Math.random() * 6) + 1;
         var x = 0, y = 20, z = -20;
         switch (number) {
             case 1:
@@ -50,7 +50,5 @@ function dado() {
         });
 
         $('#outcome').text(letters[number - 1]);
-        $('input#side').val(number);
-
     }, 1120);
 }
