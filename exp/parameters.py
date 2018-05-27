@@ -98,7 +98,7 @@ QUESTIONS = {
     1: {
         'id': 1,
         'type': 1,
-        'matrix': [[0, 100], [10, 10]],
+        'matrix': [[100, 0], [10, 10]],
         'total': 20,
         'min': 0,
         'max': 25
@@ -106,39 +106,40 @@ QUESTIONS = {
     2: {
         'id': 2,
         'type': 2,
-        'matrix': [[0, 25], []],
+        'matrix': [[25, 0], []],
         'total': 20,
         'min': 0,
         'max': 25
     },
     3: {
         'id': 3,
-        'type': 1,
-        'matrix': [[0, 25], [10, 10]],
+        'type': 3,
+        # Type 3 will have an fixed number specified for red, but it will not be displayed to the subjects
+        'matrix': [[25, 0], [12, -1]],
         'total': 20,
         'min': 0,
         'max': 25
     },
     4: {
         'id': 4,
-        'type': 1,
-        'matrix': [[0, 25], [10, 10]],
-        'total': 20,
+        'type': 2,
+        'matrix': [[25, 0], []],
+        'total': 30,
         'min': 0,
         'max': 25
     },
     5: {
         'id': 5,
         'type': 1,
-        'matrix': [[0, 25], [10, 10]],
+        'matrix': [[25, 0], [10, 10]],
         'total': 20,
         'min': 0,
         'max': 25
     },
     6: {
         'id': 6,
-        'type': 1,
-        'matrix': [[0, 25], [10, 10]],
+        'type': 3,
+        'matrix': [[25, 0], [12, -1]],
         'total': 20,
         'min': 0,
         'max': 25
