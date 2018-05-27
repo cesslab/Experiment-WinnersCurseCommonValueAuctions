@@ -21,7 +21,9 @@ class BidPage(Page):
             'auction': auction,
             'signal': experiment.phase_three.signal(self.round_number),
             'low_update': experiment.phase_three.low_update(self.round_number),
-            'high_update': experiment.phase_three.high_update(self.round_number)}
+            'high_update': experiment.phase_three.high_update(self.round_number),
+            'signals': ", ".join(map(str, auction.signals)),
+        }
 
     def bid_error_message(self, bid):
         experiment = Participant.get_experiment(self.player)

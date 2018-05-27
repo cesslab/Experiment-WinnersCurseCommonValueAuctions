@@ -3,89 +3,98 @@
 {% load staticfiles %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
-    <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
+  <link rel="stylesheet" href="{% static 'phase_three/bid.css' %}">
+  <link rel="stylesheet" href="{% static 'global/experiment.css' %}">
 {% endblock %}
 
 {% block body_main %}
-    {% include 'phase_one/snippets/navbar.html' %}
-    {{ block.super }}
+  {% include 'phase_one/snippets/navbar.html' %}
+  {{ block.super }}
 {% endblock %}
 
 {% block content %}
-    <div class="grid-container">
-        <div class="header-item">
-            <p>Consider your signal about the following lottery. What is your bid?</p>
-        </div>
+  <div class="grid-container">
+    <div class="header-item">
+      <p>Consider your signal about the following lottery. What is your bid?</p>
+    </div>
 
-        <div class="card">
-          <h4 class="card-header">Auction</h4>
-          <div class="card-body">
-            <div class="underscored">
-              <h5>Lottery</h5>
-            </div>
-            <div class="grid-auction-container">
-              <div class="">
-                {% if auction.atype == 1 %}
-                  {% include 'phase_two/snippets/type_1.html' %}
-                {% elif auction.atype == 2 %}
-                  {% include 'phase_two/snippets/type_2.html' %}
-                {% elif auction.atype == 3 %}
-                  {% include 'phase_two/snippets/type_3.html' %}
-                {% elif auction.atype == 4 %}
-                  {% include 'phase_two/snippets/type_4.html' %}
-                {% else %}
-                  {% include 'phase_two/snippets/type_5.html' %}
-                {% endif %}
-              </div>
-            </div>
+    <div class="card">
+      <h4 class="card-header">Auction</h4>
+      <div class="card-body">
+        <div class="underscored">
+          <h5>Lottery</h5>
+        </div>
+        <div class="grid-auction-container">
+          <div class="">
+            {% if auction.atype == 1 %}
+              {% include 'phase_two/snippets/type_1.html' %}
+            {% elif auction.atype == 2 %}
+              {% include 'phase_two/snippets/type_2.html' %}
+            {% elif auction.atype == 3 %}
+              {% include 'phase_two/snippets/type_3.html' %}
+            {% elif auction.atype == 4 %}
+              {% include 'phase_two/snippets/type_4.html' %}
+            {% else %}
+              {% include 'phase_two/snippets/type_5.html' %}
+            {% endif %}
           </div>
         </div>
-
-        <div class="grid-bid-container">
-
-            <div class="title-item">
-                <h4>Bid</h4>
-            </div>
-
-            <div class="signal-update-container">
-                <div class="text-center">
-                    <h5>Signal</h5>
-                </div>
-
-                <div class="text-center">
-                    <h5>Update</h5>
-                </div>
-                <div class="text-center">
-                    {% if signal_is_percentage %}
-                        <h5>{% widthratio signal 1 100 %}&#37;</h5>
-                    {% else %}
-                        <h5>{{ signal }}</h5>
-                    {% endif %}
-                </div>
-
-                <div class="text-center">
-                    {% if signal_is_percentage %}
-                        <h5>{% widthratio low_update 1 100 %}&#37; &#8804; p &#8804; {% widthratio high_update 1 100 %}&#37;</h5>
-                    {% else %}
-                        <h5>{{ low_update|floatformat }} &#8804; v &#8804; {{ high_update|floatformat }}</h5>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div>
-                <input type="text" step="any" name="bid" required id="id_bid" class="center-input form-control" size="5" maxlength="5"
-                       value="{{ form.bid.value|default_if_none:"" }}"
-                       placeholder="Enter Your Bid">
-                <small id="bidhelp" class="form-text text-muted">Your bid must be between 0.00
-                    and {{ auction.max_value }}.00</small>
-                {% if form.bid.errors %}
-                    <div class="alert alert-danger">
-                        {{ form.bid.errors }}
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+      </div>
     </div>
-    {% next_button %}
+
+    <div class="grid-bid-container">
+
+      <div class="title-item">
+        <h4>Bid</h4>
+      </div>
+
+      <div class="text-center">
+        <h5>All Possible Signals</h5>
+        <h5>
+          {{ signals }}
+        </h5>
+      </div>
+
+      <div class="signal-update-container">
+        <div class="text-center">
+          <h5>Signal</h5>
+        </div>
+
+        <div class="text-center">
+          <h5>Update</h5>
+        </div>
+        <div class="text-center">
+          {% if signal_is_percentage %}
+            <h5>{% widthratio signal 1 100 %}&#37;</h5>
+          {% else %}
+            <h5>{{ signal }}</h5>
+          {% endif %}
+        </div>
+
+        <div class="text-center">
+          {% if signal_is_percentage %}
+            <h5>{% widthratio low_update 1 100 %}&#37; &#8804; p &#8804; {% widthratio high_update 1 100 %}&#37;</h5>
+          {% else %}
+            <h5>{{ low_update|floatformat }} &#8804; v &#8804; {{ high_update|floatformat }}</h5>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <input type="text" step="any" name="bid" required id="id_bid" class="center-input form-control" size="5"
+               maxlength="5"
+               value="{{ form.bid.value|default_if_none:"" }}"
+               placeholder="Enter Your Bid">
+        <small id="bidhelp" class="form-text text-muted">Your bid must be between 0.00
+          and {{ auction.max_value }}.00
+        </small>
+        {% if form.bid.errors %}
+          <div class="alert alert-danger">
+            {{ form.bid.errors }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% next_button %}
 {% endblock %}
