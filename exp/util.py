@@ -24,5 +24,13 @@ class Participant:
         player.participant.vars['payment_two_results'] = payment_results
 
     @staticmethod
+    def set_payment_three_results(player, payment_results: Results) -> None:
+        player.participant.vars['payment_three_results'] = payment_results
+
+    @staticmethod
     def get_payment_two_results(player) -> Results:
         return player.participant.vars['payment_two_results']
+
+    @staticmethod
+    def get_payment_three_results(player) -> Results:
+        return player.participant.vars['payment_three_results']
