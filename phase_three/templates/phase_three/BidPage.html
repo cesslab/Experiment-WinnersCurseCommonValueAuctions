@@ -81,10 +81,18 @@
       </div>
 
       <div>
-        <input type="text" step="any" name="bid" required id="id_bid" class="center-input form-control" size="5"
-               maxlength="5"
-               value="{{ form.bid.value|default_if_none:"" }}"
-               placeholder="Enter Your Bid">
+        <input
+            type="text"
+            id="id_bid"
+            step="any"
+            name="bid"
+            data-min="{{ auction.min_value }}"
+            data-max="{{ auction.max_value }}"
+            class="center-input form-control" size="5"
+            maxlength="5"
+            value="{{ form.bid.value|default_if_none:"" }}"
+            placeholder="Enter Your Bid" required>
+
         <small id="bidhelp" class="form-text text-muted">Your bid must be between 0.00
           and {{ auction.max_value }}.00
         </small>
