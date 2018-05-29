@@ -78,15 +78,15 @@ class Player(BasePlayer):
 
     method_3_die_side = models.IntegerField()
     method_3_lottery_id = models.IntegerField()
-    method_3_random_price = models.DecimalField()
+    method_3_random_price = models.FloatField()
     method_3_lottery_played = models.BooleanField()
     method_3_blue_chosen = models.BooleanField()
     method_3_red_chosen = models.BooleanField()
     method_3_num_red = models.IntegerField()
     method_3_num_blue = models.IntegerField()
-    method_3_earnings = models.DecimalField()
-    method_3_random_chip_id = models.DecimalField()
-    method_3_realized_value = models.DecimalField()
+    method_3_earnings = models.FloatField()
+    method_3_random_chip_id = models.FloatField()
+    method_3_realized_value = models.FloatField()
     # Red = 0, Blue = 1
     method_3_bet_color = models.IntegerField()
 
