@@ -72,39 +72,39 @@ class Auction:
         else:
             return self.low_probabilities[Auction.HIGH]
 
-    def low_update(self, signal):
-        return (self.range_low() + signal) / 2
+    def low_update(self, signal) -> float:
+        return (self.range_low() + signal) / 2.0
 
-    def high_update(self, signal):
-        return (self.range_high() + signal) / 2
+    def high_update(self, signal) -> float:
+        return (self.range_high() + signal) / 2.0
 
-    def low_value(self, player_signal, other_signal):
+    def low_value(self, player_signal, other_signal) -> float:
         if self.atype == 2:
-            return (player_signal + other_signal) / 2
+            return (player_signal + other_signal) / 2.0
         else:
-            return self.low_values[0]
+            return float(self.low_values[0])
 
     def high_value(self, player_signal, other_signal):
         if self.atype == 3:
-            return (player_signal + other_signal) / 2
+            return (player_signal + other_signal) / 2.0
         else:
-            return self.high_values[0]
+            return float(self.high_values[0])
 
     def low_probability(self, player_signal, other_signal):
         if self.atype == 5:
-            return (player_signal + other_signal) / 2
+            return (player_signal + other_signal) / 2.0
         elif self.atype == 4:
-            return 1 - (player_signal + other_signal) / 2
+            return 1 - (player_signal + other_signal) / 2.0
         else:
-            return self.low_probabilities[0]
+            return float(self.low_probabilities[0])
 
     def high_probability(self, player_signal, other_signal):
         if self.atype == 4:
-            return (player_signal + other_signal) / 2
+            return (player_signal + other_signal) / 2.0
         elif self.atype == 5:
-            return 1 - (player_signal + other_signal) / 2
+            return 1 - (player_signal + other_signal) / 2.0
         else:
-            return self.high_probabilities[0]
+            return float(self.high_probabilities[0])
 
     def __str__(self):
         return 'Auction ' % self.aid
