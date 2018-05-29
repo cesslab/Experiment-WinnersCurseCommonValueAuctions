@@ -10,8 +10,8 @@
 
 {% block content %}
   <div class="container">
-  <p>Consider the lottery that the winner gets in each of the following auctions. Which auction would you prefer to
-    participate in?</p>
+    <p>Consider the lottery that the winner gets in each of the following auctions. Which auction would you prefer to
+      participate in?</p>
   </div>
 
   <!-- Auction B -->
@@ -69,14 +69,16 @@
     <div class="row justify-content-md-center">
       <div class="col-md-auto">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-success" id="id-preference-1">
-            <input type="radio" name="preference" value="{{left_auction.aid}}" id="left_auction" autocomplete="off"> Left Auction
+          <label class="btn btn-success" id="id-preference-1" data-auction-id="{{ left_auction.aid }}">
+            <input type="radio" name="preference" value="{{ left_auction.aid }}" id="left_auction" autocomplete="off">
+            Left Auction
           </label>
-          <label class="btn btn-success" id="id-preference-0">
+          <label class="btn btn-success" id="id-preference-0" data-auction-id="-1">
             <input type="radio" name="preference" value="-1" autocomplete="off" id="neither_auction"> Don't Care
           </label>
-          <label class="btn btn-success" id="id-preference-3">
-            <input type="radio" name="preference" value="{{right_auction.aid}}" id="right_auction" autocomplete="off"> Right Auction
+          <label class="btn btn-success" id="id-preference-2" data-auction-id="{{ right_auction.aid }}">
+            <input type="radio" name="preference" value="{{ right_auction.aid }}" id="right_auction" autocomplete="off">
+            Right Auction
           </label>
         </div>
       </div>
