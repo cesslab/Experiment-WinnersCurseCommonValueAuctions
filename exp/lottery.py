@@ -20,8 +20,8 @@ class Lottery:
         self.max_cutoff = max_cutoff
         self.min_cutoff = min_cutoff
 
-        self.cutoff = None
-        self.bet = None
+        self.cutoff = -1.0
+        self.bet = -1.0
 
     @property
     def high_value(self):
