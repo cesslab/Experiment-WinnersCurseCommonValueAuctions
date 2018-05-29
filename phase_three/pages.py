@@ -20,7 +20,7 @@ class BidPage(Page):
         if auction.signal_is_percentage:
             signals = ", ".join(["{}%".format(s * 100) for s in auction.signals])
         else:
-            signals = ", ".join(auction.signals[:])
+            signals = ", ".join(map(str, auction.signals))
 
         return {
             'signal_is_percentage': auction.signal_is_percentage,
