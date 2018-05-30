@@ -7,7 +7,7 @@ from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
 class Experiment:
     ENDOWMENT = 10
     CONVERSION_RATE = 0.125
-    SHOW_UP_FEE = 7
+    SHOW_UP_FEE = 10
     PART_ONE_WEIGHT = 0.75
     PART_TWO_WEIGHT = 0.25
 
