@@ -15,7 +15,7 @@ class SelectAuctionPage(Page):
     def preference_error_message(self, value):
         experiment = Participant.get_experiment(self.player)
         if not experiment.phase_one.is_valid_auction_id(self.round_number, int(value)):
-            return 'You must choose Auction A, Auction B, or Indifferent'
+            return 'Please select on one of the three options by pressing the corresponding green button'
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
