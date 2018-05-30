@@ -83,13 +83,13 @@
       <div>
         <input
             type="text"
+            onkeypress="return validateFloatKeyPress(this,event);"
             id="id_bid"
-            step="any"
             name="bid"
             data-min="{{ auction.min_value }}"
             data-max="{{ auction.max_value }}"
-            class="center-input form-control" size="5"
-            maxlength="5"
+            class="center-input form-control"
+            maxlength="6"
             value="{{ form.bid.value|default_if_none:"" }}"
             placeholder="Enter Your Bid" required>
 
@@ -105,4 +105,38 @@
     </div>
   </div>
   {% next_button %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+  function validateFloatKeyPress(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+         return false;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+        return false;
+    }
+    return true;
+}
+
+  //thanks: http://javascript.nwbox.com/cursor_position/
+  function getSelectionStart(o) {
+    if (o.createTextRange) {
+      var r = document.selection.createRange().duplicate()
+      r.moveEnd('character', o.value.length)
+      if (r.text == '') return o.value.length
+      return o.value.lastIndexOf(r.text)
+    } else return o.selectionStart
+  }
+
+  </script>
 {% endblock %}
