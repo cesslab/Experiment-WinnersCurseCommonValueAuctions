@@ -32,7 +32,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    bid = models.FloatField(blank=False)
+    bid = models.DecimalField(blank=False, max_digits=5, decimal_places=2)
     auction = models.IntegerField(blank=False)
     signal = models.FloatField(blank=False)
     low_update = models.FloatField(blank=False)
