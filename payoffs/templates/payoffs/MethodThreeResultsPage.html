@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block title %}
-  Earnings #3
+  Earnings in Part Two
 {% endblock %}
 
 {% block content %}
   <div class="main-container">
     <div class="title-item">
-      <h3>Question Selection</h3>
+      <h3>Task Selection</h3>
     </div>
     <div class="single-column-container-span-2">
       <div class="full-width end underscored">
@@ -71,19 +71,18 @@
         </div>
       </div>
       <div class="full-width end underscored">
-        <h4>You randomly chose side {{ rolled_side_encoded }} which was paired with Question {{ lottery.lid }} (See
-          below for
-          all pairings)</h4>
+        <h4>You randomly rolled side {{ rolled_side_encoded }} corresponding to Task {{ lottery.lid }} (See
+          below for encodings)</h4>
       </div>
       <div class="encoding-container">
         {% for pair in die_encoding %}
-          <div><span class="badge badge-secondary">{{ pair.0 }}: Question {{ pair.1 }}</span></div>
+          <div><span class="badge badge-secondary">{{ pair.0 }}: Task {{ pair.1 }}</span></div>
         {% endfor %}
       </div>
     </div>
 
     <div class="title-item">
-      <h3>Bet Outcome</h3>
+      <h3>Sure Payoff</h3>
     </div>
 
     <div class="single-column-container full-width">
@@ -103,11 +102,11 @@
 
     <div class="single-column-container full-width">
       <div class="full-width end underscored">
-        <h4>Your Cutoff</h4>
+        <h4>Minimum Compensation</h4>
       </div>
       <div><h4>{{ cutoff }}</h4></div>
       <div class="full-width end underscored">
-        <h4>Random Cutoff</h4>
+        <h4>Random Price</h4>
       </div>
       <div><h4>{{ random_cutoff }}</h4></div>
     </div>
@@ -120,7 +119,7 @@
         </h4>
       </div>
       <div class="plain-title-item">
-        <h4>Your earnings #2 are the random price {{ random_cutoff }}.</h4>
+        <h4>Your earnings in part two are the random price {{ random_cutoff }}.</h4>
       </div>
     {% else %}
       <div class="plain-title-item">
@@ -137,7 +136,7 @@
     {% endif %}
 
     <div class="title-item top-margin">
-      <h3>Lottery Outcome</h3>
+      <h3>Bet Outcome</h3>
     </div>
     <div class="single-column-container full-width">
       {% include 'payoffs/snippets/realized_lottery_table.html' %}
@@ -145,7 +144,7 @@
 
     <div class="single-column-container full-width">
       <div class="full-width end underscored">
-        <h4>Actual</h4>
+        <h4>Selected Chip Value</h4>
       </div>
       <div><h4>{{ realized_value }}</h4></div>
     </div>
@@ -154,7 +153,7 @@
     {% if play_lottery %}
       <div class="plain-title-item">
         <h5>
-          Your earnings #3 are <b>{{ earnings|floatformat }}</b>.
+          Your earnings in part two are <b>{{ earnings|floatformat }}</b>.
         </h5>
       </div>
     {% endif %}

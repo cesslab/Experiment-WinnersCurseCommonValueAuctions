@@ -1,5 +1,3 @@
-import random
-
 from ._builtin import Page, WaitPage
 
 from exp.util import Participant
@@ -13,15 +11,21 @@ class FinalPayoffResults(Page):
         method_one = Participant.get_payment_one_results(self.player)
         method_two = Participant.get_payment_two_results(self.player)
         method_three = Participant.get_payment_three_results(self.player)
-        payoff = (experiment.ENDOWMENT + method_one.earnings + method_two.earnings) * experiment.CONVERSION_RATE
+        part_one_earnings = method_one.earnings + method_two.earnings
+        part_one_payoff = experiment.PART_ONE_WEIGHT*part_one_earnings*experiment.CONVERSION_RATE
+        part_two_payoff = experiment.PART_TWO_WEIGHT*method_three.earnings*experiment.CONVERSION_RATE
+        final_payoff = experiment.SHOW_UP_FEE + experiment.ENDOWMENT + part_one_payoff + part_two_payoff
         return {
-            'payoff': round(payoff, 2),
+            'show_up_fee': experiment.SHOW_UP_FEE,
             'endowment': experiment.ENDOWMENT,
+            'rate': experiment.CONVERSION_RATE,
             'method_1': round(method_one.earnings, 2),
             'method_2': round(method_two.earnings, 2),
             'method_3': round(method_three.earnings, 2),
-            'total_in_credits': round(method_one.earnings + method_two.earnings, 2),
-            'rate': experiment.CONVERSION_RATE
+            'total_in_credits': round(part_one_earnings, 2),
+            'earnings_1': round(part_one_payoff, 2),
+            'earnings_2': round(part_two_payoff, 2),
+            'final_payoff': round(final_payoff, 2),
         }
 
 

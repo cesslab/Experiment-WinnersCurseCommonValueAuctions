@@ -11,42 +11,77 @@
 {% block content %}
   <div class="main-container">
     <div class="single-column-container-span-4 underscored">
-      <h4>Part One Earnings in Experimental Credits</h4>
+      <h5>Part One Earnings in Credits</h5>
     </div>
     <div>
       <div class="underscored">
-        <h4>Earnings One</h4>
+        <h5>Earnings #1</h5>
       </div>
       <div class="text-center">
-        <h4>{{ method_1 }}</h4>
+        <h5>{{ method_1 }}</h5>
       </div>
     </div>
 
     <div>
       <div class="underscored">
-        <h4>Earnings Two</h4>
+        <h5>Earnings #2</h5>
       </div>
       <div class="text-center">
-        <h4>{{ method_2 }}</h4>
+        <h5>{{ method_2 }}</h5>
       </div>
     </div>
 
     <div>
       <div class="underscored">
-        <h4>Total</h4>
+        <h5>Total</h5>
       </div>
       <div class="text-center">
-        <h4>{{ total_in_credits }}</h4>
+        <h5>{{ total_in_credits }}</h5>
       </div>
     </div>
 
-    <div class="single-column-container-span-4 underscored">
-      <h4>Part Two Earnings in Experimental Credits</h4>
+    <div class="single-column-container-span-4 underscored heading">
+      <h4>Part Two Earnings in Credits</h4>
     </div>
     <div class="single-column-container-span-4 text-center">
-      <h4>{{ method_3 }}</h4>
+      <h5>{{ method_3 }}</h5>
     </div>
 
+    <div class="single-column-container-span-4 underscored heading">
+      <h4>Final Payoffs in Dollars</h4>
+    </div>
+    <div class="single-column-container-span-4 two-column-container">
+      <div class="underscored">
+        <h5>Show-up Fee</h5>
+      </div>
+      <div class="underscored">
+        <h5>Endowment</h5>
+      </div>
+      <div class="text-center">
+        <h5>${{ show_up_fee }}</h5>
+      </div>
+      <div class="text-center">
+        <h5>${{ endowment }}</h5>
+      </div>
+      <div class="underscored">
+        <h5>Earnings in Part One</h5>
+      </div>
+      <div class="underscored">
+        <h5>Earnings in part Two</h5>
+      </div>
+      <div class="text-center">
+        <h5>${{ earnings_1 }} (= 3/4 * {{ total_in_credits }} * 1/8)</h5>
+      </div>
+      <div class="text-center">
+        <h5>${{ earnings_2 }} (= 1/4 * {{ method_3 }} * 1/8)</h5>
+      </div>
+    </div>
+  </div>
+  <div class="single-column-container-span-4 underscored heading">
+    <h4>Your final payoff</h4>
+  </div>
+  <div class="single-column-container-span-4 text-center">
+    <h5>${{ final_payoff }}</h5>
   </div>
 
   <button id="next-button" class="btn btn-info next-button">Next</button>
