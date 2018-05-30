@@ -56,9 +56,9 @@ class MinBuyoutBetForLotteryPage(Page):
 
     def error_message(self, values):
         if not int(values['clicked']) == 1:
-            return ' You must specify how much would you be willing to receive to NOT participate in this lottery'
+            return 'Please enter a minimum compensation for your preferred bet.'
         elif not (values['bet'] == Lottery.BET_HIGH_RED or values['bet'] == Lottery.BET_HIGH_BLUE):
-            return ' You must place a bet on either Blue or Red'
+            return 'Please select your preferred bet by pressing the red or blue button.'
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
@@ -67,7 +67,22 @@ class MinBuyoutBetForLotteryPage(Page):
         self.player.question = experiment.phase_four.get_lottery(self.round_number).lid
 
 
+class PlayerWaitPage(WaitPage):
+    pass
+
+
+class InstructionsWaitPage(Page):
+    form_model = 'player'
+    form_fields = ['pass_code']
+
+    def error_message(self, values):
+        if not int(values['pass_code']) == 2600:
+            return ' You must wait for the researcher to provide you with the correct password'
+
+
 page_sequence = [
+    PlayerWaitPage,
+    InstructionsWaitPage,
     InstructionsPage,
     RollDicePage,
     MinBuyoutBetForLotteryPage,

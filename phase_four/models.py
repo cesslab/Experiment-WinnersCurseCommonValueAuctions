@@ -14,6 +14,7 @@ class Constants(BaseConstants):
     name_in_url = 'phase_four'
     players_per_group = None
     num_rounds = 6
+    passcode = 2600
 
 
 class Subsession(BaseSubsession):
@@ -30,3 +31,4 @@ class Player(BasePlayer):
     clicked = models.IntegerField()
     lottery = models.IntegerField(blank=False)
     die_side = models.IntegerField()
+    pass_code = models.IntegerField()
