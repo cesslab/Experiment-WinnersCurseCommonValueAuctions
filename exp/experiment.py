@@ -6,7 +6,10 @@ from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
 
 class Experiment:
     ENDOWMENT = 100
-    CONVERSION_RATE = 0.5
+    CONVERSION_RATE = 0.125
+    SHOW_UP_FEE = 7
+    PART_ONE_WEIGHT = 0.75
+    PART_TWO_WEIGHT = 0.25
 
     def __init__(self):
         self.auctions = AuctionFactory.auctions(AUCTIONS)
