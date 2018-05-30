@@ -106,6 +106,10 @@ class Auction:
         else:
             return float(self.high_probabilities[0])
 
+    def get_bid(self, signal):
+        assert signal in self.signals
+        return self.bids[signal]
+
     def __str__(self):
         return 'Auction ' % self.aid
 

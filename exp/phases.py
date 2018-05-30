@@ -34,19 +34,19 @@ class PhaseOne:
             'right_auction': self.right_auction(round_number)
         }
 
-    def left_auction(self, session_round: int) -> Auction:
-        return self.left_auctions[session_round - 1]
+    def left_auction(self, round_number: int) -> Auction:
+        return self.left_auctions[round_number - 1]
 
-    def right_auction(self, session_round: int) -> Auction:
-        return self.right_auctions[session_round - 1]
+    def right_auction(self, round_number: int) -> Auction:
+        return self.right_auctions[round_number - 1]
 
-    def get_preference(self, round_number) -> int:
+    def get_preference(self, round_number: int) -> int:
         return self.preference[round_number]
 
     def set_preference(self, round_number: int, auction_id: int) -> None:
         self.preference[round_number] = auction_id
 
-    def preferred_position(self, round_number) -> int:
+    def preferred_position(self, round_number: int) -> int:
         aid = self.get_preference(round_number)
         if aid == self.left_auction(round_number).aid:
             return self.LEFT
@@ -55,7 +55,7 @@ class PhaseOne:
         else:
             return self.INDIFFERENT
 
-    def preferred_auction(self, round_number) -> Auction:
+    def preferred_auction(self, round_number: int) -> Auction:
         aid = self.get_preference(round_number)
         if aid == self.left_auction(round_number).aid:
             return self.left_auction(round_number)

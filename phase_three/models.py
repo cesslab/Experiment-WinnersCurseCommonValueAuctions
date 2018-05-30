@@ -34,6 +34,6 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     bid = models.FloatField(blank=False)
     auction = models.IntegerField(blank=False)
-    signal = models.DecimalField(blank=False, max_digits=6, decimal_places=4)
-    low_update = models.DecimalField(blank=False, max_digits=6, decimal_places=4)
-    high_update = models.DecimalField(blank=False, max_digits=6, decimal_places=4)
+    signal = models.FloatField(blank=False)
+    low_update = models.FloatField(blank=False)
+    high_update = models.FloatField(blank=False)
