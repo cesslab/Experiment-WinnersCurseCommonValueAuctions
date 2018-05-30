@@ -18,7 +18,7 @@ class BidPage(Page):
         auction = experiment.phase_three.auction(self.round_number)
 
         if auction.signal_is_percentage:
-            signals = ", ".join(["{}%".format(s * 100) for s in auction.signals])
+            signals = ", ".join(["{}%".format(round(s * 100)) for s in auction.signals])
         else:
             signals = ", ".join(map(str, auction.signals))
 
