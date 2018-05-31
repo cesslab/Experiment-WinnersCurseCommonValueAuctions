@@ -120,7 +120,7 @@ class PhaseThree:
 class PhaseFour:
     def __init__(self, lotteries: Dict[int, Lottery]):
         self.lotteries = lotteries
-        self.die_labels = ['A', 'B', 'C', 'D', 'E', 'F']
+        self.die_labels = ['B', 'A', 'C', 'E', 'F', 'D']
         self.lottery_ids = [lid for lid, value in lotteries.items()]
         self.die_side = -1
 

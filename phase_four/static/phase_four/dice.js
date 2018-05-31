@@ -6,7 +6,7 @@ function dado() {
     $('input#side').val(number);
     setTimeout(function () {
         platform.removeClass('playing').addClass('stop');
-        var letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+        var letters = ['B', 'A', 'C', 'E', 'F', 'D'];
         var x = 0, y = 20, z = -20;
         switch (number) {
             case 1:
