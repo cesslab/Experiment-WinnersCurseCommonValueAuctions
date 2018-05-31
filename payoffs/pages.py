@@ -176,6 +176,11 @@ class ResultsWaitPage(WaitPage):
             Participant.set_payment_two_results(player, method_two_results)
             Participant.set_payment_three_results(player, method_three_results)
 
+            part_one_earnings = method_one_results.earnings + method_two_results.earnings
+            part_one_payoff = experiment.PART_ONE_WEIGHT*part_one_earnings*experiment.CONVERSION_RATE
+            part_two_payoff = experiment.PART_TWO_WEIGHT*method_three_results.earnings*experiment.CONVERSION_RATE
+            final_payoff = experiment.SHOW_UP_FEE + experiment.ENDOWMENT + part_one_payoff + part_two_payoff
+            player.payoff = final_payoff
             player.save_results(method_one_results, method_two_results, method_three_results)
 
 
