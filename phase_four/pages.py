@@ -63,7 +63,7 @@ class MinBuyoutBetForLotteryPage(Page):
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
 
-        experiment.phase_four.set_cutoff(self.round_number, self.player.cutoff)
+        experiment.phase_four.set_cutoff(self.round_number, float(self.player.cutoff))
         self.player.question = experiment.phase_four.get_lottery(self.round_number).lid
 
 
@@ -76,15 +76,19 @@ class InstructionsWaitPage(Page):
     form_model = 'player'
     form_fields = ['pass_code']
 
+    def is_displayed(self):
+        return self.round_number == 1
+
     def error_message(self, values):
-        if not int(values['pass_code']) == 2600:
+        if 'pass_code' not in values:
+            return ' You must wait for the researcher to provide you with the correct password'
+        elif not (values['pass_code'] == 2600):
             return ' You must wait for the researcher to provide you with the correct password'
 
 
 page_sequence = [
     PlayerWaitPage,
     InstructionsWaitPage,
-    InstructionsPage,
     RollDicePage,
     MinBuyoutBetForLotteryPage,
 ]
