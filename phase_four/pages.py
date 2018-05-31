@@ -62,9 +62,10 @@ class MinBuyoutBetForLotteryPage(Page):
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
-
         experiment.phase_four.set_cutoff(self.round_number, float(self.player.cutoff))
         experiment.phase_four.set_bet(self.round_number, self.player.bet)
+
+        self.player.lottery = Participant.get_experiment(self.player).phase_four.get_lottery(self.round_number).lid
         self.player.question = experiment.phase_four.get_lottery(self.round_number).lid
 
 
