@@ -122,8 +122,6 @@ class PhaseFour:
         self.lotteries = lotteries
         self.die_labels = ['A', 'B', 'C', 'D', 'E', 'F']
         self.lottery_ids = [lid for lid, value in lotteries.items()]
-        # shuffle the lotteries show they are not shown in sequential order
-        random.shuffle(self.lottery_ids)
         self.die_side = -1
 
     def get_lottery(self, round_number: int) -> Lottery:
