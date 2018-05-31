@@ -257,9 +257,9 @@ class PaymentMethod:
         results.save_round_auctions(phase.left_auction(random_round), phase.right_auction(random_round), auction)
 
         # Selecting a random signal
-        random_signal = float(auction.random_signal())
+        random_signal = auction.random_signal()
         signal_percentage = auction.signal_is_percentage
-        other_random_signal = float(auction.random_signal())
+        other_random_signal = auction.random_signal()
         other_signal_percentage = auction.signal_is_percentage
         results.save_auction_signal(random_signal, signal_percentage, other_random_signal, other_signal_percentage)
 
@@ -306,7 +306,7 @@ class PaymentMethod:
         auction = phase_two.get_auction(random_round)
         results.save_auction(auction)
 
-        cutoff = float(auction.cutoff)
+        cutoff = auction.cutoff
         results.save_cutoff(cutoff)
 
         max_value = auction.max_value
@@ -325,9 +325,9 @@ class PaymentMethod:
             return results
 
         # Selecting a random signal
-        random_signal = float(auction.random_signal())
+        random_signal = auction.random_signal()
         signal_percentage = auction.signal_is_percentage
-        other_random_signal = float(auction.random_signal())
+        other_random_signal = auction.random_signal()
         other_signal_percentage = auction.signal_is_percentage
         results.save_auction_signal(random_signal, signal_percentage, other_random_signal, other_signal_percentage)
 
