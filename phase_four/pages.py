@@ -68,7 +68,8 @@ class MinBuyoutBetForLotteryPage(Page):
 
 
 class PlayerWaitPage(WaitPage):
-    pass
+    def is_displayed(self):
+        return self.round_number == 1
 
 
 class InstructionsWaitPage(Page):
