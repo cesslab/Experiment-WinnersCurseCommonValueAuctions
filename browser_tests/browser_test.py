@@ -112,11 +112,21 @@ def play_phase_three(browser):
         play_phase_three_screen(browser, round_number)
 
 
+def play_pass_code(browser):
+    browser.save_screenshot('{}/phase_four_pass_code_screen.png'.format(SCREEN_SHOT_PATH))
+    input_field = browser.find_element(By.XPATH, "//input[@id='pass_code']")
+    input_field.send_keys("2600")
+    browser.find_element(By.XPATH, "//button[@id='next-button']").click()
+    print('Entered pass code...')
+
+
 def play_phase_four(browser):
     print('--Stage 4--')
-    play_instructions(browser, 'four')
-    play_roll_die(browser)
-    for round_number in range(Experiment.phase_four_rounds()):
+    for round_number in range(1, Experiment.phase_four_rounds() + 1):
+        if round_number == 1:
+            play_pass_code(browser)
+            # play_instructions(browser, 'four')
+            play_roll_die(browser)
         play_phase_four_screen(browser, round_number)
 
 
@@ -161,6 +171,9 @@ if __name__ == "__main__":
         play_phase_one(driver)
         play_phase_two(driver)
         play_phase_three(driver)
+
+    for i in range(len(links)):
+        driver.switch_to.window(driver.window_handles[i+1])
         play_phase_four(driver)
 
     driver.set_window_size(1200, 1750)
