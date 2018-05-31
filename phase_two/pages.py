@@ -31,7 +31,7 @@ class CutoffSelectionPage(Page):
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
-        experiment.phase_two.set_cutoff(self.round_number, self.player.cutoff)
+        experiment.phase_two.set_cutoff(self.round_number, float(self.player.cutoff))
 
         self.player.auction = experiment.phase_two.get_auction(self.round_number).aid
 
