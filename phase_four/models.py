@@ -31,4 +31,4 @@ class Player(BasePlayer):
     clicked = models.IntegerField()
     lottery = models.IntegerField(blank=False)
     die_side = models.IntegerField()
-    pass_code = models.IntegerField()
+    pass_code = models.IntegerField(blank=True)
