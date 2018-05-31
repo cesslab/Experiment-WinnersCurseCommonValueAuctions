@@ -1,5 +1,6 @@
 from ._builtin import Page, WaitPage
 
+import random
 from exp.util import Participant
 from exp.payment import PaymentMethod, MethodThreeResults, MethodOneResults, MethodTwoResults
 from exp.lottery import Lottery
@@ -162,7 +163,7 @@ class ResultsWaitPage(WaitPage):
         for i, player in enumerate(players):
             player_id = player.participant.id_in_session
             others = players[:i] + players[i + 1:]
-            other_player = others.pop()
+            other_player = random.choice(others)
             other_id = other_player.participant.id_in_session
             experiment = Participant.get_experiment(player)
             other_experiment = Participant.get_experiment(other_player)
