@@ -85,6 +85,7 @@ class Player(BasePlayer):
     method_3_num_red = models.IntegerField()
     method_3_num_blue = models.IntegerField()
     method_3_earnings = models.FloatField()
+    method_3_cutoff = models.FloatField()
     method_3_random_chip_id = models.FloatField()
     method_3_realized_value = models.FloatField()
     # Red = 0, Blue = 1
@@ -136,6 +137,7 @@ class Player(BasePlayer):
         self.method_3_die_side = method_3.rolled_side
         self.method_3_lottery_id = method_3.lottery_chosen
         self.method_3_bet_color = method_3.bet_color
+        self.method_3_cutoff = method_3.cutoff
         self.method_3_random_price = method_3.random_cutoff
         self.method_3_lottery_played = method_3.play_lottery
         self.method_3_random_chip_id = method_3.random_number_red
