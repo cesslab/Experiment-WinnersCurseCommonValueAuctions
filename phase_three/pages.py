@@ -40,7 +40,7 @@ class BidPage(Page):
 
     def before_next_page(self):
         experiment = Participant.get_experiment(self.player)
-        experiment.phase_three.set_bid(self.round_number, self.player.bid)
+        experiment.phase_three.set_bid(self.round_number, float(self.player.bid))
 
         self.player.auction = experiment.phase_three.auction(self.round_number).aid
         self.player.signal = experiment.phase_three.signal(self.round_number)
