@@ -13,6 +13,22 @@
 {% endblock %}
 
 {% block content %}
+  <div>
+    {% if player.round_number == 1 %}
+      {% include 'phase_four/instructions/task_1.html' %}
+    {% elif player.round_number == 2 %}
+      {% include 'phase_four/instructions/task_2.html' %}
+    {% elif player.round_number == 3 %}
+      {% include 'phase_four/instructions/task_3.html' %}
+    {% elif player.round_number == 4 %}
+      {% include 'phase_four/instructions/task_4.html' %}
+    {% elif player.round_number == 5 %}
+      {% include 'phase_four/instructions/task_5.html' %}
+    {% else %}
+      {% include 'phase_four/instructions/task_6.html' %}
+    {% endif %}
+  </div>
+
   {% if lottery_type == 1 %}
     {% include 'phase_four/lottery_types/type_1.html' %}
   {% elif lottery_type == 2 %}
