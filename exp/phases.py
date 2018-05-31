@@ -132,6 +132,10 @@ class PhaseFour:
         lottery_id = self.lottery_ids[round_number - 1]
         self.lotteries[lottery_id].cutoff = cutoff
 
+    def set_bet(self, round_number: int, bet: int) -> None:
+        lottery_id = self.lottery_ids[round_number - 1]
+        self.lotteries[lottery_id].bet = bet
+
     def die_side_encoding_pairs(self) -> List[Tuple[str, int]]:
         return list(zip(self.die_labels, self.lottery_ids))
 
