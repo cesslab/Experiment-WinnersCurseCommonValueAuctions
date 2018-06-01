@@ -118,7 +118,7 @@ QUESTIONS = {
         'id': 3,
         'type': 3,
         # Type 3 will have an fixed number specified for red, but it will not be displayed to the subjects
-        'matrix': [[100, 0], [12, -1]],
+        'matrix': [[100, 0], [11, -1]],
         'total': 20,
         'min': 0,
         'max': 100
@@ -142,7 +142,7 @@ QUESTIONS = {
     6: {
         'id': 6,
         'type': 3,
-        'matrix': [[150, 0], [12, -1]],
+        'matrix': [[150, 0], [23, -1]],
         'total': 30,
         'min': 0,
         'max': 150

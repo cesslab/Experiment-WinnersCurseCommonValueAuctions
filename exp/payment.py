@@ -191,6 +191,7 @@ class MethodThreeResults:
         self.low_value: int = -1
         self.high_value: int = -1
         self.earnings: float = -1.0
+        self.rand_num_red_in_bag: int = -1
 
     def save_phase_three_lottery(self, lottery: Lottery):
         self.lottery = lottery
@@ -211,7 +212,7 @@ class MethodThreeResults:
     def save_phase_three_lottery_played(self, play_lottery: bool):
         self.play_lottery = play_lottery
 
-    def save_phase_three_random_number_red(self, random_number_red: float):
+    def save_phase_three_random_red_chip_id(self, random_number_red: float):
         self.random_number_red = random_number_red
 
     def save_phase_three_num_red_blue(self, num_red: int, num_blue: int):
@@ -227,6 +228,9 @@ class MethodThreeResults:
 
     def save_phase_three_earnings(self, earnings: float):
         self.earnings = float(earnings)
+
+    def save_random_num_red_in_bag(self, rand_num_red_in_bag):
+        self.rand_num_red_in_bag = rand_num_red_in_bag
 
 
 class PaymentMethod:
@@ -381,27 +385,31 @@ class PaymentMethod:
             play_lottery = False
         results.save_phase_three_lottery_played(play_lottery)
 
-        random_number_red = random.randint(0, lottery.total)
-        results.save_phase_three_random_number_red(random_number_red)
-
-        high_red_chosen = False
+        red_chosen = False
         if lottery.ltype == Lottery.ALL_KNOWN:
-            num_red = lottery.number_red
-            if random_number_red <= num_red:
-                high_red_chosen = True
+            random_chip_id = random.randint(1, lottery.total)
+            if random_chip_id <= lottery.number_red:
+                red_chosen = True
+            results.save_phase_three_num_red_blue(lottery.number_red, lottery.total - lottery.number_red)
+            results.save_phase_three_random_red_chip_id(random_chip_id)
         elif lottery.ltype == Lottery.COMPOUND_RISK:
-            num_red = random.randint(0, lottery.total)
-            if random_number_red <= num_red:
-                high_red_chosen = True
+            rand_num_red_in_bag = random.randint(0, lottery.total)
+            random_chip_id = random.randint(1, lottery.total)
+            if random_chip_id <= rand_num_red_in_bag:
+                red_chosen = True
+            results.save_phase_three_num_red_blue(rand_num_red_in_bag, lottery.total - rand_num_red_in_bag)
+            results.save_phase_three_random_red_chip_id(random_chip_id)
+            results.save_random_num_red_in_bag(rand_num_red_in_bag)
         else:
-            num_red = lottery.number_red
-            if random_number_red <= num_red:
-                high_red_chosen = True
+            random_chip_id = random.randint(1, lottery.total)
+            if random_chip_id <= lottery.number_red:
+                red_chosen = True
+            results.save_phase_three_random_red_chip_id(random_chip_id)
+            results.save_phase_three_num_red_blue(lottery.number_red, lottery.total - lottery.number_red)
 
-        results.save_phase_three_num_red_blue(num_red, lottery.total - num_red)
-        results.save_phase_three_high_color_chosen(high_red_chosen, not high_red_chosen)
+        results.save_phase_three_high_color_chosen(red_chosen, not red_chosen)
 
-        if high_red_chosen and lottery.bet == Lottery.BET_HIGH_RED:
+        if red_chosen and lottery.bet == Lottery.BET_HIGH_RED:
             realized_value = lottery.high_value
         else:
             realized_value = lottery.low_value
