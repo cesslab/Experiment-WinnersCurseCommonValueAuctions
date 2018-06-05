@@ -20,7 +20,7 @@ SESSION_CONFIGS = [
         'name': 'phase_one',
         'display_name': "Winner's Curse",
         'num_demo_participants': 2,
-        'app_sequence': ['phase_one', 'phase_two', 'phase_three', 'phase_four', 'payoffs', 'questionnaire'],
+        'app_sequence': ['quiz', 'phase_one', 'phase_two', 'phase_three', 'phase_four', 'payoffs', 'questionnaire'],
         'use_browser_bots': (environ.get('OTREE_USE_BROWSER_BOTS') in {'1', 'true', 'True', 'TRUE'}),
     },
 ]
