@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+  Questionnaire
+{% endblock %}
+
+{% block content %}
+  <p>{% formfield player.gender %}</p>
+  <p>{% formfield player.age %}</p>
+  <p>{% formfield player.major %}</p>
+  <p>What factors did you consider in stage 1 if you strictly preferred to bid for one lottery type over the other one?
+{% formfield player.q1 %}</p>
+  <p>Did you find one lottery type more complicated than the other one? If yes, why?{% formfield player.q2 %}</p>
+  <p>What rule did you use to determine your bid for lotteries of type A?{% formfield player.q3 %}</p>
+  <p>What rule did you use to determine your bid for lotteries of type B?{% formfield player.q4 %}</p>
+  <p>What choice strategy in stage 1 would you recommend to a future participant in the experiment?{% formfield player.q5 %}</p>
+  <p>What bidding strategy in stage 3 would you recommend to a future participant in the experiment?
+{% formfield player.q6 %}</p>
+    {% next_button %}
+{% endblock %}
