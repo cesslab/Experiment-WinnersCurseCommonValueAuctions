@@ -62,4 +62,4 @@ class Player(BasePlayer):
     q3 = models.IntegerField(choices=Q3_CHOICES, widget=widgets.RadioSelect, blank=False)
     q4 = models.IntegerField(choices=Q4_CHOICES, widget=widgets.RadioSelect, blank=False)
     q5 = models.IntegerField(choices=Q5_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q6 = models.IntegerField(choices=Q6_CHOICES, widget=widgets.CheckboxSelectMultiple, blank=False)
+    q6 = models.BooleanField(blank=False)

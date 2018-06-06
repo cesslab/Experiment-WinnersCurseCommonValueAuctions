@@ -16,7 +16,25 @@
     <li>Between $2 and $4 with a 30%, or</li>
     <li>$8 with 70%</li>
   </ol>
-  <p>Suppose you receive a signal of $2. What are the possible values for the low outcome? Select all that apply.</p>
-  <p>{% formfield player.q6 %}</p>
+  <p>Suppose you receive a signal of $2. What are the possible values for the low outcome?</p>
+  <fieldset>
+  <legend>Select all that apply</legend>
+  <div>
+    <input type="checkbox" id="q6-1" name="q6" value="1">
+    <label for="q6-1">$2 (= [2+2]/2)</label>
+  </div>
+  <div>
+    <input type="checkbox" id="q6-2" name="q6" value="2">
+    <label for="q6-2">$2.5 (= [2+3]/2)</label>
+  </div>
+  <div>
+    <input type="checkbox" id="q6-3" name="q6" value="3">
+    <label for="q6-3">$3 (= [2+4]/2)</label>
+  </div>
+    <div>
+      <input type="checkbox" id="q6-4" name="q6" value="4">
+      <label for="q6-4">$4 (= [4+4]/2)</label>
+    </div>
+</fieldset>
   {% next_button %}
 {% endblock %}
