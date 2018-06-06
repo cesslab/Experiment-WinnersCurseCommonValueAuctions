@@ -5,7 +5,7 @@ from .models import Constants
 
 class QuizPage(Page):
     form_model = 'player'
-    form_fields = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6']
+    form_fields = ['q1', 'q2', 'q3', 'q4', 'q5']
 
     def q1_error_message(self, value):
         if value != 3:
@@ -27,10 +27,13 @@ class QuizPage(Page):
         if value != 3:
             return 'Incorrect answer for question 5. Please try again.'
 
-    def error_messages(self, values):
+    def error_message(self, values):
         print(values['q6'])
         if not (1 in values['q6'] and 2 in values['q6'] and 3 in values['p6']):
             return 'Incorrect answer for question 6. Please try again.'
+
+    def before_next_page(self):
+        self.player.q6 = True
 
 
 page_sequence = [
