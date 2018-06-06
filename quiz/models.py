@@ -3,7 +3,6 @@ from otree.api import (
     Currency as c, currency_range
 )
 
-
 author = 'Your name here'
 
 doc = """
@@ -51,15 +50,16 @@ class Player(BasePlayer):
         (3, 'You receive $2 and you do not participate in the auction.')
     )
     Q6_CHOICES = (
-        (0, '$2 (= [2+2]/2)'),
-        (1, '$2.5 (= [2+3]/2'),
-        (2, '$3 (= [2+4]/2'),
-        (3, '$4 (= [4+4]/2'),
+        (1, '$2 (= [2+2]/2)'),
+        (2, '$2.5 (= [2+3]/2)'),
+        (3, '$3 (= [2+4]/2)'),
+        (4, '$4 (= [4+4]/2)'),
     )
 
-    q1 = models.IntegerField(choices=Q1_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q2 = models.IntegerField(choices=Q2_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q3 = models.IntegerField(choices=Q3_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q4 = models.IntegerField(choices=Q4_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q5 = models.IntegerField(choices=Q5_CHOICES, widget=widgets.RadioSelect, blank=False)
-    q6 = models.IntegerField(choices=Q6_CHOICES, widget=widgets.CheckboxSelectMultiple, blank=False)
+    q1 = models.IntegerField(label='', choices=Q1_CHOICES, widget=widgets.RadioSelect, blank=False)
+    q2 = models.IntegerField(label='', choices=Q2_CHOICES, widget=widgets.RadioSelect, blank=False)
+    q3 = models.IntegerField(label='', choices=Q3_CHOICES, widget=widgets.RadioSelect, blank=False)
+    q4 = models.IntegerField(label='', choices=Q4_CHOICES, widget=widgets.RadioSelect, blank=False)
+    q5 = models.IntegerField(label='', choices=Q5_CHOICES, widget=widgets.RadioSelect, blank=False)
+    q6 = models.IntegerField(label='', choices=Q6_CHOICES, widget=widgets.CheckboxInput,
+                             blank=False)

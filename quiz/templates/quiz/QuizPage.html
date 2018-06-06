@@ -2,21 +2,30 @@
 {% load staticfiles otree %}
 
 {% block title %}
-    Page title
+  Quiz
 {% endblock %}
 
 {% block content %}
   <p>1. Which of the following alternatives is correct? {% formfield player.q1 %}</p>
+  <p>{{ form.q1.errors }}</p>
   <p>2. Suppose you are the high bidder in an auction. What are your earnings? {% formfield player.q2 %}</p>
-  <p>3. Suppose you and the other bidder in an auction submit identical bids. What is the outcome?{% formfield player.q3 %}</p>
-  <p>4. Suppose that you submit a bid of $1.00 and the other subject bids $1.50. How much do you have to pay? {% formfield player.q4 %}</p>
-  <p>5. Consider Stage 2. Suppose you enter a minimum compensation of $1, and the computer generates a random price of $2. This means:{% formfield player.q5 %}</p>
+  <p>{{ form.q2.errors }}</p>
+  <p>3. Suppose you and the other bidder in an auction submit identical bids. What is the
+    outcome?{% formfield player.q3 %}</p>
+  <p>{{ form.q3.errors }}</p>
+  <p>4. Suppose that you submit a bid of $1.00 and the other subject bids $1.50. How much do you have to
+    pay? {% formfield player.q4 %}</p>
+  <p>{{ form.q4.errors }}</p>
+  <p>5. Consider Stage 2. Suppose you enter a minimum compensation of $1, and the computer generates a random price of
+    $2. This means:{% formfield player.q5 %}</p>
+  <p>{{ form.q5.errors }}</p>
   <p>6. Consider the following lottery</p>
   <ol>
     <li>Between $2 and $4 with a 30%, or</li>
     <li>$8 with 70%</li>
   </ol>
   <p>Suppose you receive a signal of $2. What are the possible values for the low outcome? Select all that apply.</p>
-  <p>{% formfield player.q6 %}</p>
+  <p>{% formfield player.q6 %} </p> <p>{{ form.q6.errors }}</p>
+
   {% next_button %}
 {% endblock %}
