@@ -1,8 +1,8 @@
 import random
 from typing import Dict, List, Tuple
 
-from exp.auctions import Auction
-from exp.lottery import Lottery
+from core.auctions import Auction
+from core.lottery import Lottery
 
 
 class PhaseOne:

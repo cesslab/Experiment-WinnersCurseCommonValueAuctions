@@ -1,10 +1,8 @@
-from decimal import Decimal
-
 from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from exp.payment import MethodThreeResults, MethodOneResults, MethodTwoResults
+from core.payment import MethodThreeResults, MethodOneResults, MethodTwoResults
 
 author = 'Anwar A. Ruff'
 

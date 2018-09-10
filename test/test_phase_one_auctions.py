@@ -1,5 +1,5 @@
-from exp.experiment import Experiment
-from exp.auctions import Auction
+from core.experiment import Experiment
+from core.auctions import Auction
 
 
 def test_left_auction_types():

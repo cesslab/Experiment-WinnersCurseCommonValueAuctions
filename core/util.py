@@ -1,5 +1,5 @@
-from exp.experiment import Experiment
-from exp.payment import MethodThreeResults, MethodOneResults, MethodTwoResults
+from core.experiment import Experiment
+from core.payment import MethodThreeResults, MethodOneResults, MethodTwoResults
 
 
 class Participant:

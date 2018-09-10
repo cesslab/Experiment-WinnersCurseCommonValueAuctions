@@ -1,8 +1,7 @@
-from otree.api import Currency as c, currency_range
 from ._builtin import Page, WaitPage
 
-from exp.util import Participant
-from exp.lottery import Lottery
+from core.util import Participant
+from core.lottery import Lottery
 
 
 class InstructionsPage(Page):

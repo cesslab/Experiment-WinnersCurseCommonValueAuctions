@@ -1,7 +1,7 @@
 from ._builtin import Page
 from .models import Constants
 
-from exp.util import Participant
+from core.util import Participant
 
 
 class InstructionsPage(Page):

@@ -1,9 +1,9 @@
 from ._builtin import Page, WaitPage
 
 import random
-from exp.util import Participant
-from exp.payment import PaymentMethod, MethodThreeResults, MethodOneResults, MethodTwoResults
-from exp.lottery import Lottery
+from core.util import Participant
+from core.payment import PaymentMethod, MethodThreeResults, MethodOneResults, MethodTwoResults
+from core.lottery import Lottery
 
 
 class FinalPayoffResults(Page):

@@ -1,4 +1,4 @@
-from exp.experiment import Experiment
+from core.experiment import Experiment
 
 
 def test_auction_not_empty():

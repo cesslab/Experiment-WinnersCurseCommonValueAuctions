@@ -2,7 +2,7 @@ from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from exp.experiment import Experiment
+from core.experiment import Experiment
 
 author = 'Your name here'
 

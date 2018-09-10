@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
-from exp.experiment import Experiment
+from core.experiment import Experiment
 
 SCREEN_SHOT_PATH = environ.get('SCREEN_SHOT_PATH')
 SITE_URL = environ.get('SITE_URL')

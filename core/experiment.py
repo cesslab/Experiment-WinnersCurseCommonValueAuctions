@@ -1,7 +1,7 @@
-from exp.auctions import AuctionFactory
-from exp.lottery import LotteryFactory
-from exp.phases import (PhaseOne, PhaseTwo, PhaseThree, PhaseFour)
-from exp.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
+from core.auctions import AuctionFactory
+from core.lottery import LotteryFactory
+from core.phases import (PhaseOne, PhaseTwo, PhaseThree, PhaseFour)
+from core.parameters import (AUCTIONS, PHASE_ONE_AUCTION_PAIRS, QUESTIONS)
 
 
 class Experiment:

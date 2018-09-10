@@ -2,7 +2,7 @@ import random
 
 from otree.api import Bot, SubmissionMustFail
 from phase_one import pages
-from exp.util import Participant
+from core.util import Participant
 
 
 class PlayerBot(Bot):

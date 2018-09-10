@@ -2,8 +2,8 @@ from otree.api import (
     models, BaseConstants, BaseSubsession, BaseGroup, BasePlayer
 )
 
-from exp.experiment import Experiment
-from exp.util import Participant
+from core.experiment import Experiment
+from core.util import Participant
 
 
 author = 'Anwar A Ruff'
